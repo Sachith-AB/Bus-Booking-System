@@ -12,6 +12,11 @@ android {
     namespace = "com.example.bus_booking"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+    
+    defaultConfig {
+        applicationId "com.example.bus_booking"
+        minSdkVersion 23  // ✅ Updated to match Firebase requirements
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
