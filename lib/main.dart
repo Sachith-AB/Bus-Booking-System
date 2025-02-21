@@ -1,11 +1,12 @@
 import 'package:bus_booking/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter bindings are initialized
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform, // ✅ Fixed Syntax
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Bus Booking App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -26,22 +27,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class HomeController extends GetxController {
+  var message = "Welcome to Bus Booking App!".obs;
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = Get.put(HomeController());
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Page"),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
       ),
-      body: const Center(
-        child: Text(
-          "Welcome to Bus Booking App!",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
+      body: Center(
+        child: Obx(() => Text(
+              controller.message.value,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            )),
       ),
     );
   }
