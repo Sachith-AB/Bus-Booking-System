@@ -13,7 +13,7 @@ class AppInputStyle {
   //border
   static OutlineInputBorder outlineInputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(color: Colors.orange));
+      borderSide: const BorderSide(color: KColors.primaryColor));
 
   static OutlineInputBorder outlineDropDownInputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
