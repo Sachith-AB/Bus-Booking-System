@@ -1,5 +1,6 @@
-import 'package:bus_booking/views/auth/login/login.dart';
-import 'package:bus_booking/views/auth/register/register.dart';
+import 'package:bus_booking/src/utils/color/colors.dart';
+import 'package:bus_booking/src/app/views/auth/login/login.dart';
+import 'package:bus_booking/src/app/views/auth/register/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Bus Booking App',
+      title: 'Food App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: KColors.appPrimary,
         useMaterial3: true,
       ),
       initialRoute: '/register',  // Start with Login Page

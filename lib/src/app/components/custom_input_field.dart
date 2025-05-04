@@ -1,0 +1,48 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../../common/style/app_input_style.dart';
+
+class CustomInputField extends StatelessWidget {
+
+  final TextEditingController controller;
+  final String hintText;
+  final String labelText;
+  final bool isValid;
+  final ValueChanged<String> onChanged;
+  final TextInputType keyboardType;
+  final Widget ? prefixIcon;
+
+  const CustomInputField ({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.labelText,
+    required this.isValid,
+    required this.onChanged,
+    required this.keyboardType,
+    required this.prefixIcon
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        border: AppInputStyle.outlineInputBorder,
+        focusedBorder: AppInputStyle.outlineInputBorder,
+        contentPadding: AppInputStyle.contentPadding,
+        filled: isValid,
+        //fillColor: AppInputStyle.validFillColor,
+        hintText: hintText,
+        labelText: labelText,
+        hintStyle: AppInputStyle.hintTextStyle,
+        labelStyle: AppInputStyle.labelTextStyle,
+        floatingLabelStyle: AppInputStyle.floatingLabelStyle,
+        prefixIcon: prefixIcon,
+      ),
+    );
+  }
+}
