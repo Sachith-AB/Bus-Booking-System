@@ -1,0 +1,1 @@
+const tLogo = "assets/logo/logo.png";
