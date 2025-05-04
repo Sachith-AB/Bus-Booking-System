@@ -1,4 +1,5 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
+import 'package:bus_booking/src/utils/validate/KValidator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/style/app_input_style.dart';
@@ -15,17 +16,31 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  bool validEmail = false;
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
-  void onEmailChanged(String email) {
+  bool validEmail = false;
+  bool validName = false;
+  bool validPassword = false;
+
+  void onNameChanged(String name) {
+    final error = KValidator.validateName(name);
     setState(() {
-      validEmail = validateEmail(email);
+      validName = error == null;
     });
   }
 
-  bool validateEmail(String email) {
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    return emailRegex.hasMatch(email);
+  void onEmailChanged(String email) {
+    setState(() {
+      validEmail = KValidator.validateEmail(email);
+    });
+  }
+
+  void onPasswordChanged(String password,String cPassword){
+    final error = KValidator.validatePassword(password, cPassword);
+    setState(() {
+      validPassword = error == null;
+    });
   }
 
   @override
@@ -113,32 +128,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(height: 15,),
 
                     CustomInputField(
-                        controller: emailController,
-                        hintText: "*******",
+                        controller: passwordController,
+                        hintText: AppInputStyle.hintObscureCharacter,
                         labelText: "Password",
-                        isValid: validEmail,
-                        onChanged: (email)=>onEmailChanged(email),
+                        isValid: validPassword,
+                        onChanged: (password)=>onPasswordChanged(password,confirmPasswordController.text),
                         keyboardType: TextInputType.text,
-                        prefixIcon: AppInputStyle.emailIcon
+                        prefixIcon: AppInputStyle.emailIcon,
+                        obscureText:true
                     ),
 
                     const SizedBox(height: 15,),
 
                     CustomInputField(
-                        controller: emailController,
-                        hintText: "******",
+                        controller: confirmPasswordController,
+                        hintText: AppInputStyle.hintObscureCharacter,
                         labelText: "Confirm Password",
-                        isValid: validEmail,
-                        onChanged: (email)=>onEmailChanged(email),
+                        isValid: validPassword,
+                        onChanged: (cPassword)=>onPasswordChanged(passwordController.text,cPassword),
                         keyboardType: TextInputType.text,
-                        prefixIcon: AppInputStyle.emailIcon
+                        prefixIcon: AppInputStyle.emailIcon,
+                        obscureText:true
                     ),
 
                     const SizedBox(height: 15,),
 
                     PrimaryButton(
                       label: "Register",
-                      isEnabled: validName && validEmail, // Example condition
+                      isEnabled:  validName && validEmail && validPassword,
                       isLoading: false, // Set true if submitting
                       onPressed: () {
                         // Your submit logic
@@ -152,27 +169,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       )
     );
-  }
-
-  final nameRegex = RegExp(r'^[a-zA-Z]+(?:\s[a-zA-Z]+)*$');
-
-  bool validName = false;
-  String _nameError = '';
-
-  onNameChanged(String userName){
-    final name = userName.trim().toString();
-
-    setState(() {
-      _nameError = '';
-      validName = false;
-      if(name.isEmpty){
-        _nameError = "* Name is required.";
-      }else if(!nameRegex.hasMatch(name) || name.length < 3){
-        _nameError = "* Name is invalid";
-      }else {
-        validName = true;
-      }
-    });
   }
 
 }
