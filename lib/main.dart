@@ -1,3 +1,6 @@
+import 'package:bus_booking/src/app/views/auth/register/owner_register.dart';
+import 'package:bus_booking/src/app/views/welcome_screen.dart';
+import 'package:bus_booking/src/routes/routes_path.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
 import 'package:bus_booking/src/app/views/auth/register/register.dart';
@@ -21,11 +24,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: KColors.appPrimary,
         useMaterial3: true,
       ),
-      initialRoute: '/register',  // Start with Login Page
-      getPages: [
-        GetPage(name: '/login', page: () => const LoginPage()),
-        GetPage(name: '/register', page: () => const RegisterPage()),
-      ],
+      initialRoute: '/',  // Start with Login Page
+      getPages: AppRoutes.routes
     );
   }
 }
