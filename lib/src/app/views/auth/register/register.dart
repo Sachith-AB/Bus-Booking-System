@@ -1,5 +1,6 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/controllers/user_register_controller.dart';
 import 'package:bus_booking/src/utils/validate/KValidator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -154,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       isEnabled:  validName && validEmail && validPassword,
                       isLoading: false, // Set true if submitting
                       onPressed: () {
-                        // Your submit logic
+                        registerUser();
                       },
                     ),
                     const SizedBox(height: 20),
@@ -189,7 +190,19 @@ class _RegisterPageState extends State<RegisterPage> {
       )
     );
   }
+  final controller = Get.put(UserRegisterController());
 
+  void registerUser() {
+    final name = nameController.text.trim().toString();
+    final email = emailController.text.trim().toString();
+    final password = passwordController.text.trim().toString();
+
+    const userType = KCustomer;
+
+    controller.registerAsUser(name, email, password, userType);
+    debugPrint(userType);
+
+  }
 }
 
 
