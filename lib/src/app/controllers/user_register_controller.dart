@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/models/user_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
 import 'package:bus_booking/src/services/authentication_services.dart';
@@ -15,20 +18,18 @@ class UserRegisterController extends GetxController {
 
   static UserRegisterController get instance => Get.find();
 
-  void registerAsUser(
-      String name,String email, String password, String user_type
-      ) async {
-    try{
-
+  void registerAsUser(String name, String email, String password,
+      String userType) async {
+    try {
       final userCredential = await authController.registerUser(email, password);
 
       final newUser = UserModel.register(
-        email:email,
-        id:userCredential.user!.uid,
-        image_url:tProfile,
-        createdAt: DateTime.now(),
-        name:name,
-        user_type:user_type
+          email: email,
+          id: userCredential.user!.uid,
+          image_url: tProfile,
+          createdAt: DateTime.now(),
+          name: name,
+          user_type: userType
       );
 
       await authController.insertUser(collection: "Users", user: newUser)
@@ -45,9 +46,48 @@ class UserRegisterController extends GetxController {
         transition: Transition.rightToLeft,
         duration: const Duration(milliseconds: 500),
       );
+    } catch (e) {
+      e;
+    }
+  }
 
-    }catch(e){
+  void loginAllUser(String email, String password) async {
+    String userId = '';
 
+    try {
+      await authController.loginUser(email, password).then((value) {
+        userId = value.user!.uid;
+      });
+
+      final userData = await crudController.findOne(
+          collection: "Users", filed: userId);
+
+      if (userData != null) {
+        PopupWarning.Warning(
+          title: "Congratulations! 🎉",
+          message: "Login Successful!",
+          type: 0,
+        );
+
+        Get.offAll(
+          () => const LoginPage(),
+          transition: Transition.rightToLeft,
+          duration: const Duration(milliseconds: 500),
+        );
+      }
+
+      if(userData[0] != null){
+        final authUser = [
+          userData[0].id.toString(),
+          userData[0].userType.toString(),
+          userData[0].email.toString(),
+          userData[0].name.toString(),
+          userData[0].image_url.toString()
+        ];
+        SharedAuthUser.saveAuthUser(authUser);
+      }
+    } catch (e) {
+      e;
     }
   }
 }
