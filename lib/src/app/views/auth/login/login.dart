@@ -103,13 +103,15 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                           ),
                         ],
-                        isEnabled:  validEmail && validPassword,
-                        isLoading: false,
-                        submitLabel: "Login",
-                        onSubmit: (){
-                         //login function
-                        }
                       ),
+                    PrimaryButton(
+                      label: 'Register',
+                      isEnabled: validEmail && validPassword,
+                      isLoading: false,
+                      onPressed: (){
+                        //registerUser();
+                      },
+                    ),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
