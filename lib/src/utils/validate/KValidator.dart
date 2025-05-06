@@ -28,4 +28,13 @@ class KValidator {
     }
     return null;
   }
+
+  static validateLoginPassword(String password) {
+    if (password.isEmpty) {
+      return "* Password is Required";
+    }else if(password.length<8){
+      return "* Password Invalid";
+    }
+    return null;
+  }
 }

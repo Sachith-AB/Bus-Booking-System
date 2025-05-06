@@ -1,5 +1,7 @@
+import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/controllers/user_register_controller.dart';
 import 'package:bus_booking/src/utils/validate/KValidator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +9,9 @@ import 'package:get/get.dart';
 import '../../../../common/style/app_input_style.dart';
 import '../../../../utils/color/colors.dart';
 import '../../../../utils/constant.dart';
+import '../../../components/custom_dynamic_form.dart';
 import '../../../components/custom_input_field.dart';
+import '../../../components/input_field_config.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -51,17 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(onPressed: (){
-          //add go back function here
-          Get.back();
-        },
-            icon: const Icon(Icons.arrow_back_ios_new_rounded
-            )
-        )
-      ),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
@@ -88,9 +82,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 0,
-              ),
               const PrimaryHeader(
                   text: "Create an Account",
               ),
@@ -101,60 +92,50 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 child: Column(
                   children: [
-                    CustomInputField(
-                        controller: nameController,
-                        hintText: "Brendon Macalum",
-                        labelText: "Name",
-                        isValid: validName,
-                        onChanged: (name)=>onNameChanged(name),
-                        keyboardType: TextInputType.text,
-                        prefixIcon: AppInputStyle.emailIcon
-                    ),
-                    const SizedBox(height: 15,),
-                    CustomInputField(
-                        controller: emailController,
-                        hintText: "brendonmacalum@gmail.com",
-                        labelText: "Email",
-                        isValid: validEmail,
-                        onChanged: (email)=>onEmailChanged(email),
-                        keyboardType: TextInputType.text,
-                        prefixIcon: AppInputStyle.emailIcon
-                    ),
-
-                    const SizedBox(height: 15,),
-
-                    CustomInputField(
-                        controller: passwordController,
-                        hintText: "Password must be 8 character",
-                        labelText: "Password",
-                        isValid: validPassword,
-                        onChanged: (password)=>onPasswordChanged(password,confirmPasswordController.text),
-                        keyboardType: TextInputType.text,
-                        prefixIcon: AppInputStyle.emailIcon,
-                        obscureText:true
-                    ),
-
-                    const SizedBox(height: 15,),
-
-                    CustomInputField(
-                        controller: confirmPasswordController,
-                        hintText: "Re-enter password",
-                        labelText: "Confirm Password",
-                        isValid: validPassword,
-                        onChanged: (cPassword)=>onPasswordChanged(passwordController.text,cPassword),
-                        keyboardType: TextInputType.text,
-                        prefixIcon: AppInputStyle.emailIcon,
-                        obscureText:true
-                    ),
-
-                    const SizedBox(height: 15,),
-
-                    PrimaryButton(
-                      label: "Register",
-                      isEnabled:  validName && validEmail && validPassword,
-                      isLoading: false, // Set true if submitting
-                      onPressed: () {
-                        // Your submit logic
+                    DynamicForm(
+                      fields: [
+                        InputFieldConfig(
+                          controller: nameController,
+                          labelText: "Name",
+                          hintText: "Brendon Macalum",
+                          isValid: validName,
+                          onChanged: (name) => onNameChanged(name),
+                          prefixIcon: AppInputStyle.emailIcon,
+                        ),
+                        InputFieldConfig(
+                          controller: emailController,
+                          labelText: "Email",
+                          hintText: "brendonmacalum@gmail.com",
+                          isValid: validEmail,
+                          onChanged: (email) => onEmailChanged(email),
+                          prefixIcon: AppInputStyle.emailIcon,
+                        ),
+                        InputFieldConfig(
+                          controller: passwordController,
+                          labelText: "Password",
+                          hintText: "Password must be 8 character",
+                          isValid: validPassword,
+                          onChanged: (password) =>
+                              onPasswordChanged(password, confirmPasswordController.text),
+                          prefixIcon: AppInputStyle.emailIcon,
+                          obscureText: true,
+                        ),
+                        InputFieldConfig(
+                          controller: confirmPasswordController,
+                          labelText: "Confirm Password",
+                          hintText: "Re-enter password",
+                          isValid: validPassword,
+                          onChanged: (cPassword) =>
+                              onPasswordChanged(passwordController.text, cPassword),
+                          prefixIcon: AppInputStyle.emailIcon,
+                          obscureText: true,
+                        ),
+                      ],
+                      isEnabled: validName && validEmail && validPassword,
+                      isLoading: false,
+                      submitLabel: "Register",
+                      onSubmit: () {
+                        registerUser();
                       },
                     ),
                     const SizedBox(height: 20),
@@ -162,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const PrimaryHeader(
-                          text: 'Already have an account',
+                          text: 'Have an Account',
                           color: KColors.gray,
                           size: 16,
                           weight: FontWeight.w500,
@@ -189,7 +170,18 @@ class _RegisterPageState extends State<RegisterPage> {
       )
     );
   }
+  final controller = Get.put(UserRegisterController());
 
+  void registerUser() {
+    final name = nameController.text.trim().toString();
+    final email = emailController.text.trim().toString();
+    final password = passwordController.text.trim().toString();
+
+    const userType = KCustomer;
+
+    controller.registerAsUser(name, email, password, userType);
+
+  }
 }
 
 
