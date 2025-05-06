@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/models/user_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
+import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
 import 'package:bus_booking/src/services/authentication_services.dart';
 import 'package:bus_booking/src/services/crud_services.dart';
 import 'package:bus_booking/src/utils/constant.dart';
@@ -70,7 +71,7 @@ class UserRegisterController extends GetxController {
         );
 
         Get.offAll(
-          () => const LoginPage(),
+          () => const HomePage(),
           transition: Transition.rightToLeft,
           duration: const Duration(milliseconds: 500),
         );

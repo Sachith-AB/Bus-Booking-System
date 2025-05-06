@@ -1,6 +1,7 @@
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
 import 'package:bus_booking/src/app/views/auth/register/owner_register.dart';
 import 'package:bus_booking/src/app/views/auth/register/register.dart';
+import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
 import 'package:bus_booking/src/app/views/welcome_screen.dart';
 import 'package:get/get.dart';
 
@@ -10,5 +11,8 @@ class AppRoutes {
     GetPage(name: '/register', page: () => const RegisterPage()),
     GetPage(name: '/', page: () => const WelcomePage()),
     GetPage(name: '/owner-register', page: () => const OwnerRegisterPage()),
+    
+    //user route
+    GetPage(name: '/home', page: () => HomePage())
   ];
 }
