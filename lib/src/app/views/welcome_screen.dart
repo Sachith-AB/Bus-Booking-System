@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:flutter/material.dart';
 import '../../utils/color/colors.dart';
 import '../../utils/constant.dart';
@@ -32,46 +33,39 @@ class _WelcomeScreenState extends State<WelcomePage> {
                         fit: BoxFit.cover,
                       )
                   ),
-                  width: 200,
-                  height: 200,
+                  width: 500,
+                  height: 500,
                 ),
                 const PrimaryHeader(
-                  text: "Welcome!",
+                  text: "Welcome to FoodStore",
                   size: 32,
                 ),
                 const SizedBox(height: 8),
                 const Text(
                   "Let's get started by creating an account",
                   style: TextStyle(fontSize: 16, color: Colors.grey),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.start,
                 ),
                 const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
+                PrimaryButton(
+                  label: "Get Started",
+                  onPressed: (){
                     Navigator.pushNamed(context, '/register');
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: KColors.primaryColor,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 14,
-                      horizontal: 32,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    "Create Account",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
                 ),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account? "),
+                    const PrimaryHeader(
+                      text: 'Already have an account',
+                      color: KColors.gray,
+                      size: 16,
+                      weight: FontWeight.w500,
+                    ),
+                    const SizedBox(width: 5),
                     GestureDetector(
-                      onTap: () {
+                      onTap: (){
                         Navigator.pushNamed(context, '/login');
                       },
                       child: const PrimaryHeader(

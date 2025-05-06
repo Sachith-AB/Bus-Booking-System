@@ -1,81 +1,143 @@
+import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
+import 'package:bus_booking/src/app/components/custom_input_field.dart';
+import 'package:bus_booking/src/app/components/input_field_config.dart';
+import 'package:bus_booking/src/app/components/primary_button.dart';
+import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/utils/validate/KValidator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class LoginPage extends StatelessWidget {
+import '../../../../common/style/app_input_style.dart';
+import '../../../../utils/color/colors.dart';
+import '../../../../utils/constant.dart';
+import '../../../components/custom_app_bar.dart';
+
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  bool validEmail = false;
+  bool validPassword = false;
+
+  void onEmailChanged(String email) {
+    setState(() {
+      validEmail = KValidator.validateEmail(email);
+    });
+  }
+
+  void onPasswordChanged(String password){
+    final error = KValidator.validateLoginPassword(password);
+    setState(() {
+      validPassword = error == null;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Email Field
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                labelText: "Email",
-                prefixIcon: Icon(Icons.email),
-                border: OutlineInputBorder(),
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
+      appBar: const CustomAppBar(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        physics: const BouncingScrollPhysics(),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: SizedBox(
+          child:Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                          image: AssetImage(
+                              tLogo
+                          ),
+                          fit: BoxFit.cover,
+                        )
+                    ),
+                    width: 200,
+                    height: 200,
+                  )
+                ],
               ),
-            ),
-            const SizedBox(height: 15),
-
-            // Password Field
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Password",
-                prefixIcon: Icon(Icons.lock),
-                border: OutlineInputBorder(),
+              const PrimaryHeader(
+                text: "Welcome Back!",
               ),
-            ),
-            const SizedBox(height: 20),
-
-            // Login Button
-            ElevatedButton(
-              onPressed: () {
-                String email = emailController.text.trim();
-                String password = passwordController.text.trim();
-
-                if (email.isNotEmpty && password.isNotEmpty) {
-                  // Call login function (we'll implement this later)
-                  Get.snackbar("Login", "Login button clicked!");
-                } else {
-                  Get.snackbar("Error", "Please enter all fields",
-                      snackPosition: SnackPosition.BOTTOM);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple,
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              ),
-              child: const Text(
-                "Login",
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 15),
-
-            // Navigate to Register Page
-            TextButton(
-              onPressed: () {
-                Get.toNamed('/register'); // Navigation to Register Page
-              },
-              child: const Text("Don't have an account? Register here"),
-            ),
-          ],
+              const SizedBox(height: 30),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                ),
+                child: Column(
+                  children: [
+                    DynamicForm(
+                        fields:[
+                          InputFieldConfig(
+                            controller: emailController,
+                            labelText: "Email",
+                            hintText: "brendonmacalum@gmail.com",
+                            isValid: validEmail,
+                            onChanged: (email) => onEmailChanged(email),
+                            prefixIcon: AppInputStyle.emailIcon,
+                          ),
+                          InputFieldConfig(
+                            controller: passwordController,
+                            labelText: "Password",
+                            hintText: "Password must be 8 character",
+                            isValid: validPassword,
+                            onChanged: (password) =>
+                                onPasswordChanged(password),
+                            prefixIcon: AppInputStyle.emailIcon,
+                            obscureText: true,
+                          ),
+                        ],
+                        isEnabled:  validEmail && validPassword,
+                        isLoading: false,
+                        submitLabel: "Login",
+                        onSubmit: (){
+                         //login function
+                        }
+                      ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const PrimaryHeader(
+                          text: 'Not register yet',
+                          color: KColors.gray,
+                          size: 16,
+                          weight: FontWeight.w500,
+                        ),
+                        const SizedBox(width: 5),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, '/register');
+                          },
+                          child: const PrimaryHeader(
+                            text: "Register",
+                            color: KColors.primaryColor,
+                            size: 16,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          )
         ),
       ),
     );
