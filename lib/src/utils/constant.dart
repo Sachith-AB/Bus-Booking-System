@@ -13,3 +13,4 @@ const KCustomer = 'customer';
 const KOwner = 'owner';
 
 const tLogo = "assets/logo/logo.png";
+const tProfile = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";

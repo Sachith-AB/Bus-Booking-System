@@ -2,6 +2,7 @@ import 'package:bus_booking/src/app/models/user_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
 import 'package:bus_booking/src/services/authentication_services.dart';
 import 'package:bus_booking/src/services/crud_services.dart';
+import 'package:bus_booking/src/utils/constant.dart';
 import 'package:get/get.dart';
 
 import '../../utils/popup_warning.dart';
@@ -24,6 +25,8 @@ class UserRegisterController extends GetxController {
       final newUser = UserModel.register(
         email:email,
         id:userCredential.user!.uid,
+        image_url:tProfile,
+        createdAt: DateTime.now(),
         name:name,
         user_type:user_type
       );

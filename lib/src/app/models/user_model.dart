@@ -20,6 +20,8 @@ class UserModel {
     required this.name,
     required this.email,
     required this.user_type,
+    required this.image_url,
+    required this.createdAt,
   });
 
   // Convert UserModel instance to JSON map

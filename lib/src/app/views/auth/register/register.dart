@@ -200,7 +200,6 @@ class _RegisterPageState extends State<RegisterPage> {
     const userType = KCustomer;
 
     controller.registerAsUser(name, email, password, userType);
-    debugPrint(userType);
 
   }
 }
