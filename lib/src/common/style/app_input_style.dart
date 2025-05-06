@@ -74,7 +74,7 @@ class AppInputStyle {
     color: KColors.primaryColor,
     size: 18,
   );
-  static Icon foodAvailableIcon = const Icon(
+  static Icon foodAvailabilityIcon = const Icon(
     Icons.check_circle_outline,
     color: KColors.primaryColor,
     size: 18,
