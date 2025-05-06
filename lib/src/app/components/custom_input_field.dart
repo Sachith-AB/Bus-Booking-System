@@ -34,7 +34,7 @@ class CustomInputField extends StatelessWidget {
       onChanged: onChanged,
       obscureText: obscureText,
       decoration: InputDecoration(
-        border: AppInputStyle.outlineInputBorder,
+        border: isValid ? AppInputStyle.outlineInputBorder: AppInputStyle.outlineInputBorder,
         focusedBorder: AppInputStyle.outlineInputBorder,
         contentPadding: AppInputStyle.contentPadding,
         filled: isValid,

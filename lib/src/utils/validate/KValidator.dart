@@ -19,7 +19,7 @@ class KValidator {
   static String? validatePassword(String password,String cPassword){
     if(password.isEmpty){
       return "* Password is Required";
-    }else if(password.length < 4){
+    }else if(password.length < 8){
       return "* Password must be 8 Character";
     }else if(cPassword.isEmpty){
       return "* Confirm Password is Required";
