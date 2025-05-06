@@ -51,8 +51,23 @@ class AppInputStyle {
   //   size: 18,
   // );
 
+  static Icon personIcon = const Icon(
+    Icons.person_outline,
+    color: KColors.primaryColor,
+    size: 18,
+  );
   static Icon emailIcon = const Icon(
     Icons.email_outlined,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+  static Icon phoneIcon = const Icon(
+    Icons.phone,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+  static Icon AddressIcon = const Icon(
+    Icons.location_on_outlined,
     color: KColors.primaryColor,
     size: 18,
   );

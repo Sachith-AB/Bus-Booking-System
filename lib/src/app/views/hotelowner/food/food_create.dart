@@ -37,6 +37,9 @@ class _FoodCreatePageState extends State<FoodCreatePage>{
   void onDescriptionChanged(String description){
 
   }
+  void onPriceChanged(String price){
+
+  }
 
 
 
@@ -76,7 +79,7 @@ class _FoodCreatePageState extends State<FoodCreatePage>{
                           hintText: "Enter Food Name",
                           isValid: false,
                           onChanged: (name) => onNameChanged(name),
-                          prefixIcon: AppInputStyle.emailIcon,
+                          prefixIcon: AppInputStyle.foodIcon,
                         ),
                         InputFieldConfig(
                           controller: descriptionController,
@@ -91,7 +94,7 @@ class _FoodCreatePageState extends State<FoodCreatePage>{
                           labelText: "Price",
                           hintText: "Enter food price",
                           isValid: false,
-                          onChanged: (price) => priceController.text = price,
+                          onChanged: (price) => onPriceChanged(price),
                           prefixIcon: AppInputStyle.foodPriceIcon,
                         ),
                         

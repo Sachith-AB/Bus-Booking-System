@@ -37,8 +37,10 @@ class CustomInputField extends StatelessWidget {
         border: isValid ? AppInputStyle.outlineInputBorder: AppInputStyle.outlineInputBorder,
         focusedBorder: AppInputStyle.outlineInputBorder,
         contentPadding: AppInputStyle.contentPadding,
-        filled: isValid,
+        // filled: isValid,
         //fillColor: AppInputStyle.validFillColor,
+        filled: true, // Always filled
+        fillColor: Colors.white, // Or use AppInputStyle.fillColor if defined
         hintText: hintText,
         labelText: labelText,
         hintStyle: AppInputStyle.hintTextStyle,
