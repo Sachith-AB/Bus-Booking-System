@@ -23,6 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: backgroundColor,
+      automaticallyImplyLeading: showBackButton, 
       title: title != null ? 
         PrimaryHeader(
           text: title!,

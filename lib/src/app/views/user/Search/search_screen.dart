@@ -1,4 +1,6 @@
+import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
+import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -14,7 +16,12 @@ class _SearchPageState extends State<SearchPage> {
     return MainScaffold(
       selectedIndex: 1,
       body: Scaffold(
-
+        appBar: CustomAppBar(
+          title: 'Search',
+          showBackButton: false,
+          showCartButton: true,
+          backgroundColor: KColors.appPrimary.shade100,
+        ),
       )
     );
   }
