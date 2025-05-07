@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: KColors.appPrimary,
         useMaterial3: true,
       ),
-      initialRoute: '/profile',  // Start with Login Page
+      initialRoute: '/',  // Start with Login Page
       getPages: AppRoutes.routes
     );
   }
