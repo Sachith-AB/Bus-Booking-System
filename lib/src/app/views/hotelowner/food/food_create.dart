@@ -99,10 +99,7 @@ class _FoodCreatePageState extends State<FoodCreatePage>{
                         ),
                         
                       ],
-                      submitLabel: "Register",
-                            onSubmit: () {
-                              
-                            },
+                      
                     ),
                     const SizedBox(height: 30),
                     CustomDropdown(
@@ -117,13 +114,13 @@ class _FoodCreatePageState extends State<FoodCreatePage>{
                       },
                     ),
 
-                    // const SizedBox(height: 25),
-                    // PrimaryButton(
-                    //   label: "Add Food",
-                    //   onPressed: () {
-                    //     // Handle food submission here
-                    //   },
-                    // ),
+                    const SizedBox(height: 25),
+                    PrimaryButton(
+                      label: "Add Food",
+                      onPressed: () {
+                        // Handle food submission here
+                      },
+                    ),
                   ]
                 )
               )

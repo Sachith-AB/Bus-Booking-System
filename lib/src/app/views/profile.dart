@@ -123,10 +123,13 @@ void initState() {
                         ),
                         
                       ],
-                      submitLabel: "Update Profile",
-                            onSubmit: () {
-                              
-                            },
+                      
+                    ),
+                    PrimaryButton(
+                      label: "Update profile",
+                      onPressed: () {
+                        // Handle cancel action here
+                      },
                     ),
                     const SizedBox(height: 25),
                     SecondaryButton(
