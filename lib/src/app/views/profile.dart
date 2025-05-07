@@ -3,6 +3,7 @@ import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
 import 'package:bus_booking/src/app/components/input_field_config.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/profile_image.dart';
+import 'package:bus_booking/src/app/components/secondary_button.dart';
 import 'package:bus_booking/src/common/style/app_input_style.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/validate/KValidator.dart';
@@ -128,14 +129,10 @@ void initState() {
                             },
                     ),
                     const SizedBox(height: 25),
-                    PrimaryButton(
-                      backgroundColor: Colors.white,
-                      textColor: KColors.primaryColor,
-                      outline: true,
-                      outlineColor: Colors.red,
+                    SecondaryButton(
                       label: "Cancel",
                       onPressed: () {
-                        // Handle food submission here
+                        // Handle cancel action here
                       },
                     ),
                 ]
