@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/models/user_model.dart';

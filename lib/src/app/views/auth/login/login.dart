@@ -1,14 +1,11 @@
 import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
-import 'package:bus_booking/src/app/components/custom_input_field.dart';
 import 'package:bus_booking/src/app/components/input_field_config.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/controllers/user_register_controller.dart';
 import 'package:bus_booking/src/utils/validate/KValidator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../common/style/app_input_style.dart';
 import '../../../../utils/color/colors.dart';

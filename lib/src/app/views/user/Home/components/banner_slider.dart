@@ -24,11 +24,11 @@ class BannerSlider extends StatelessWidget {
             decoration: BoxDecoration(
               color: banner['backgroundColor'],
               borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: AssetImage(banner['imageUrl']),
-                fit: BoxFit.cover,
-                alignment: Alignment.centerRight,
-              ),
+              // image: DecorationImage(
+              //   image: AssetImage(banner['imageUrl']),
+              //   fit: BoxFit.cover,
+              //   alignment: Alignment.centerRight,
+              // ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(16),

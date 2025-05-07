@@ -108,7 +108,10 @@ class HomePage extends StatelessWidget {
                 child: SearchBarWidget(),
               ),
               const SizedBox(height: 16),
+
+              //banner list
               BannerSlider(banners: banners),
+              
               const SizedBox(height: 24),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
@@ -122,10 +125,13 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
+
+              //category list
               CategoryList(categories: categories),
+
               const SizedBox(height: 24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: PrimaryHeader(
                   text: 'Most Popular',
                 ),

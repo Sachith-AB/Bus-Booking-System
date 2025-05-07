@@ -1,4 +1,6 @@
 import 'package:bus_booking/src/app/models/category_model.dart';
+import 'package:bus_booking/src/utils/color/colors.dart';
+import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class CategoryList extends StatelessWidget {
@@ -19,7 +21,7 @@ class CategoryList extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: categories.length + 1, // +1 for "Show all" button
+            itemCount: categories.length, // +1 for "Show all" button
             itemBuilder: (context, index) {
               if (index == 0) {
                 return _buildCategoryItem(
@@ -27,7 +29,7 @@ class CategoryList extends StatelessWidget {
                   Category(
                     id: 'all',
                     name: 'Show all',
-                    iconPath: 'assets/icons/all.png',
+                    iconPath: tLogo,
                   ),
                   isShowAll: true,
                 );
@@ -53,16 +55,16 @@ class CategoryList extends StatelessWidget {
               color: Colors.grey[200],
               shape: BoxShape.circle,
             ),
-            child: Center(
-              child: isShowAll
-                  ? const Icon(Icons.apps, color: Color(0xFF1D4F6E), size: 30)
-                  : Image.asset(
-                category.iconPath,
-                width: 30,
-                height: 30,
-                color: const Color(0xFF1D4F6E),
-              ),
-            ),
+            child: isShowAll
+                ? const Icon(Icons.apps, color: KColors.appPrimary, size: 30)
+                : ClipOval(
+                    child: Image.asset(
+                      category.iconPath,
+                      width: 60,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
           ),
           const SizedBox(height: 8),
           Text(
