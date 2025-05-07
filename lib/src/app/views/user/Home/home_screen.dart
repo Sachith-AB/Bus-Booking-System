@@ -4,6 +4,7 @@ import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/banner_slider.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/category_list.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/product_grid.dart';
+import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class HomePage extends StatelessWidget {
         id: '1',
         name: 'Americano',
         price: 3.99,
-        imageUrl: tLogo,
+        imageUrl: coffee,
         isFavorite: false,
         category: 'Coffee',
       ),
@@ -34,7 +35,15 @@ class HomePage extends StatelessWidget {
         id: '2',
         name: 'Plain Croissant',
         price: 2.99,
-        imageUrl: tLogo,
+        imageUrl: bread,
+        isFavorite: true,
+        category: 'Croissant',
+      ),
+      Product(
+        id: '3',
+        name: 'Plain Croissant',
+        price: 2.99,
+        imageUrl: bread,
         isFavorite: true,
         category: 'Croissant',
       ),
@@ -53,10 +62,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const PrimaryHeader(text: 'Food Store'),
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
+        backgroundColor: KColors.appPrimary.shade100,
         actions: [
           Stack(
             alignment: Alignment.topRight,
@@ -100,14 +106,12 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 24),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1D4F6E),
-                  ),
-                ),
+                child: 
+                PrimaryHeader(
+                  text: 'Categories',
+                  weight: FontWeight.bold,
+                  size: 18,
+                )
               ),
               const SizedBox(height: 12),
 
