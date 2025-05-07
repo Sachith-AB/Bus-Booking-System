@@ -20,3 +20,6 @@ const croissant = 'assets/foods/croissant.jpg';
 const crepe = 'assets/foods/crepe.jpg';
 const donut = 'assets/foods/donut.webp';
 const bread = 'assets/foods/bread.webp';
+
+const burgerKing = "assets/adds/gift.jpg";
+const delicious = "assets/adds/delicious-food.jpeg";

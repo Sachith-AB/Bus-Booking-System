@@ -1,4 +1,3 @@
-import 'package:bus_booking/src/app/components/custome_search_bar.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/models/category_model.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
@@ -43,21 +42,13 @@ class HomePage extends StatelessWidget {
 
     final List<Map<String, dynamic>> banners = [
       {
-        'title': 'BLUEBERRY\nWAFFLES',
-        'discount': '15% OFF',
-        'buttonText': 'Order Now',
-        'imageUrl': tLogo,
-        'backgroundColor': const Color(0xFF1D4F6E),
-        'textColor': Colors.white,
+        'imageUrl': burgerKing,
       },
       {
-        'title': 'Start the day\nwith great\ntaste',
-        'buttonText': 'Order Now',
-        'imageUrl': tLogo,
-        'backgroundColor': const Color(0xFFF5F5F5),
-        'textColor': const Color(0xFF3A2618),
+        'imageUrl': delicious,
       },
     ];
+
 
     return Scaffold(
       appBar: AppBar(
@@ -103,12 +94,6 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SearchBarWidget(),
-              ),
-              const SizedBox(height: 16),
-
               //banner list
               BannerSlider(banners: banners),
 
