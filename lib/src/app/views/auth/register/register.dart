@@ -131,10 +131,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           obscureText: true,
                         ),
                       ],
-                      isEnabled: validName && validEmail && validPassword,
+                    ),
+                    PrimaryButton(
+                      label: 'Register',
+                      isEnabled: validEmail && validName && validPassword,
                       isLoading: false,
-                      submitLabel: "Register",
-                      onSubmit: () {
+                      onPressed: (){
                         registerUser();
                       },
                     ),

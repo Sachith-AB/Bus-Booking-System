@@ -55,4 +55,22 @@ class AuthenticationServices extends GetxController {
       throw ex;
     }
   }
+
+  Future<UserCredential> loginUser(String email , String password) async {
+    try{
+      final user = await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value){
+        return value;
+      });
+      return user;
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpFailure.code(e.code);
+      PopupWarning.Warning(
+        title: 'User SignIn Failure',
+        message: ex.message,
+        type: 1
+      ); throw ex.message;
+    }
+  }
 }
