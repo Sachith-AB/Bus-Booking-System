@@ -1,5 +1,5 @@
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
-import 'package:bus_booking/src/app/components/custom_navbar.dart';
+import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/models/category_model.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
@@ -62,6 +62,7 @@ class HomePage extends StatelessWidget {
 
 
     return MainScaffold(
+      selectedIndex: 0,
       body: Scaffold(
         appBar: CustomAppBar(
           title: 'Food Store',

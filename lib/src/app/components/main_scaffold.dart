@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
+import 'package:get/get.dart';
 
 class MainScaffold extends StatefulWidget {
   final Widget body;
@@ -32,20 +33,20 @@ class _MainScaffoldState extends State<MainScaffold> {
 
     // Replace with your actual route names
     switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-    }
+    case 0:
+      Get.toNamed('/home');
+      break;
+    case 1:
+      Get.toNamed('/search');
+      break;
+    case 2:
+      Get.toNamed('/cart'); // Make sure you have this route defined
+      break;
+    case 3:
+      Get.toNamed('/profile'); // Make sure you have this route defined
+      break;
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +87,12 @@ class _MainScaffoldState extends State<MainScaffold> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon,
-              color: isSelected ? KColors.appPrimary.shade600 : KColors.appPrimary.shade400
+              color: isSelected ? KColors.black : KColors.gray
             ),
             Text(
               label,
               style: TextStyle(
-                color: isSelected ? KColors.appPrimary.shade600 : KColors.appPrimary.shade400,
+                color: isSelected ? KColors.black : KColors.gray,
                 fontSize: 12,
               ),
             ),
