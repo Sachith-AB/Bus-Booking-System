@@ -1,9 +1,12 @@
+import 'package:bus_booking/src/app/components/custom_app_bar.dart';
+import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/models/category_model.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/banner_slider.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/category_list.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/product_grid.dart';
+import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +29,7 @@ class HomePage extends StatelessWidget {
         id: '1',
         name: 'Americano',
         price: 3.99,
-        imageUrl: tLogo,
+        imageUrl: coffee,
         isFavorite: false,
         category: 'Coffee',
       ),
@@ -34,7 +37,15 @@ class HomePage extends StatelessWidget {
         id: '2',
         name: 'Plain Croissant',
         price: 2.99,
-        imageUrl: tLogo,
+        imageUrl: bread,
+        isFavorite: true,
+        category: 'Croissant',
+      ),
+      Product(
+        id: '3',
+        name: 'Plain Croissant',
+        price: 2.99,
+        imageUrl: bread,
         isFavorite: true,
         category: 'Croissant',
       ),
@@ -50,83 +61,54 @@ class HomePage extends StatelessWidget {
     ];
 
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const PrimaryHeader(text: 'Food Store'),
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
+    return MainScaffold(
+      selectedIndex: 0,
+      body: Scaffold(
+        appBar: CustomAppBar(
+          title: 'Food Store',
+          showBackButton: false,
+          showCartButton: true,
+          backgroundColor: KColors.appPrimary.shade100
         ),
-        actions: [
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.shopping_bag_outlined),
-                onPressed: () {},
-              ),
-              Positioned(
-                right: 8,
-                top: 8,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Text(
-                    '2',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //banner list
-              BannerSlider(banners: banners),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //banner list
+                BannerSlider(banners: banners),
 
-              const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1D4F6E),
+                const SizedBox(height: 24),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: 
+                  PrimaryHeader(
+                    text: 'Categories',
+                    weight: FontWeight.bold,
+                    size: 18,
+                  )
+                ),
+                const SizedBox(height: 12),
+
+                //category list
+                CategoryList(categories: categories),
+
+                const SizedBox(height: 24),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: PrimaryHeader(
+                    text: 'Most Popular',
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-
-              //category list
-              CategoryList(categories: categories),
-
-              const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: PrimaryHeader(
-                  text: 'Most Popular',
-                ),
-              ),
-              const SizedBox(height: 12),
-              ProductGrid(products: popularProducts),
-            ],
+                const SizedBox(height: 12),
+                ProductGrid(products: popularProducts),
+                const SizedBox(height: 12),
+              ],
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }
