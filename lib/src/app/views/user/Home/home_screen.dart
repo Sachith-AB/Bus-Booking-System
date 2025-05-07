@@ -15,11 +15,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Sample data
     final List<Category> categories = [
-      Category(id: '1', name: 'Coffee', iconPath: tLogo),
-      Category(id: '2', name: 'Croissant', iconPath: tLogo),
-      Category(id: '3', name: 'Crepe', iconPath: 'assets/foods/crepe.avif'),
-      Category(id: '4', name: 'Donut', iconPath: 'assets/foods/donut.avif'),
-      Category(id: '5', name: 'Bread', iconPath: 'assets/foods/bread.avif'),
+      Category(id: '1', name: 'Coffee', iconPath: coffee),
+      Category(id: '2', name: 'Croissant', iconPath: croissant),
+      Category(id: '3', name: 'Crepe', iconPath: crepe),
+      Category(id: '4', name: 'Donut', iconPath: donut),
+      Category(id: '5', name: 'Bread', iconPath: bread),
     ];
 
     final List<Product> popularProducts = [
@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
 
               //banner list
               BannerSlider(banners: banners),
-              
+
               const SizedBox(height: 24),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
