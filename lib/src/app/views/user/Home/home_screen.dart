@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/custom_navbar.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/models/category_model.dart';
@@ -62,39 +63,11 @@ class HomePage extends StatelessWidget {
 
     return MainScaffold(
       body: Scaffold(
-        appBar: AppBar(
-          title: const PrimaryHeader(text: 'Food Store'),
-          backgroundColor: KColors.appPrimary.shade100,
-          actions: [
-            Stack(
-              alignment: Alignment.topRight,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.shopping_bag_outlined),
-                  onPressed: () {},
-                ),
-                Positioned(
-                  right: 8,
-                  top: 8,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Text(
-                      '2',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+        appBar: CustomAppBar(
+          title: 'Food Store',
+          showBackButton: false,
+          showCartButton: true,
+          backgroundColor: KColors.appPrimary.shade100
         ),
         body: SingleChildScrollView(
           child: Padding(
