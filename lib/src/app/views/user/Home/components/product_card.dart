@@ -59,13 +59,13 @@ class ProductCard extends StatelessWidget {
             child: Container(
               width: 36,
               height: 36,
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: product.isFavorite ? Colors.red : Colors.grey,
+                color: product.isFavorite ? Colors.red : Colors.white,
                 size: 20,
               ),
             ),
@@ -115,7 +115,7 @@ class ProductCard extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor: Colors.white.withOpacity(0.5),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -136,7 +136,7 @@ class ProductCard extends StatelessWidget {
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.white.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(Icons.more_horiz, size: 20),
