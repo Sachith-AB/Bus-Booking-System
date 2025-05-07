@@ -1,6 +1,4 @@
 import 'package:bus_booking/src/app/models/category_model.dart';
-import 'package:bus_booking/src/utils/color/colors.dart';
-import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class CategoryList extends StatelessWidget {
@@ -21,20 +19,9 @@ class CategoryList extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: categories.length, // +1 for "Show all" button
+            itemCount: categories.length,
             itemBuilder: (context, index) {
-              if (index == 0) {
-                return _buildCategoryItem(
-                  context,
-                  Category(
-                    id: 'all',
-                    name: 'Show all',
-                    iconPath: tLogo,
-                  ),
-                  isShowAll: true,
-                );
-              }
-              return _buildCategoryItem(context, categories[index - 1]);
+              return _buildCategoryItem(context, categories[index]);
             },
           ),
         ),
@@ -42,7 +29,7 @@ class CategoryList extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryItem(BuildContext context, Category category, {bool isShowAll = false}) {
+  Widget _buildCategoryItem(BuildContext context, Category category) {
     return Container(
       width: 80,
       margin: const EdgeInsets.only(right: 12),
@@ -55,16 +42,14 @@ class CategoryList extends StatelessWidget {
               color: Colors.grey[200],
               shape: BoxShape.circle,
             ),
-            child: isShowAll
-                ? const Icon(Icons.apps, color: KColors.appPrimary, size: 30)
-                : ClipOval(
-                    child: Image.asset(
-                      category.iconPath,
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            child: ClipOval(
+              child: Image.asset(
+                category.iconPath,
+                width: 60,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           const SizedBox(height: 8),
           Text(

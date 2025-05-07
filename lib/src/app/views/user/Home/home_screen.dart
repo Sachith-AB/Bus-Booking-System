@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Food Store'),
+        title: const PrimaryHeader(text: 'Food Store'),
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {},
