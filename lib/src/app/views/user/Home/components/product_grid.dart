@@ -1,5 +1,5 @@
 import 'package:bus_booking/src/app/models/product_model.dart';
-import 'package:bus_booking/src/app/views/user/Home/components/produnct_card.dart';
+import 'package:bus_booking/src/app/views/user/Home/components/product_card.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,22 +13,17 @@ class ProductGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.75,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
+    return SizedBox(
+        height: 300,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: products.length,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemBuilder: (context, index) {
+            final product = products[index];
+            return ProductCard(product: product);
+          },
         ),
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          return ProductCard(product: products[index]);
-        },
-      ),
-    );
+      );
   }
 }
