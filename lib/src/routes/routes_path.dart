@@ -3,6 +3,7 @@ import 'package:bus_booking/src/app/views/auth/register/owner_register.dart';
 import 'package:bus_booking/src/app/views/auth/register/register.dart';
 import 'package:bus_booking/src/app/views/hotelowner/food/food_create.dart';
 import 'package:bus_booking/src/app/views/profile.dart';
+import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
 import 'package:bus_booking/src/app/views/welcome_screen.dart';
 import 'package:get/get.dart';
 
@@ -14,5 +15,8 @@ class AppRoutes {
     GetPage(name: '/owner-register', page: () => const OwnerRegisterPage()),
     GetPage(name: '/owner-addfood', page: ()=>const FoodCreatePage()),
     GetPage(name: '/profile', page: ()=>const ProfilePage()),
+    
+    //user route
+    GetPage(name: '/home', page: () => HomePage())
   ];
 }

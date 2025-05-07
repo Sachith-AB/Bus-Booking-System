@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
   final String id;
   late String name;
@@ -24,6 +26,14 @@ class UserModel {
     required this.createdAt,
   });
 
+  UserModel.aboutMe({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.user_type,
+    required this.image_url
+});
+
   // Convert UserModel instance to JSON map
   Map<String, dynamic> toJson() {
     return {
@@ -37,14 +47,14 @@ class UserModel {
   }
 
   // Create a UserModel instance from a JSON map
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'] ?? '',
-      name: json['name'] ?? '',
-      email: json['email'] ?? '',
-      image_url: json['image_url'] ?? '',
-      user_type: json['user_type'] ?? '',
-      createdAt: DateTime.parse(json['createdAt'])
+  factory UserModel.fromSnapshot(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String , dynamic>;
+    return UserModel.aboutMe(
+      id:data['id'] ?? '',
+      name: data['name'] ?? '',
+      email: data['email'] ?? '',
+      image_url: data['image_url'] ?? '',
+      user_type: data['user_type'] ?? '',
     );
   }
 }

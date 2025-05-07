@@ -14,3 +14,12 @@ const KOwner = 'owner';
 
 const tLogo = "assets/logo/logo.png";
 const tProfile = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+
+const coffee = "assets/foods/coffee.jpg";
+const croissant = 'assets/foods/croissant.jpg';
+const crepe = 'assets/foods/crepe.jpg';
+const donut = 'assets/foods/donut.webp';
+const bread = 'assets/foods/bread.webp';
+
+const burgerKing = "assets/adds/gift.jpg";
+const delicious = "assets/adds/delicious-food.jpeg";

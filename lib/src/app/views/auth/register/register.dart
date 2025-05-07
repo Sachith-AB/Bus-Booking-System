@@ -10,7 +10,6 @@ import '../../../../common/style/app_input_style.dart';
 import '../../../../utils/color/colors.dart';
 import '../../../../utils/constant.dart';
 import '../../../components/custom_dynamic_form.dart';
-import '../../../components/custom_input_field.dart';
 import '../../../components/input_field_config.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -55,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
@@ -97,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         InputFieldConfig(
                           controller: nameController,
                           labelText: "Name",
-                          hintText: "Brendon Macalum",
+                          hintText: "Sachith Avintha",
                           isValid: validName,
                           onChanged: (name) => onNameChanged(name),
                           prefixIcon: AppInputStyle.emailIcon,
@@ -131,10 +130,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           obscureText: true,
                         ),
                       ],
-                      isEnabled: validName && validEmail && validPassword,
+                    ),
+                    PrimaryButton(
+                      label: 'Register',
+                      isEnabled: validEmail && validName && validPassword,
                       isLoading: false,
-                      submitLabel: "Register",
-                      onSubmit: () {
+                      onPressed: (){
                         registerUser();
                       },
                     ),
