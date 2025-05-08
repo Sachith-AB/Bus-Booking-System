@@ -1,26 +1,49 @@
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
+import 'package:bus_booking/src/app/components/custom_search_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
+import 'package:bus_booking/src/app/models/category_model.dart';
+import 'package:bus_booking/src/app/views/user/Search/components/category_list.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
+import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  @override
   Widget build(BuildContext context) {
-    return MainScaffold(
+
+    // Sample data
+    final List<Category> categories = [
+      Category(id: '1', name: 'Coffee', iconPath:coffee , icon: Icons.coffee_outlined),
+      Category(id: '2', name: 'Croissant', iconPath: croissant , icon: Icons.coffee_outlined),
+      Category(id: '3', name: 'Crepe', iconPath: crepe , icon: Icons.coffee_outlined),
+      Category(id: '4', name: 'Donut', iconPath: donut , icon: Icons.coffee_outlined),
+      Category(id: '5', name: 'Bread', iconPath: bread , icon: Icons.coffee_outlined),
+    ];
+  return MainScaffold(
       selectedIndex: 1,
       body: Scaffold(
         appBar: CustomAppBar(
-          title: 'Search',
           showBackButton: false,
           showCartButton: true,
           backgroundColor: KColors.appPrimary.shade100,
+          title: 'Search',
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(padding: EdgeInsets.symmetric(horizontal: 16),
+                  child:SearchBarWidget(),
+                ),
+                const SizedBox(height: 12),
+                CategoryList(categories: categories),
+              ],
+            ),
+          ),
         ),
       )
     );

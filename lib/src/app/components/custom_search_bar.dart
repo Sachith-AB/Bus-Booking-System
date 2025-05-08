@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -8,14 +9,13 @@ class SearchBarWidget extends StatelessWidget {
     return Container(
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: KColors.appPrimary.shade100,
         borderRadius: BorderRadius.circular(25),
       ),
       child: const TextField(
         decoration: InputDecoration(
           hintText: 'Search',
-          prefixIcon: Icon(Icons.search, color: Colors.grey),
-          suffixIcon: Icon(Icons.mic, color: Colors.grey),
+          prefixIcon: Icon(Icons.search, color: KColors.black),
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(vertical: 15),
         ),

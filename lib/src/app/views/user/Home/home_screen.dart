@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     // Sample data
     final List<Category> categories = [
       Category(id: '1', name: 'Coffee', iconPath: coffee),
