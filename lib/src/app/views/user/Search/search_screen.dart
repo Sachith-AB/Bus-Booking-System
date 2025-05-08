@@ -16,10 +16,12 @@ class SearchPage extends StatelessWidget {
     // Sample data
     final List<Category> categories = [
       Category(id: '1', name: 'Coffee', iconPath:coffee , icon: Icons.coffee_outlined),
-      Category(id: '2', name: 'Croissant', iconPath: croissant , icon: Icons.coffee_outlined),
-      Category(id: '3', name: 'Crepe', iconPath: crepe , icon: Icons.coffee_outlined),
-      Category(id: '4', name: 'Donut', iconPath: donut , icon: Icons.coffee_outlined),
-      Category(id: '5', name: 'Bread', iconPath: bread , icon: Icons.coffee_outlined),
+      Category(id: '2', name: 'Croissant', iconPath: croissant , icon: Icons.bakery_dining),
+      Category(id: '3', name: 'Crepe', iconPath: crepe , icon: Icons.set_meal),
+      Category(id: '4', name: 'Donut', iconPath: donut ,  icon : Icons.donut_large),
+      Category(id: '5', name: 'Bread', iconPath: bread , icon: Icons.bakery_dining),
+      Category(id: '6', name: 'Donut', iconPath: donut , icon: Icons.donut_large),
+      Category(id: '7', name: 'Bread', iconPath: bread , icon: Icons.bakery_dining),
     ];
   return MainScaffold(
       selectedIndex: 1,
@@ -36,11 +38,15 @@ class SearchPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 16),
-                  child:SearchBarWidget(),
+                Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      const SearchBarWidget(),
+                      const SizedBox(height: 12),
+                      CategoryList(categories: categories),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 12),
-                CategoryList(categories: categories),
               ],
             ),
           ),
