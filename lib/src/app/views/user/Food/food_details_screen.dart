@@ -26,20 +26,43 @@ class FoodDetailsPage extends StatelessWidget {
         body: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16 , vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: SingleChildScrollView(
                 padding: const EdgeInsets.only(bottom: 80), 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(
-                        product.imageUrl,
-                        height: 450,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                    // Wrap image and heart icon in a Stack
+                    Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            product.imageUrl,
+                            height: 450,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        // Heart icon positioned on the image
+                        Positioned(
+                          top: 16,
+                          right: 16,
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.5),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                              color: product.isFavorite ? Colors.red : Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 12),
                     PrimaryHeader(text: product.name),
@@ -50,7 +73,7 @@ class FoodDetailsPage extends StatelessWidget {
                       weight: FontWeight.normal,
                       color: KColors.gray,
                     ),
-                    const SizedBox(height: 80),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
