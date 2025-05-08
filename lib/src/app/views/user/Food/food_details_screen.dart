@@ -26,9 +26,9 @@ class FoodDetailsPage extends StatelessWidget {
         body: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16 , vertical: 16),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 80), // space for button
+                padding: const EdgeInsets.only(bottom: 80), 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

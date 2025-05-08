@@ -1,6 +1,7 @@
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ProductGrid extends StatelessWidget {
@@ -21,7 +22,12 @@ class ProductGrid extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           itemBuilder: (context, index) {
             final product = products[index];
-            return ProductCard(product: product);
+            return GestureDetector(
+              onTap: (){
+                Get.offNamed('/food-page',arguments: product);
+              },
+              child: ProductCard(product: product),
+            );
           },
         ),
       );

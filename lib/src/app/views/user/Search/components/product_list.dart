@@ -40,7 +40,6 @@ class ProductList extends StatelessWidget {
             children: [
               const SizedBox(height: 8),
               GestureDetector(
-                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Get.toNamed('/food-page', arguments: product);
                 },
