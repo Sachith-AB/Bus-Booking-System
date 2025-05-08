@@ -66,7 +66,7 @@ class AppInputStyle {
     color: KColors.primaryColor,
     size: 18,
   );
-  static Icon AddressIcon = const Icon(
+  static Icon addressIcon = const Icon(
     Icons.location_on_outlined,
     color: KColors.primaryColor,
     size: 18,

@@ -119,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage>{
                           hintText: "Enter home address",
                           isValid: false,
                           onChanged: (address) => onAddressChanged(address),
-                          prefixIcon: AppInputStyle.AddressIcon,
+                          prefixIcon: AppInputStyle.addressIcon,
                         ),
                         
                       ],
@@ -144,6 +144,7 @@ class _ProfilePageState extends State<ProfilePage>{
             ]
           )
         )
+      
       ),
     );
   }
