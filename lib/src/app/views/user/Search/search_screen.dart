@@ -74,7 +74,22 @@ class SearchPage extends StatelessWidget {
                 Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
-                      const SearchBarWidget(),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Expanded(child: SearchBarWidget()),
+                          const SizedBox(width: 8),
+                          Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: KColors.appPrimary.shade100, // adjust as needed
+                              shape: BoxShape.circle,
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            child: const Icon(Icons.filter_list, size: 30),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 12),
                       CategoryList(categories: categories),
                       const SizedBox(height: 12),
