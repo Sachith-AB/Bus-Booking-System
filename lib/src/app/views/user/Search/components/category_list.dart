@@ -17,7 +17,6 @@ class CategoryList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
-        padding: const EdgeInsets.symmetric(horizontal: 0),
         itemBuilder: (context, index) {
           final category = categories[index];
 
