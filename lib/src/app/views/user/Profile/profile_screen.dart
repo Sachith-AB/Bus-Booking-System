@@ -66,7 +66,7 @@ class _profilePageState extends State<profilePage> {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      selectedIndex: 3,
+      selectedIndex: 4,
       body: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: CustomAppBar(

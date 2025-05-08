@@ -58,7 +58,7 @@ class SearchPage extends StatelessWidget {
     ];
 
   return MainScaffold(
-      selectedIndex: 1,
+      selectedIndex: 2,
       body: Scaffold(
         appBar: CustomAppBar(
           showBackButton: false,

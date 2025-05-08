@@ -99,7 +99,7 @@ class _CartPageState extends State<CartPage> {
 @override
 Widget build(BuildContext context) {
   return MainScaffold(
-    selectedIndex: 2,
+    selectedIndex: 3,
     body: Scaffold(
       appBar: CustomAppBar(
         title: 'Cart',

@@ -33,16 +33,16 @@ class _MainScaffoldState extends State<MainScaffold> {
 
     // Replace with your actual route names
     switch (index) {
-    case 0:
+    case 1:
       Get.toNamed('/home');
       break;
-    case 1:
+    case 2:
       Get.toNamed('/search');
       break;
-    case 2:
+    case 3:
       Get.toNamed('/cart'); // Make sure you have this route defined
       break;
-    case 3:
+    case 4:
       Get.toNamed('/profile'); // Make sure you have this route defined
       break;
   }
@@ -59,10 +59,10 @@ class _MainScaffoldState extends State<MainScaffold> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(0, Icons.home_outlined, 'Home'),
-            _buildNavItem(1, Icons.search_outlined, 'Search'),
-            _buildNavItem(2, Icons.shopping_cart_outlined, 'Cart'),
-            _buildNavItem(3, Icons.person_outline, 'Profile'),
+            _buildNavItem(1, Icons.home_outlined, 'Home'),
+            _buildNavItem(2, Icons.search_outlined, 'Search'),
+            _buildNavItem(3, Icons.shopping_cart_outlined, 'Cart'),
+            _buildNavItem(4, Icons.person_outline, 'Profile'),
           ],
         ),
       ),

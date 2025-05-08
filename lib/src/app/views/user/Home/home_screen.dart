@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
 
 
     return MainScaffold(
-      selectedIndex: 0,
+      selectedIndex: 1,
       body: Scaffold(
         appBar: CustomAppBar(
           title: 'Food Store',
