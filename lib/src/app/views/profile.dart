@@ -5,9 +5,7 @@ import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/profile_image.dart';
 import 'package:bus_booking/src/app/components/secondary_button.dart';
 import 'package:bus_booking/src/common/style/app_input_style.dart';
-import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/validate/KValidator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget{
