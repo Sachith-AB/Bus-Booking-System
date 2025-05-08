@@ -38,24 +38,11 @@ class ProductList extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius:const  BorderRadius.only(
-                  topRight: Radius.circular(15),
-                  topLeft: Radius.circular(15)
-                ),
-                child: Image.asset(
-                  product.imageUrl,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
               const SizedBox(height: 8),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Get.toNamed('/food-page', arguments: product);
-                  print('text');
                 },
                 child: ProductCard(product: product)
               )
