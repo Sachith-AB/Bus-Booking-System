@@ -4,6 +4,7 @@ import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/models/category_model.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/user/Search/components/category_list.dart';
+import 'package:bus_booking/src/app/views/user/Search/components/filter_bottom_sheet.dart';
 import 'package:bus_booking/src/app/views/user/Search/components/product_list.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/constant.dart';
@@ -79,14 +80,26 @@ class SearchPage extends StatelessWidget {
                         children: [
                           const Expanded(child: SearchBarWidget()),
                           const SizedBox(width: 8),
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: KColors.appPrimary.shade100, // adjust as needed
-                              shape: BoxShape.circle,
+                          GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                ),
+                                isScrollControlled: true,
+                                builder: (context) => const FilterBottomSheet(),
+                              );
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: KColors.appPrimary.shade100, // adjust as needed
+                                shape: BoxShape.circle,
+                              ),
+                              padding: const EdgeInsets.all(8),
+                              child: const Icon(Icons.filter_list, size: 30),
                             ),
-                            padding: const EdgeInsets.all(8),
-                            child: const Icon(Icons.filter_list, size: 30),
                           ),
                         ],
                       ),

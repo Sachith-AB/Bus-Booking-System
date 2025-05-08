@@ -25,19 +25,23 @@ class CustomDropdown extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: KColors.primaryColor),
+        focusColor: KColors.appPrimary,
         border: AppInputStyle.outlineInputBorder,
         focusedBorder: AppInputStyle.outlineInputBorder,
         contentPadding: AppInputStyle.contentPadding,
         labelStyle: AppInputStyle.labelTextStyle,
         floatingLabelStyle: AppInputStyle.floatingLabelStyle,
         hintStyle: AppInputStyle.hintTextStyle,
+        filled: true,
+        fillColor: KColors.appPrimary.shade100
+        
       ),
       value: value,
       items: items.map((item) => DropdownMenuItem<String>(
           value: item,
           child: Text(
             item,
-            style: AppInputStyle.dropdownItemTextStyle, // Apply your style directly to text
+            style: AppInputStyle.dropdownItemTextStyle,
           ),
         )).toList(),
 
