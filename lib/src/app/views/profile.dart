@@ -24,15 +24,15 @@ class _ProfilePageState extends State<ProfilePage>{
   TextEditingController addressController = TextEditingController();
 
   @override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
 
-  // Example default values – you should replace these with actual user data
-  nameController.text = "John Doe";
-  emailController.text = "johndoe@example.com";
-  phoneNoController.text = "0712345678";
-  addressController.text = "123 Main Street, Colombo";
-}
+    // Example default values – you should replace these with actual user data
+    nameController.text = "John Doe";
+    emailController.text = "johndoe@example.com";
+    phoneNoController.text = "0712345678";
+    addressController.text = "123 Main Street, Colombo";
+  }
 
 
   bool validEmail = false;

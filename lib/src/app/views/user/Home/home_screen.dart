@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
       Product(
         id: '1',
         name: 'Americano',
+        description: "A delicious Americano coffee",
         price: 3.99,
         imageUrl: coffee,
         isFavorite: false,
@@ -36,6 +37,7 @@ class HomePage extends StatelessWidget {
       Product(
         id: '2',
         name: 'Plain Croissant',
+        description: "A delicious plain croissant",
         price: 2.99,
         imageUrl: bread,
         isFavorite: true,
@@ -44,6 +46,7 @@ class HomePage extends StatelessWidget {
       Product(
         id: '3',
         name: 'Plain Croissant',
+        description: "A delicious plain croissant",
         price: 2.99,
         imageUrl: bread,
         isFavorite: true,

@@ -1,6 +1,7 @@
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
 import 'package:bus_booking/src/app/views/auth/register/owner_register.dart';
 import 'package:bus_booking/src/app/views/auth/register/register.dart';
+import 'package:bus_booking/src/app/views/user/Cart/cart_screen.dart';
 import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
 import 'package:bus_booking/src/app/views/user/Profile/profile_screen.dart';
 import 'package:bus_booking/src/app/views/user/Search/search_screen.dart';
