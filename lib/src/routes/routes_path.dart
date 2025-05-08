@@ -14,7 +14,7 @@ class AppRoutes {
     GetPage(name: '/login', page: () => const LoginPage()),
     GetPage(name: '/register', page: () => const RegisterPage()),
     GetPage(name: '/owner-register', page: () => const OwnerRegisterPage()),
-
+    
     //user route
     GetPage(name: '/home', page: () => const HomePage()),
     GetPage(name: '/search', page: () => const SearchPage()),

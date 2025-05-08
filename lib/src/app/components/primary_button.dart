@@ -10,6 +10,9 @@ class PrimaryButton extends StatelessWidget {
   final double borderRadius;
   final Color? backgroundColor;
   final Color? textColor;
+  final bool outline;
+  final Color? outlineColor;
+
 
   const PrimaryButton({
     super.key,
@@ -21,6 +24,8 @@ class PrimaryButton extends StatelessWidget {
     this.borderRadius = 12,
     this.backgroundColor,
     this.textColor,
+    this.outline = false,
+    this.outlineColor,
   });
 
   @override
@@ -39,6 +44,9 @@ class PrimaryButton extends StatelessWidget {
           foregroundColor: fg,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
+            side: outline
+              ? BorderSide(color: outlineColor ?? KColors.primaryColor, width: 2)
+              : BorderSide.none,
           ),
         ),
         child: isLoading

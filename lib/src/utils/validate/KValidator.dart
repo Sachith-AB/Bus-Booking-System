@@ -1,6 +1,7 @@
 class KValidator {
   static final _nameRegex = RegExp(r'^[a-zA-Z]+(?:\s[a-zA-Z]+)*$');
   static final _emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  static final _phoneRegex = RegExp(r'^[0-9]{10}$');
 
   static String? validateName(String uName) {
     final name = uName.trim();
@@ -34,6 +35,16 @@ class KValidator {
       return "* Password is Required";
     }else if(password.length<8){
       return "* Password Invalid";
+    }
+    return null;
+  }
+
+  static String? validatePhoneNo(String phone) {
+    final trimmed = phone.trim();
+    if (trimmed.isEmpty) {
+      return "* Phone number is required.";
+    } else if (!_phoneRegex.hasMatch(trimmed)) {
+      return "* Phone number must be 10 digits.";
     }
     return null;
   }
