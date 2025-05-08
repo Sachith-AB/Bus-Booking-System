@@ -51,11 +51,50 @@ class AppInputStyle {
   //   size: 18,
   // );
 
+  static Icon personIcon = const Icon(
+    Icons.person_outline,
+    color: KColors.primaryColor,
+    size: 18,
+  );
   static Icon emailIcon = const Icon(
     Icons.email_outlined,
     color: KColors.primaryColor,
     size: 18,
   );
+  static Icon phoneIcon = const Icon(
+    Icons.phone,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+  static Icon addressIcon = const Icon(
+    Icons.location_on_outlined,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+  //food icon
+  static Icon foodIcon = const Icon(
+    Icons.fastfood,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+  //food description icon
+  static Icon foodDescriptionIcon = const Icon(
+    Icons.description,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+  //food price icon
+  static Icon foodPriceIcon = const Icon(
+    Icons.attach_money,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+  static Icon foodAvailabilityIcon = const Icon(
+    Icons.check_circle_outline,
+    color: KColors.primaryColor,
+    size: 18,
+  );
+
   // static Icon passwordIcon = const Icon(
   //   Iconsax.key,
   //   color: KColors.primaryColor,
@@ -78,4 +117,14 @@ class AppInputStyle {
   // padding
   static EdgeInsets contentPadding =
     const EdgeInsets.symmetric(horizontal: 20, vertical: 15);
+
+  
+
+// Dropdown item text style
+static TextStyle dropdownItemTextStyle = const TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
+  color: Colors.black,
+);
+
 }
