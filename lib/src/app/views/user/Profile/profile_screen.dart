@@ -170,11 +170,13 @@ class _profilePageState extends State<profilePage> {
   final controller = Get.put(UserUpdateController());
 
   void updateUser(){
+
+    final createdAt = DateTime.parse(user![5]);
+
     final id = user![0];
     final name = nameController.text.trim().toString();
     final email = emailController.text.trim().toString();
     final imageUrl = user![4];
-print(user);
-    //controller.updateUser(id, name, email, imageUrl);
+    controller.updateUser(id, name, email, imageUrl,user![3],createdAt);
   }
 }

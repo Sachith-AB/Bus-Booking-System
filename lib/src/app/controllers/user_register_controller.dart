@@ -75,8 +75,6 @@ class UserRegisterController extends GetxController {
           duration: const Duration(milliseconds: 500),
         );
       }
-      
-
       if(userData != null){
         final authUser = [
           userData[0].id.toString(),

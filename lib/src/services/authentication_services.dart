@@ -82,7 +82,6 @@ class AuthenticationServices extends GetxController {
       service.collection(collection).doc(user.id).update(user.toJson());
     } on FirebaseException catch (e) {
       final ex = CrudFailure.code(e.code);
-      print("🔥 FirebaseException: ${e.code} - ${e.message}");
       PopupWarning.Warning(
         title: "User Update Failure",
         message: ex.message,
@@ -90,7 +89,6 @@ class AuthenticationServices extends GetxController {
       );
       throw ex;
     } catch (_) {
-      print("🔥 Unknown Error: $_"); 
       final ex = CrudFailure();
       PopupWarning.Warning(
         title: "User Update Failure",
