@@ -11,7 +11,7 @@ class FoodDetailsPage extends StatelessWidget {
 
   const FoodDetailsPage({
     super.key,
-    required this.product
+    required this.product,
   });
 
   @override
@@ -28,11 +28,10 @@ class FoodDetailsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 80), 
+                padding: const EdgeInsets.only(bottom: 120), // For "Order Now" button space
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Wrap image and heart icon in a Stack
                     Stack(
                       children: [
                         ClipRRect(
@@ -44,7 +43,6 @@ class FoodDetailsPage extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        // Heart icon positioned on the image
                         Positioned(
                           top: 16,
                           right: 16,
@@ -56,10 +54,52 @@ class FoodDetailsPage extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
-                              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                              product.isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
                               color: product.isFavorite ? Colors.red : Colors.white,
                               size: 20,
                             ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 16,
+                          left: 16,
+                          right: 16,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white.withOpacity(0.50),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                  ),
+                                  onPressed: () {
+                                    // Add to cart logic
+                                  },
+                                  child: const Text(
+                                    'Add to Cart',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.50),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Icon(Icons.more_horiz, size: 20),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -78,6 +118,8 @@ class FoodDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
+
+            // "Order Now" Button at bottom of screen
             Positioned(
               bottom: 16,
               left: 16,
@@ -85,7 +127,7 @@ class FoodDetailsPage extends StatelessWidget {
               child: PrimaryButton(
                 label: 'Order Now',
                 onPressed: () {
-                  // Your order button action
+                  // Order action
                 },
               ),
             ),
