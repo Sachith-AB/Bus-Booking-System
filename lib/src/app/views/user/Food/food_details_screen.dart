@@ -105,7 +105,20 @@ class FoodDetailsPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    PrimaryHeader(text: product.name),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        PrimaryHeader(text: product.name),
+                        const SizedBox(width: 12,),
+                        PrimaryHeader(
+                          text: "LKR ${product.price.toString()}",
+                          size: 20,
+                          weight: FontWeight.w500,
+                          color: KColors.appPrimary,
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: 5),
                     PrimaryHeader(
                       text: product.description,
