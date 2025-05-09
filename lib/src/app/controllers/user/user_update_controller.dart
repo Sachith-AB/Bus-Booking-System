@@ -1,4 +1,3 @@
-import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/models/user_model.dart';
 import 'package:bus_booking/src/services/authentication_services.dart';
 import 'package:bus_booking/src/utils/popup_warning.dart';

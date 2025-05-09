@@ -79,7 +79,6 @@ class AuthenticationServices extends GetxController {
     required UserModel user,
   }) async {
     try {
-      print(user);
       service.collection(collection).doc(user.id).update(user.toJson());
     } on FirebaseException catch (e) {
       final ex = CrudFailure.code(e.code);

@@ -83,7 +83,8 @@ class UserRegisterController extends GetxController {
           userData[0].name.toString(),
           userData[0].email.toString(),
           userData[0].user_type.toString(),
-          userData[0].image_url.toString()
+          userData[0].image_url.toString(),
+          userData[0].createdAt.toString()
         ];
         await SharedAuthUser.saveAuthUser(authUser);
       }

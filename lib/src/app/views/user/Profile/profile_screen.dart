@@ -174,7 +174,7 @@ class _profilePageState extends State<profilePage> {
     final name = nameController.text.trim().toString();
     final email = emailController.text.trim().toString();
     final imageUrl = user![4];
-
-    controller.updateUser(id, name, email, imageUrl);
+print(user);
+    //controller.updateUser(id, name, email, imageUrl);
   }
 }
