@@ -5,6 +5,7 @@ import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/profile_image.dart';
 import 'package:bus_booking/src/app/components/secondary_button.dart';
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/common/style/app_input_style.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:bus_booking/src/utils/validate/KValidator.dart';
 
 class profilePage extends StatefulWidget {
   const profilePage({super.key});
+
 
   @override
   State<profilePage> createState() => _profilePageState();
@@ -24,17 +26,25 @@ class _profilePageState extends State<profilePage> {
   TextEditingController addressController = TextEditingController();
 
 
-
+  List<dynamic>? user;
   @override
   void initState() {
     super.initState();
 
     // Example default values – you should replace these with actual user data
-    nameController.text = "John Doe";
-    emailController.text = "johndoe@example.com";
+
+    user = SharedAuthUser.getAuthUser();
+    print(user);
+
+    if (user != null && user!.length >= 5) {
+      nameController.text = user![1];   // name
+      emailController.text = user![2];  // email
+    }
+
     phoneNoController.text = "0712345678";
     addressController.text = "123 Main Street, Colombo";
   }
+
   bool validEmail = false;
   bool validName = false;
   bool validPhoneNo = false;
@@ -65,6 +75,7 @@ class _profilePageState extends State<profilePage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return MainScaffold(
       selectedIndex: 4,
       body: Scaffold(
@@ -89,7 +100,9 @@ class _profilePageState extends State<profilePage> {
                 child: Column(
                 children: [
                   const SizedBox(height: 35),
-                  const ProfileImagePicker(),
+                  ProfileImagePicker(
+                    initialImagePath: user![4],
+                  ),
                   const SizedBox(height: 35),
                   DynamicForm(
                       fields: [

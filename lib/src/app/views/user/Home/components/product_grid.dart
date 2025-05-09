@@ -1,4 +1,5 @@
 import 'package:bus_booking/src/app/models/product_model.dart';
+import 'package:bus_booking/src/app/views/user/Food/food_details_screen.dart';
 import 'package:bus_booking/src/app/views/user/Home/components/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class ProductGrid extends StatelessWidget {
             final product = products[index];
             return GestureDetector(
               onTap: (){
-                Get.offNamed('/food-page',arguments: product);
+                Get.to(() => FoodDetailsPage(product: product));
               },
               child: ProductCard(product: product),
             );

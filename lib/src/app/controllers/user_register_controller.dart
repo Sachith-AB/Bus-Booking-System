@@ -75,17 +75,19 @@ class UserRegisterController extends GetxController {
           duration: const Duration(milliseconds: 500),
         );
       }
+      
 
-      if(userData[0] != null){
+      if(userData != null){
         final authUser = [
           userData[0].id.toString(),
-          userData[0].userType.toString(),
-          userData[0].email.toString(),
           userData[0].name.toString(),
+          userData[0].email.toString(),
+          userData[0].user_type.toString(),
           userData[0].image_url.toString()
         ];
-        SharedAuthUser.saveAuthUser(authUser);
+        await SharedAuthUser.saveAuthUser(authUser);
       }
+
     } catch (e) {
       e;
     }

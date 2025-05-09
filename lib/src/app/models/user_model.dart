@@ -57,4 +57,9 @@ class UserModel {
       user_type: data['user_type'] ?? '',
     );
   }
+
+  @override
+  String toString() {
+    return 'UserModel(id: $id, name: $name, email: $email)';
+  }
 }
