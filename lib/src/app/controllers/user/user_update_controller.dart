@@ -38,17 +38,17 @@ class UserUpdateController extends GetxController {
       await authController.updateUser(collection: "Users", user: updatedUser);
 
       final userData = await crudController.findOne(collection: "Users", filed: id);
-      print(userData);
+      
 
       if (userData != null) {
         // Save to SharedPreferences
         final authUser = [
-          userData.id.toString(),
-          userData.name.toString(),
-          userData.email.toString(),
-          userData.user_type.toString(),
-          userData.image_url.toString(),
-          userData.createdAt.toString()
+          userData[0].id.toString(),
+          userData[0].name.toString(),
+          userData[0].email.toString(),
+          userData[0].user_type.toString(),
+          userData[0].image_url.toString(),
+          userData[0].createdAt.toString()
         ];
 
         await SharedAuthUser.saveAuthUser(authUser);
