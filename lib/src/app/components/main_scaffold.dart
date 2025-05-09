@@ -7,10 +7,10 @@ class MainScaffold extends StatefulWidget {
   final int selectedIndex;
 
   const MainScaffold({
-    Key? key,
+    super.key,
     required this.body,
     this.selectedIndex = 0,
-  }) : super(key: key);
+  });
 
   @override
   State<MainScaffold> createState() => _MainScaffoldState();
@@ -75,8 +75,8 @@ class _MainScaffoldState extends State<MainScaffold> {
       onTap: () => _onTabTapped(index),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(1000),
             bottomRight:Radius.circular(1000),
             topLeft: Radius.circular(20),

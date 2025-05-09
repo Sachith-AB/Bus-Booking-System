@@ -70,7 +70,7 @@ class UserModel {
         try {
           createdAtDate = DateTime.parse(data['createdAt']);
         } catch (e) {
-          print('Error parsing createdAt date: $e');
+          //print('Error parsing createdAt date: $e');
         }
       }
     }

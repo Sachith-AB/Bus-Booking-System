@@ -2,7 +2,7 @@ import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({Key? key}) : super(key: key);
+  const SearchBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -55,7 +55,7 @@ class CrudServices {
       final ex = CrudFailure();
       PopupWarning.Warning(
         title: "Try again later",
-        message: ex.message + ".",
+        message: "${ex.message}.",
         type: 1,
       );
       // print("exception-1 ${ex.message}");

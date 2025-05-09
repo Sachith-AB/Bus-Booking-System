@@ -9,7 +9,7 @@ class UserUpdateController extends GetxController {
   final authController = Get.put(AuthenticationServices());
   final crudController = Get.put(CrudServices());
 
-  static UserUpdateController get instace => Get.find();
+  static UserUpdateController get instance => Get.find();
 
   void updateUser(
     String id,

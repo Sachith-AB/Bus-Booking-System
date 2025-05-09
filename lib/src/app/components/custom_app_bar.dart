@@ -10,13 +10,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showCartButton;
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     this.title,
     this.backgroundColor = Colors.white,
     this.showBackButton = true,
     this.onBack,
     this.showCartButton = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

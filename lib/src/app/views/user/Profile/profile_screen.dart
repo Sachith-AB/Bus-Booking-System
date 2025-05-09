@@ -20,6 +20,7 @@ class profilePage extends StatefulWidget {
   State<profilePage> createState() => _profilePageState();
 }
 
+// ignore: camel_case_types
 class _profilePageState extends State<profilePage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();

@@ -9,7 +9,9 @@ const Color warning = Color(0x98F57C00);
 const Color info = Color(0xA51976D2);
 
 //user types constants
+// ignore: constant_identifier_names
 const KCustomer = 'customer';
+// ignore: constant_identifier_names
 const KOwner = 'owner';
 
 const tLogo = "assets/logo/logo.png";
