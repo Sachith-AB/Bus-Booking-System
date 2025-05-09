@@ -4,9 +4,9 @@ class BannerSlider extends StatelessWidget {
   final List<Map<String, dynamic>> banners;
 
   const BannerSlider({
-    Key? key,
+    super.key,
     required this.banners,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

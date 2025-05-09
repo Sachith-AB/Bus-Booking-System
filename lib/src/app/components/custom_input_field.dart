@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/style/app_input_style.dart';
@@ -33,13 +34,12 @@ class CustomInputField extends StatelessWidget {
       onChanged: onChanged,
       obscureText: obscureText,
       decoration: InputDecoration(
-        border: isValid ? AppInputStyle.outlineInputBorder: AppInputStyle.outlineInputBorder,
+        border: AppInputStyle.outlineInputBorder,
+        enabledBorder: isValid ? AppInputStyle.outlineValidBorder : AppInputStyle.outlineInputBorder,
         focusedBorder: AppInputStyle.outlineInputBorder,
         contentPadding: AppInputStyle.contentPadding,
-        // filled: isValid,
-        //fillColor: AppInputStyle.validFillColor,
-        filled: true, // Always filled
-        fillColor: Colors.white, // Or use AppInputStyle.fillColor if defined
+        filled: isValid,
+        fillColor: isValid ? KColors.appPrimary.shade100 : KColors.white,
         hintText: hintText,
         labelText: labelText,
         hintStyle: AppInputStyle.hintTextStyle,

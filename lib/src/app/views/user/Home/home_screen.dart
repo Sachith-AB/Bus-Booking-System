@@ -11,17 +11,18 @@ import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
     // Sample data
     final List<Category> categories = [
-      Category(id: '1', name: 'Coffee', iconPath: coffee),
-      Category(id: '2', name: 'Croissant', iconPath: croissant),
-      Category(id: '3', name: 'Crepe', iconPath: crepe),
-      Category(id: '4', name: 'Donut', iconPath: donut),
-      Category(id: '5', name: 'Bread', iconPath: bread),
+      Category(id: '1', name: 'Coffee', iconPath:coffee , icon: Icons.coffee_outlined),
+      Category(id: '2', name: 'Croissant', iconPath: croissant , icon: Icons.coffee_outlined),
+      Category(id: '3', name: 'Crepe', iconPath: crepe , icon: Icons.coffee_outlined),
+      Category(id: '4', name: 'Donut', iconPath: donut , icon: Icons.coffee_outlined),
+      Category(id: '5', name: 'Bread', iconPath: bread , icon: Icons.coffee_outlined),
     ];
 
     final List<Product> popularProducts = [
@@ -65,7 +66,7 @@ class HomePage extends StatelessWidget {
 
 
     return MainScaffold(
-      selectedIndex: 0,
+      selectedIndex: 1,
       body: Scaffold(
         appBar: CustomAppBar(
           title: 'Food Store',

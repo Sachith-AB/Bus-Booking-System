@@ -8,12 +8,12 @@ class CartItemCard extends StatelessWidget {
   final VoidCallback onRemove;
 
   const CartItemCard({
-    Key? key,
+    super.key,
     required this.product,
     required this.quantity,
     required this.onAdd,
     required this.onRemove,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class CartItemCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  product.description ?? '',
+                  product.description,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(

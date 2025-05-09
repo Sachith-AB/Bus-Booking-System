@@ -7,10 +7,10 @@ class MainScaffold extends StatefulWidget {
   final int selectedIndex;
 
   const MainScaffold({
-    Key? key,
+    super.key,
     required this.body,
     this.selectedIndex = 0,
-  }) : super(key: key);
+  });
 
   @override
   State<MainScaffold> createState() => _MainScaffoldState();
@@ -33,16 +33,16 @@ class _MainScaffoldState extends State<MainScaffold> {
 
     // Replace with your actual route names
     switch (index) {
-    case 0:
+    case 1:
       Get.toNamed('/home');
       break;
-    case 1:
+    case 2:
       Get.toNamed('/search');
       break;
-    case 2:
+    case 3:
       Get.toNamed('/cart'); // Make sure you have this route defined
       break;
-    case 3:
+    case 4:
       Get.toNamed('/profile'); // Make sure you have this route defined
       break;
   }
@@ -59,10 +59,10 @@ class _MainScaffoldState extends State<MainScaffold> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(0, Icons.home_outlined, 'Home'),
-            _buildNavItem(1, Icons.search_outlined, 'Search'),
-            _buildNavItem(2, Icons.shopping_cart_outlined, 'Cart'),
-            _buildNavItem(3, Icons.person_outline, 'Profile'),
+            _buildNavItem(1, Icons.home_outlined, 'Home'),
+            _buildNavItem(2, Icons.search_outlined, 'Search'),
+            _buildNavItem(3, Icons.shopping_cart_outlined, 'Cart'),
+            _buildNavItem(4, Icons.person_outline, 'Profile'),
           ],
         ),
       ),
@@ -75,8 +75,8 @@ class _MainScaffoldState extends State<MainScaffold> {
       onTap: () => _onTabTapped(index),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(1000),
             bottomRight:Radius.circular(1000),
             topLeft: Radius.circular(20),

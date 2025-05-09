@@ -5,10 +5,13 @@ import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/profile_image.dart';
 import 'package:bus_booking/src/app/components/secondary_button.dart';
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
+import 'package:bus_booking/src/app/controllers/user/user_update_controller.dart';
 import 'package:bus_booking/src/common/style/app_input_style.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/utils/validate/KValidator.dart';
+import 'package:get/get.dart';
 
 class profilePage extends StatefulWidget {
   const profilePage({super.key});
@@ -17,27 +20,33 @@ class profilePage extends StatefulWidget {
   State<profilePage> createState() => _profilePageState();
 }
 
+// ignore: camel_case_types
 class _profilePageState extends State<profilePage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNoController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
-
+  List<dynamic>? user;
+  bool validEmail = false;
+  bool validName = false;
+  bool validPhoneNo = false;
+  bool validAddress = false;
+  bool validContact = false;
 
   @override
   void initState() {
     super.initState();
 
-    // Example default values – you should replace these with actual user data
-    nameController.text = "John Doe";
-    emailController.text = "johndoe@example.com";
-    phoneNoController.text = "0712345678";
-    addressController.text = "123 Main Street, Colombo";
+    user = SharedAuthUser.getAuthUser();
+
+    if (user != null && user!.length >= 8) {
+      nameController.text = user![1];
+      emailController.text = user![2];
+      phoneNoController.text = user![7];
+      addressController.text = user![6];
+    }
   }
-  bool validEmail = false;
-  bool validName = false;
-  bool validPhoneNo = false;
 
   void onNameChanged(String name) {
     final error = KValidator.validateName(name);
@@ -60,13 +69,23 @@ class _profilePageState extends State<profilePage> {
   }
 
   void onAddressChanged(String address) {
-    
+    final error = KValidator.validateAddress(address);
+    setState(() {
+      validAddress = error == null;
+    });
+  }
+
+  void onContactChanged(String contact) {
+    final error = KValidator.validateContact(contact);
+    setState(() {
+      validContact = error == null;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      selectedIndex: 3,
+      selectedIndex: 4,
       body: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: CustomAppBar(
@@ -77,7 +96,8 @@ class _profilePageState extends State<profilePage> {
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -87,16 +107,18 @@ class _profilePageState extends State<profilePage> {
                   horizontal: 25,
                 ),
                 child: Column(
-                children: [
-                  const SizedBox(height: 35),
-                  const ProfileImagePicker(),
-                  const SizedBox(height: 35),
-                  DynamicForm(
+                  children: [
+                    const SizedBox(height: 35),
+                    ProfileImagePicker(
+                      initialImagePath: user![4],
+                    ),
+                    const SizedBox(height: 35),
+                    DynamicForm(
                       fields: [
                         InputFieldConfig(
                           controller: nameController,
                           labelText: "Full Name",
-                          hintText: "Enter Food Name",
+                          hintText: "Enter Full Name",
                           isValid: validName,
                           onChanged: (name) => onNameChanged(name),
                           prefixIcon: AppInputStyle.personIcon,
@@ -106,7 +128,8 @@ class _profilePageState extends State<profilePage> {
                           labelText: "Email",
                           hintText: "Enter email",
                           isValid: validEmail,
-                          onChanged: (description) => onEmailChanged(description),
+                          onChanged: (description) =>
+                              onEmailChanged(description),
                           prefixIcon: AppInputStyle.emailIcon,
                         ),
                         InputFieldConfig(
@@ -121,18 +144,16 @@ class _profilePageState extends State<profilePage> {
                           controller: addressController,
                           labelText: "Home Address",
                           hintText: "Enter home address",
-                          isValid: false,
+                          isValid: validAddress,
                           onChanged: (address) => onAddressChanged(address),
                           prefixIcon: AppInputStyle.phoneIcon,
                         ),
-                        
                       ],
-                      
                     ),
                     PrimaryButton(
                       label: "Update profile",
                       onPressed: () {
-                        // Handle cancel action here
+                        updateUser();
                       },
                     ),
                     const SizedBox(height: 25),
@@ -142,14 +163,28 @@ class _profilePageState extends State<profilePage> {
                         // Handle cancel action here
                       },
                     ),
-                ]
-                )
-              )
-            ]
-          )
-        )
-      ,
-      )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  final controller = Get.put(UserUpdateController());
+
+  void updateUser() {
+    final createdAt = DateTime.parse(user![5]);
+    final id = user![0];
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final imageUrl = user![4];
+    final address = addressController.text.trim();
+    final contact = phoneNoController.text.trim();
+
+    controller.updateUser(
+        id, name, email, imageUrl, user![3], createdAt, address, contact);
   }
 }

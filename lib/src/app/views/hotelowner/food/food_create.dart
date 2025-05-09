@@ -3,15 +3,11 @@ import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
 import 'package:bus_booking/src/app/components/input_field_config.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/views/hotelOwner/food/components/image_picker_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../common/style/app_input_style.dart';
-import '../../../../utils/color/colors.dart';
-import '../../../../utils/constant.dart';
-import '../../../components/custom_input_field.dart';
 import '../../../components/custom_dropdown.dart';
-import '../components/image_picker_card.dart';
 
 class FoodCreatePage extends StatefulWidget {
   const FoodCreatePage({super.key});
@@ -48,7 +44,7 @@ class _FoodCreatePageState extends State<FoodCreatePage>{
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),

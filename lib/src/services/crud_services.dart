@@ -8,7 +8,6 @@ class CrudServices {
   final FirebaseFirestore service = FirebaseFirestore.instance;
 
   Future<void> insert(String collection,dynamic data) async {
-
     try{
       await service.collection(collection).doc(data.id).set(data.toJson());
     } on FirebaseException catch(e){
@@ -56,11 +55,38 @@ class CrudServices {
       final ex = CrudFailure();
       PopupWarning.Warning(
         title: "Try again later",
-        message: ex.message + ".",
+        message: "${ex.message}.",
         type: 1,
       );
       // print("exception-1 ${ex.message}");
       throw ex;
     }
+  }
+
+  
+  Future<void> update({
+    required String collection,
+    required String documentId,
+    required dynamic data
+  }) async {
+      try{
+        await service.collection(collection).doc(documentId).update(data.toJson);
+      } on FirebaseException catch(e) {
+        final ex = CrudFailure.code(e.code);
+        PopupWarning.Warning(
+          title: "Try again later",
+          message: ex.message,
+          type: 1
+        );
+        throw ex;
+      } catch(e) {
+        final ex = CrudFailure();
+        PopupWarning.Warning(
+            title: "Try again later",
+            message: ex.message,
+            type: 1
+        );
+        throw ex;
+      }
   }
 }

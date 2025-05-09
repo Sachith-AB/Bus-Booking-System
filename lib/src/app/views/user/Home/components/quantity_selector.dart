@@ -5,10 +5,10 @@ class QuantitySelector extends StatelessWidget {
   final Function(int) onChanged;
 
   const QuantitySelector({
-    Key? key,
+    super.key,
     required this.quantity,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
