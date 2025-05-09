@@ -73,4 +73,63 @@ class AuthenticationServices extends GetxController {
       ); throw ex.message;
     }
   }
+
+  Future<void> updateUser({
+    required String collection,
+    required UserModel user,
+  }) async {
+    try {
+      print(user);
+      service.collection(collection).doc(user.id).update(user.toJson());
+    } on FirebaseException catch (e) {
+      final ex = CrudFailure.code(e.code);
+      print("🔥 FirebaseException: ${e.code} - ${e.message}");
+      PopupWarning.Warning(
+        title: "User Update Failure",
+        message: ex.message,
+        type: 1,
+      );
+      throw ex;
+    } catch (_) {
+      print("🔥 Unknown Error: $_"); 
+      final ex = CrudFailure();
+      PopupWarning.Warning(
+        title: "User Update Failure",
+        message: ex.message,
+        type: 1,
+      );
+      throw ex;
+    }
+  }
+
+  Future<void> changeEmail(String newEmail) async {
+    try {
+      final user = _auth.currentUser;
+
+      if (user == null) {
+        throw FirebaseAuthException(code: 'no-user', message: 'No user is currently signed in.');
+      }
+
+      // ignore: deprecated_member_use
+      await user.updateEmail(newEmail);
+      await user.reload(); // Refresh the user data
+    } on FirebaseAuthException catch (e) {
+      final ex = CrudFailure.code(e.code); // Or SignUpFailure if you prefer
+      PopupWarning.Warning(
+        title: "Email Update Failure",
+        message: ex.message,
+        type: 1,
+      );
+      throw ex;
+    } catch (_) {
+      final ex = CrudFailure();
+      PopupWarning.Warning(
+        title: "Email Update Failure",
+        message: ex.message,
+        type: 1,
+      );
+      throw ex;
+    }
+  }
+
 }

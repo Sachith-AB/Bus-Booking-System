@@ -6,10 +6,12 @@ import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/profile_image.dart';
 import 'package:bus_booking/src/app/components/secondary_button.dart';
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
+import 'package:bus_booking/src/app/controllers/user/user_update_controller.dart';
 import 'package:bus_booking/src/common/style/app_input_style.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/utils/validate/KValidator.dart';
+import 'package:get/get.dart';
 
 class profilePage extends StatefulWidget {
   const profilePage({super.key});
@@ -34,7 +36,6 @@ class _profilePageState extends State<profilePage> {
     // Example default values – you should replace these with actual user data
 
     user = SharedAuthUser.getAuthUser();
-    print(user);
 
     if (user != null && user!.length >= 5) {
       nameController.text = user![1];   // name
@@ -145,7 +146,7 @@ class _profilePageState extends State<profilePage> {
                     PrimaryButton(
                       label: "Update profile",
                       onPressed: () {
-                        // Handle cancel action here
+                        updateUser();
                       },
                     ),
                     const SizedBox(height: 25),
@@ -164,5 +165,16 @@ class _profilePageState extends State<profilePage> {
       ,
       )
     );
+  }
+
+  final controller = Get.put(UserUpdateController());
+
+  void updateUser(){
+    final id = user![0];
+    final name = nameController.text.trim().toString();
+    final email = emailController.text.trim().toString();
+    final imageUrl = user![4];
+
+    controller.updateUser(id, name, email, imageUrl);
   }
 }

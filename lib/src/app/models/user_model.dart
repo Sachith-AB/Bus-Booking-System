@@ -5,8 +5,8 @@ class UserModel {
   late String name;
   late String email;
   late String image_url;
-  late String user_type;
-  late DateTime createdAt;
+  final String? user_type;
+  final DateTime? createdAt;
 
   UserModel({
     required this.id,
@@ -30,9 +30,10 @@ class UserModel {
     required this.id,
     required this.name,
     required this.email,
-    required this.user_type,
-    required this.image_url
-});
+    required this.image_url,
+    this.user_type,
+    this.createdAt
+  });
 
   // Convert UserModel instance to JSON map
   Map<String, dynamic> toJson() {
@@ -42,7 +43,7 @@ class UserModel {
       'email': email,
       'image_url': image_url,
       'user_type': user_type,
-      'createdAt': createdAt.toIso8601String(),
+      'createdAt': createdAt,
     };
   }
 
@@ -54,7 +55,6 @@ class UserModel {
       name: data['name'] ?? '',
       email: data['email'] ?? '',
       image_url: data['image_url'] ?? '',
-      user_type: data['user_type'] ?? '',
     );
   }
 
