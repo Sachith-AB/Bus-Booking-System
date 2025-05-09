@@ -7,15 +7,16 @@ class SharedAuthUser {
     _prefs ??= await SharedPreferences.getInstance();
   }
 
-  static Future<void> saveAuthUser(List<String> value) async {
-    await _prefs?.setStringList('user', value);
+  static Future<void> saveAuthUser(List<String> userData) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('authUser', userData);
   }
 
   static List<String>? getAuthUser() {
-    return _prefs?.getStringList('user');
+    return _prefs?.getStringList('authUser'); // Fix: Directly access _prefs
   }
 
   static Future<void> clearAuthUser() async {
-    await _prefs?.remove('user');
+    await _prefs?.remove('authUser'); // Fix: Correct key used
   }
 }

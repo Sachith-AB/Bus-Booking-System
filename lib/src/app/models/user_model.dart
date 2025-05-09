@@ -7,6 +7,8 @@ class UserModel {
   late String image_url;
   final String? user_type;
   final DateTime? createdAt;
+  late String address;
+  late String contact;
 
   UserModel({
     required this.id,
@@ -15,6 +17,8 @@ class UserModel {
     required this.image_url,
     required this.user_type,
     required this.createdAt,
+    required this.address,
+    required this.contact,
   });
 
   UserModel.register({
@@ -24,6 +28,8 @@ class UserModel {
     required this.user_type,
     required this.image_url,
     required this.createdAt,
+    required this.address,
+    required this.contact,
   });
 
   UserModel.aboutMe({
@@ -32,7 +38,9 @@ class UserModel {
     required this.email,
     required this.image_url,
     this.user_type,
-    this.createdAt
+    this.createdAt,
+    required this.address,
+    required this.contact,
   });
 
   // Convert UserModel instance to JSON map
@@ -44,13 +52,15 @@ class UserModel {
       'image_url': image_url,
       'user_type': user_type,
       'createdAt': createdAt,
+      'address': address,
+      'contact': contact,
     };
   }
 
   // Create a UserModel instance from a JSON map using aboutMe constructor
   factory UserModel.fromSnapshot(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    
+
     // Handle the Timestamp conversion to DateTime
     DateTime? createdAtDate;
     if (data['createdAt'] != null) {
@@ -64,14 +74,16 @@ class UserModel {
         }
       }
     }
-    
+
     return UserModel.aboutMe(
       id: data['id'] ?? '',
       name: data['name'] ?? '',
       email: data['email'] ?? '',
       image_url: data['image_url'] ?? '',
       user_type: data['user_type'], // Include user_type
-      createdAt: createdAtDate // Include createdAt with proper conversion
+      createdAt: createdAtDate, // Include createdAt with proper conversion
+      address: data['address'] ?? '',
+      contact: data['contact'] ?? '',
     );
   }
 

@@ -1,4 +1,3 @@
-
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/models/user_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
@@ -11,7 +10,6 @@ import 'package:get/get.dart';
 import '../../utils/popup_warning.dart';
 
 class UserRegisterController extends GetxController {
-
   final authController = Get.put(AuthenticationServices());
 
   final crudController = Get.put(CrudServices());
@@ -19,20 +17,23 @@ class UserRegisterController extends GetxController {
   static UserRegisterController get instance => Get.find();
 
   void registerAsUser(String name, String email, String password,
-      String userType) async {
+      String userType, String address, String contact) async {
     try {
       final userCredential = await authController.registerUser(email, password);
 
       final newUser = UserModel.register(
-          email: email,
-          id: userCredential.user!.uid,
-          image_url: tProfile,
-          createdAt: DateTime.now(),
-          name: name,
-          user_type: userType
+        email: email,
+        id: userCredential.user!.uid,
+        image_url: tProfile,
+        createdAt: DateTime.now(),
+        name: name,
+        user_type: userType,
+        address: address,
+        contact: contact,
       );
 
-      await authController.insertUser(collection: "Users", user: newUser)
+      await authController
+          .insertUser(collection: "Users", user: newUser)
           .whenComplete(() {
         PopupWarning.Warning(
           title: "Congratulations! 🎉",
@@ -42,7 +43,7 @@ class UserRegisterController extends GetxController {
       });
 
       Get.offAll(
-            () => const LoginPage(),
+        () => const LoginPage(),
         transition: Transition.rightToLeft,
         duration: const Duration(milliseconds: 500),
       );
@@ -59,8 +60,8 @@ class UserRegisterController extends GetxController {
         userId = value.user!.uid;
       });
 
-      final userData = await crudController.findOne(
-          collection: "Users", filed: userId);
+      final userData =
+          await crudController.findOne(collection: "Users", filed: userId);
 
       if (userData != null) {
         PopupWarning.Warning(
@@ -74,19 +75,19 @@ class UserRegisterController extends GetxController {
           transition: Transition.rightToLeft,
           duration: const Duration(milliseconds: 500),
         );
-      }
-      if(userData != null){
+
         final authUser = [
           userData[0].id.toString(),
           userData[0].name.toString(),
           userData[0].email.toString(),
           userData[0].user_type.toString(),
           userData[0].image_url.toString(),
-          userData[0].createdAt.toString()
+          userData[0].createdAt.toString(),
+          userData[0].address.toString(),
+          userData[0].contact.toString(),
         ];
         await SharedAuthUser.saveAuthUser(authUser);
       }
-
     } catch (e) {
       e;
     }

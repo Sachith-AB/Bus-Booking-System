@@ -17,14 +17,14 @@ class KValidator {
     return _emailRegex.hasMatch(email.trim());
   }
 
-  static String? validatePassword(String password,String cPassword){
-    if(password.isEmpty){
+  static String? validatePassword(String password, String cPassword) {
+    if (password.isEmpty) {
       return "* Password is Required";
-    }else if(password.length < 8){
+    } else if (password.length < 8) {
       return "* Password must be 8 Character";
-    }else if(cPassword.isEmpty){
+    } else if (cPassword.isEmpty) {
       return "* Confirm Password is Required";
-    }else if(password != cPassword){
+    } else if (password != cPassword) {
       return "* Password Must Match";
     }
     return null;
@@ -33,7 +33,7 @@ class KValidator {
   static validateLoginPassword(String password) {
     if (password.isEmpty) {
       return "* Password is Required";
-    }else if(password.length<8){
+    } else if (password.length < 8) {
       return "* Password Invalid";
     }
     return null;
@@ -45,6 +45,24 @@ class KValidator {
       return "* Phone number is required.";
     } else if (!_phoneRegex.hasMatch(trimmed)) {
       return "* Phone number must be 10 digits.";
+    }
+    return null;
+  }
+
+  static String? validateAddress(String address) {
+    if (address.trim().isEmpty) {
+      return "* Address is required.";
+    } else if (address.length < 5) {
+      return "* Address is too short.";
+    }
+    return null;
+  }
+
+  static String? validateContact(String contact) {
+    if (contact.trim().isEmpty) {
+      return "* Contact is required.";
+    } else if (!_phoneRegex.hasMatch(contact.trim())) {
+      return "* Contact must be a valid 10-digit number.";
     }
     return null;
   }

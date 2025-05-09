@@ -24,10 +24,14 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController contactController = TextEditingController();
 
   bool validEmail = false;
   bool validName = false;
   bool validPassword = false;
+  bool validAddress = false;
+  bool validContact = false;
 
   void onNameChanged(String name) {
     final error = KValidator.validateName(name);
@@ -42,10 +46,24 @@ class _RegisterPageState extends State<RegisterPage> {
     });
   }
 
-  void onPasswordChanged(String password,String cPassword){
+  void onPasswordChanged(String password, String cPassword) {
     final error = KValidator.validatePassword(password, cPassword);
     setState(() {
       validPassword = error == null;
+    });
+  }
+
+  void onAddressChanged(String address) {
+    final error = KValidator.validateAddress(address);
+    setState(() {
+      validAddress = error == null;
+    });
+  }
+
+  void onContactChanged(String contact) {
+    final error = KValidator.validateContact(contact);
+    setState(() {
+      validContact = error == null;
     });
   }
 
@@ -70,11 +88,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
-                          image: AssetImage(
-                              tLogo
-                          ),
-                          fit: BoxFit.cover,
-                      )
+                        image: AssetImage(tLogo),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     width: 200,
                     height: 200,
@@ -82,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
               const PrimaryHeader(
-                  text: "Create an Account",
+                text: "Create an Account",
               ),
               const SizedBox(height: 15),
               Container(
@@ -114,8 +130,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: "Password",
                           hintText: "Password must be 8 character",
                           isValid: validPassword,
-                          onChanged: (password) =>
-                              onPasswordChanged(password, confirmPasswordController.text),
+                          onChanged: (password) => onPasswordChanged(
+                              password, confirmPasswordController.text),
                           prefixIcon: AppInputStyle.emailIcon,
                           obscureText: true,
                         ),
@@ -124,18 +140,38 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: "Confirm Password",
                           hintText: "Re-enter password",
                           isValid: validPassword,
-                          onChanged: (cPassword) =>
-                              onPasswordChanged(passwordController.text, cPassword),
+                          onChanged: (cPassword) => onPasswordChanged(
+                              passwordController.text, cPassword),
                           prefixIcon: AppInputStyle.emailIcon,
                           obscureText: true,
+                        ),
+                        InputFieldConfig(
+                          controller: addressController,
+                          labelText: "Address",
+                          hintText: "Enter your address",
+                          isValid: validAddress,
+                          onChanged: (address) => onAddressChanged(address),
+                          prefixIcon: AppInputStyle.emailIcon,
+                        ),
+                        InputFieldConfig(
+                          controller: contactController,
+                          labelText: "Contact",
+                          hintText: "Enter your contact number",
+                          isValid: validContact,
+                          onChanged: (contact) => onContactChanged(contact),
+                          prefixIcon: AppInputStyle.emailIcon,
                         ),
                       ],
                     ),
                     PrimaryButton(
                       label: 'Register',
-                      isEnabled: validEmail && validName && validPassword,
+                      isEnabled: validEmail &&
+                          validName &&
+                          validPassword &&
+                          validAddress &&
+                          validContact,
                       isLoading: false,
-                      onPressed: (){
+                      onPressed: () {
                         registerUser();
                       },
                     ),
@@ -151,7 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         const SizedBox(width: 5),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pushNamed(context, '/login');
                           },
                           child: const PrimaryHeader(
@@ -168,22 +204,22 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
         ),
-      )
+      ),
     );
   }
+
   final controller = Get.put(UserRegisterController());
 
   void registerUser() {
-    final name = nameController.text.trim().toString();
-    final email = emailController.text.trim().toString();
-    final password = passwordController.text.trim().toString();
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final address = addressController.text.trim();
+    final contact = contactController.text.trim();
 
     const userType = KCustomer;
 
-    controller.registerAsUser(name, email, password, userType);
-
+    controller.registerAsUser(
+        name, email, password, userType, address, contact);
   }
 }
-
-
-
