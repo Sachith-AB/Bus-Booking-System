@@ -169,12 +169,12 @@ Widget build(BuildContext context) {
                   children: [
                     const Text(
                       'Subtotal:',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     Text(
-                      '${_calculateTotal().toStringAsFixed(2)} LKR',
+                      'LKR ${_calculateTotal().toStringAsFixed(2)}',
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 14,
                         color: Colors.orange,
                       ),
                     ),
@@ -186,12 +186,12 @@ Widget build(BuildContext context) {
                   children: [
                     const Text(
                       'Delivery:',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     Text(
-                      '${deliveryFee.toStringAsFixed(2)} LKR',
+                      'LKR ${deliveryFee.toStringAsFixed(2)}',
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 14,
                         color: Colors.orange,
                       ),
                     ),
@@ -203,12 +203,12 @@ Widget build(BuildContext context) {
                   children: [
                     const Text(
                       'Total:',
-                      style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color.fromARGB(255, 139, 138, 138)),
+                      style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold, color: Color.fromARGB(255, 139, 138, 138)),
                     ),
                     Text(
-                      '${_calculateGrandTotal().toStringAsFixed(2)} LKR',
+                      'LKR ${_calculateGrandTotal().toStringAsFixed(2)}',
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: Colors.orange,
                       ),
