@@ -18,4 +18,18 @@ class Product {
     required this.category,
     required this.availableStatus,
   });
+  // Convert Product instance to JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+      'isFavorite': isFavorite,
+      'category': category,
+      'availableStatus': availableStatus,
+      'createdAt': DateTime.now().toIso8601String(),
+    };
+  }
 }

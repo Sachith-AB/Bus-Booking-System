@@ -3,11 +3,15 @@ import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
 import 'package:bus_booking/src/app/components/input_field_config.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/controllers/hotelOwner/create_food_controller.dart';
 import 'package:bus_booking/src/app/views/hotelOwner/food/components/image_picker_card.dart';
+import 'package:bus_booking/src/utils/popup_warning.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../common/style/app_input_style.dart';
 import '../../../components/custom_dropdown.dart';
+
 
 class FoodCreatePage extends StatefulWidget {
   const FoodCreatePage({super.key});
@@ -16,27 +20,18 @@ class FoodCreatePage extends StatefulWidget {
   State<FoodCreatePage> createState() => _FoodCreatePageState();
 }
 
-class _FoodCreatePageState extends State<FoodCreatePage>{
-  TextEditingController nameController = TextEditingController();
-  TextEditingController imageController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-  TextEditingController availabilityStatusController = TextEditingController();
+class _FoodCreatePageState extends State<FoodCreatePage> {
+  final controller = Get.put(AddFoodController());
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController CategoryController = TextEditingController();
 
   String availabilityStatus = 'Available';
 
-
-
-  void onNameChanged(String name) {
-    
-  }
-  void onDescriptionChanged(String description){
-
-  }
-  void onPriceChanged(String price){
-
-  }
-
+  // Placeholder: Replace with actual image picker logic
+  String? imageUrl; // This will store the image path (or URL later if uploaded)
 
 
   @override
@@ -49,81 +44,116 @@ class _FoodCreatePageState extends State<FoodCreatePage>{
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: SizedBox(
-          
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const PrimaryHeader(text: "Add a Food"),
-
-              const SizedBox(height: 15),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25,
-                ),
-                child: Column(
-                  children: [
-                    const ImagePickerCard(),
-
-                    const SizedBox(height: 20),
-                    DynamicForm(
-                      fields: [
-                        InputFieldConfig(
-                          controller: nameController,
-                          labelText: "Name",
-                          hintText: "Enter Food Name",
-                          isValid: false,
-                          onChanged: (name) => onNameChanged(name),
-                          prefixIcon: AppInputStyle.foodIcon,
-                        ),
-                        InputFieldConfig(
-                          controller: descriptionController,
-                          labelText: "Description",
-                          hintText: "Enter food description",
-                          isValid: false,
-                          onChanged: (description) => onDescriptionChanged(description),
-                          prefixIcon: AppInputStyle.foodDescriptionIcon,
-                        ),
-                        InputFieldConfig(
-                          controller: priceController,
-                          labelText: "Price",
-                          hintText: "Enter food price",
-                          isValid: false,
-                          onChanged: (price) => onPriceChanged(price),
-                          prefixIcon: AppInputStyle.foodPriceIcon,
-                        ),
-                        
-                      ],
-                      
-                    ),
-                    const SizedBox(height: 30),
-                    CustomDropdown(
-                      value: availabilityStatus,
-                      label: "Availability",
-                      icon: Icons.check_circle_outline,
-                      items: const ['Available', 'Not Available'],
-                      onChanged: (value) {
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const PrimaryHeader(text: "Add a Food"),
+            const SizedBox(height: 15),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                children: [
+                  ImagePickerCard(
+                    onImageSelected: (path) {
                         setState(() {
-                          availabilityStatus = value ?? 'Available';
+                          imageUrl = path;
                         });
-                      },
-                    ),
-
-                    const SizedBox(height: 25),
-                    PrimaryButton(
-                      label: "Add Food",
-                      onPressed: () {
-                        // Handle food submission here
-                      },
-                    ),
-                  ]
-                )
-              )
-            ],
-          ),
-        )
+                    },
+                  ), // Currently just UI
+                  const SizedBox(height: 20),
+                  DynamicForm(
+                    fields: [
+                      InputFieldConfig(
+                        controller: nameController,
+                        labelText: "Name",
+                        hintText: "Enter Food Name",
+                        isValid: false,
+                        onChanged: (_) {},
+                        prefixIcon: AppInputStyle.foodIcon,
+                      ),
+                      InputFieldConfig(
+                        controller: descriptionController,
+                        labelText: "Description",
+                        hintText: "Enter food description",
+                        isValid: false,
+                        onChanged: (_) {},
+                        prefixIcon: AppInputStyle.foodDescriptionIcon,
+                      ),
+                      InputFieldConfig(
+                        controller: priceController,
+                        labelText: "Price",
+                        hintText: "Enter food price",
+                        isValid: false,
+                        onChanged: (_) {},
+                        prefixIcon: AppInputStyle.foodPriceIcon,
+                      ),
+                      InputFieldConfig(
+                        controller: CategoryController,
+                        labelText: "Category",
+                        hintText: "Enter food category",
+                        isValid: false,
+                        onChanged: (_) {},
+                        prefixIcon: AppInputStyle.foodPriceIcon,
+                      ),
+                    ],
+                  ),
+                  CustomDropdown(
+                    value: availabilityStatus,
+                    label: "Availability",
+                    icon: Icons.check_circle_outline,
+                    items: const ['Available', 'Not Available'],
+                    onChanged: (value) {
+                      setState(() {
+                        availabilityStatus = value ?? 'Available';
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 25),
+                  PrimaryButton(
+                    label: "Add Food",
+                    onPressed: addFood,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  void addFood() {
+    final name = nameController.text.trim();
+    final description = descriptionController.text.trim();
+    final priceText = priceController.text.trim();
+    final category = CategoryController.text.trim();
+
+    if (name.isEmpty || description.isEmpty || priceText.isEmpty || category.isEmpty || imageUrl == null) {
+      PopupWarning.Warning(
+        title: "Missing Fields",
+        message: "Please fill in all fields.",
+        type: 1,
+      );
+      return;
+    }
+
+    final price = double.tryParse(priceText);
+    if (price == null) {
+      PopupWarning.Warning(
+        title: "Invalid Price",
+        message: "Please enter a valid number for price.",
+        type: 1,
+      );
+      return;
+    }
+
+    controller.createFood(
+      name: name,
+      description: description,
+      price: price,
+      imageUrl: imageUrl!, // Add image picker logic later
+      category: category,
+      availableStatus: availabilityStatus,
     );
   }
 }

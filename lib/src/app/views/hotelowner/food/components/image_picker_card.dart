@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerCard extends StatefulWidget {
-  const ImagePickerCard({super.key});
+  final void Function(String imagePath) onImageSelected;
+
+  const ImagePickerCard({super.key, required this.onImageSelected});
 
   @override
   State<ImagePickerCard> createState() => _ImagePickerCardState();
@@ -15,9 +17,12 @@ class _ImagePickerCardState extends State<ImagePickerCard> {
   Future<void> _pickImage() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = pickedImage;
-    });
+    if (pickedImage != null) {
+      setState(() {
+        _image = pickedImage;
+      });
+      widget.onImageSelected(pickedImage.path); // Send back the path
+    }
   }
 
   @override
