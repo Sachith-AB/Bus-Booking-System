@@ -26,7 +26,7 @@ class SearchPage extends StatelessWidget {
       Category(id: '6', name: 'Donut', iconPath: donut , icon: Icons.donut_large),
       Category(id: '7', name: 'Bread', iconPath: bread , icon: Icons.bakery_dining),
     ];
-
+  
     final List<Product> products = [
       Product(
         id: '1',
@@ -36,6 +36,7 @@ class SearchPage extends StatelessWidget {
         imageUrl: coffee,
         isFavorite: false,
         category: 'Coffee',
+        availableStatus: 'Available',
       ),
       Product(
         id: '2',
@@ -45,6 +46,7 @@ class SearchPage extends StatelessWidget {
         imageUrl: bread,
         isFavorite: true,
         category: 'Croissant',
+        availableStatus: 'Available',
       ),
       Product(
         id: '3',
@@ -54,6 +56,7 @@ class SearchPage extends StatelessWidget {
         imageUrl: bread,
         isFavorite: true,
         category: 'Croissant',
+        availableStatus: 'Available',
       ),
     ];
 

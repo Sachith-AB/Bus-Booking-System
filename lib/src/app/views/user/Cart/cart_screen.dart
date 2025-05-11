@@ -39,7 +39,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '2',
@@ -48,7 +49,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '3',
@@ -57,7 +59,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '4',
@@ -66,7 +69,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '5',
@@ -75,7 +79,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
   ];
 

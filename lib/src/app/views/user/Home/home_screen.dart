@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
       Category(id: '4', name: 'Donut', iconPath: donut , icon: Icons.coffee_outlined),
       Category(id: '5', name: 'Bread', iconPath: bread , icon: Icons.coffee_outlined),
     ];
+    //those items should be available
 
     final List<Product> popularProducts = [
       Product(
@@ -34,6 +35,7 @@ class HomePage extends StatelessWidget {
         imageUrl: coffee,
         isFavorite: false,
         category: 'Coffee',
+        availableStatus: 'Available',
       ),
       Product(
         id: '2',
@@ -43,6 +45,7 @@ class HomePage extends StatelessWidget {
         imageUrl: bread,
         isFavorite: true,
         category: 'Croissant',
+        availableStatus: 'Available',
       ),
       Product(
         id: '3',
@@ -52,6 +55,7 @@ class HomePage extends StatelessWidget {
         imageUrl: bread,
         isFavorite: true,
         category: 'Croissant',
+        availableStatus: 'Available',
       ),
     ];
 

@@ -6,6 +6,7 @@ class Product {
   final String imageUrl;
   final bool isFavorite;
   final String category;
+  final String availableStatus;
 
   Product({
     required this.id,
@@ -15,5 +16,6 @@ class Product {
     required this.imageUrl,
     required this.isFavorite,
     required this.category,
+    required this.availableStatus,
   });
 }
