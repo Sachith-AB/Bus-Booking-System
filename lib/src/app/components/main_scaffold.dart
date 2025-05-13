@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:get/get.dart';
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 
 class MainScaffold extends StatefulWidget {
   final Widget body;
@@ -23,7 +24,21 @@ class _MainScaffoldState extends State<MainScaffold> {
   void initState() {
     super.initState();
     _currentIndex = widget.selectedIndex;
+    _loadUserType();
   }
+
+  String userType = '';
+  //get current user user_type
+  Future<void> _loadUserType() async {
+    await SharedAuthUser.init(); // Ensure _prefs is initialized
+    final userData = SharedAuthUser.getAuthUser();
+    if (userData != null && mounted) {
+      setState(() {
+        userType = userData[3]; // Index 3 = user_type
+      });
+    }
+  }
+
 
   void _onTabTapped(int index) {
     if (_currentIndex == index) return;
@@ -60,8 +75,8 @@ class _MainScaffoldState extends State<MainScaffold> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildNavItem(1, Icons.home_outlined, 'Home'),
-            _buildNavItem(2, Icons.search_outlined, 'Search'),
-            _buildNavItem(3, Icons.shopping_cart_outlined, 'Cart'),
+            _buildNavItem(2, userType == 'hotelowner' ? Icons.food_bank_outlined : Icons.search_outlined, userType == 'hotelowner' ? 'Foods' : 'Search'),
+            _buildNavItem(3, userType == 'hotelowner' ? Icons.receipt_long_outlined : Icons.shopping_cart_outlined, userType == 'hotelowner' ? 'Orders' :'Cart'),
             _buildNavItem(4, Icons.person_outline, 'Profile'),
           ],
         ),
