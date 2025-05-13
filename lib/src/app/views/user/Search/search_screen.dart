@@ -91,6 +91,7 @@ class _SearchPageState extends State<SearchPage> {
         appBar: CustomAppBar(
           showBackButton: false,
           showCartButton: _showCartButton,
+          showAddfoodButton: !_showCartButton,
           backgroundColor: KColors.appPrimary.shade100,
           title: _showCartButton ?'Search': 'Foods',
         ),

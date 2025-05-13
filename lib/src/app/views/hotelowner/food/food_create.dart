@@ -2,9 +2,9 @@ import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
 import 'package:bus_booking/src/app/components/input_field_config.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
-import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/controllers/hotelOwner/create_food_controller.dart';
 import 'package:bus_booking/src/app/views/hotelOwner/food/components/image_picker_card.dart';
+import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/popup_warning.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +39,13 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(
+        title: "Add Food",
+        backgroundColor: KColors.appPrimary.shade100,
+        showBackButton: true,
+        showAddfoodButton: false,
+        showCartButton: false,
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
@@ -47,8 +53,8 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const PrimaryHeader(text: "Add a Food"),
-            const SizedBox(height: 15),
+            // const PrimaryHeader(text: "Add a Food"),
+            const SizedBox(height: 45),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
