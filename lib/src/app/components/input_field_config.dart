@@ -9,6 +9,7 @@ class InputFieldConfig {
   final TextInputType keyboardType;
   final Widget prefixIcon;
   final bool obscureText;
+  final bool isRead;
 
   InputFieldConfig({
     required this.controller,
@@ -19,5 +20,6 @@ class InputFieldConfig {
     this.keyboardType = TextInputType.text,
     required this.prefixIcon,
     this.obscureText = false,
+    this.isRead = false,
   });
 }
