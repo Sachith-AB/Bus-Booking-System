@@ -32,8 +32,8 @@ class UserUpdateController extends GetxController {
         address: address,
         contact: contact,
       );
-print(updatedUser);
-      //await authController.updateUser(collection: "Users", user: updatedUser);
+
+      await authController.updateUser(collection: "Users", user: updatedUser);
 
       final userData =
           await crudController.findOne(collection: "Users", filed: id);
