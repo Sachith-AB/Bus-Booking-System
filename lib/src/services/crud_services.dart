@@ -90,21 +90,18 @@ class CrudServices {
       }
   }
 
-  Future<List<dynamic>> findAll({required String collection}) async {
-    List<dynamic> data = [];
-
+  Future<List<T>> findAll<T>({
+    required String collection,
+    required T Function(dynamic doc) fromSnapshot,
+  }) async {
     try {
       final snapshot = await service.collection(collection).get();
 
-      if (collection == "Users") {
-        data = snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList();
-      }
-
-      return data;
+      return snapshot.docs.map<T>((doc) => fromSnapshot(doc)).toList();
     } catch (e) {
-      // Handle exception as needed
       throw e;
     }
   }
+
 
 }

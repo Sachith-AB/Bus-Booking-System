@@ -15,10 +15,14 @@ class FoodController extends GetxController {
 
   Future<void> getAllFoods() async {
     try {
-      final result = await crudController.findAll(collection: 'Foods');
+      final result = await crudController.findAll<Product>(
+      collection: 'Foods',
+      fromSnapshot: (doc) => Product.fromSnapshot(doc),
+    );
+      print(result);
       if (result.isNotEmpty) {
         foods.value = result.cast<Product>();
-        print(result);
+        
       } else {
         foods.clear();
       }

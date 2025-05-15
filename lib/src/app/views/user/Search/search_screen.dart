@@ -1,15 +1,15 @@
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/custom_search_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
+import 'package:bus_booking/src/app/controllers/foods/food_controller.dart';
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/models/category_model.dart';
-import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/user/Search/components/category_list.dart';
 import 'package:bus_booking/src/app/views/user/Search/components/filter_bottom_sheet.dart';
 import 'package:bus_booking/src/app/views/user/Search/components/product_list.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
-import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -19,12 +19,14 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final foodController = Get.put(FoodController());
   bool _showCartButton = true;
 
   @override
   void initState() {
     super.initState();
     _loadUserType();
+    foodController.getAllFoods();
   }
 
   Future<void> _loadUserType() async {
@@ -50,39 +52,6 @@ class _SearchPageState extends State<SearchPage> {
       Category(id: '5', name: 'Bread', icon: Icons.bakery_dining),
       Category(id: '6', name: 'Donut', icon: Icons.donut_large),
       Category(id: '7', name: 'Bread', icon: Icons.bakery_dining),
-    ];
-  
-    final List<Product> products = [
-      Product(
-        id: '1',
-        name: 'Americano',
-        description: "A delicious Americano coffee",
-        price: 3.99,
-        imageUrl: coffee,
-        isFavorite: false,
-        category: 'Coffee',
-        availableStatus: 'Available',
-      ),
-      Product(
-        id: '2',
-        name: 'Plain Croissant',
-        description: "A delicious plain croissant",
-        price: 2.99,
-        imageUrl: bread,
-        isFavorite: true,
-        category: 'Croissant',
-        availableStatus: 'Available',
-      ),
-      Product(
-        id: '3',
-        name: 'Plain Croissant',
-        description: "A delicious plain croissant",
-        price: 2.99,
-        imageUrl: bread,
-        isFavorite: true,
-        category: 'Croissant',
-        availableStatus: 'Available',
-      ),
     ];
 
   return MainScaffold(
@@ -135,7 +104,19 @@ class _SearchPageState extends State<SearchPage> {
                       const SizedBox(height: 12),
                       CategoryList(categories: categories),
                       const SizedBox(height: 12),
-                      ProductList(products:products)
+                      Obx(() {
+                        final products = foodController.foods;
+                        if (products.isEmpty) {
+                          return const Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 40),
+                              child: Text('No products found.'),
+                            ),
+                          );
+                        }
+
+                        return ProductList(products: products);
+                      }),
                     ],
                   ),
                 ),

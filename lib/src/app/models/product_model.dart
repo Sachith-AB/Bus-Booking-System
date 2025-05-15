@@ -32,4 +32,19 @@ class Product {
       'createdAt': DateTime.now().toIso8601String(),
     };
   }
+
+  factory Product.fromSnapshot(dynamic doc) {
+    final data = doc.data() as Map<String, dynamic>;
+
+    return Product(
+      id: doc.id,
+      name: data['name'] ?? '',
+      description: data['description'] ?? '',
+      price: (data['price'] ?? 0).toDouble(),
+      imageUrl: data['imageUrl'] ?? '',
+      isFavorite: data['isFavorite'] ?? false,
+      category: data['category'] ?? '',
+      availableStatus: data['availableStatus'] ?? '',
+    );
+  }
 }
