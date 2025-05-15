@@ -111,6 +111,9 @@ class _profilePageState extends State<profilePage> {
                     const SizedBox(height: 35),
                     ProfileImagePicker(
                       initialImagePath: user![4],
+                      onImageSaved: (savedPath){
+                        user![4] = savedPath;
+                      },
                     ),
                     const SizedBox(height: 35),
                     DynamicForm(
@@ -180,7 +183,7 @@ class _profilePageState extends State<profilePage> {
     final id = user![0];
     final name = nameController.text.trim();
     final email = emailController.text.trim();
-    final imageUrl = user![4];
+    final imageUrl = user![4].toString();
     final address = addressController.text.trim();
     final contact = phoneNoController.text.trim();
 

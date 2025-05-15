@@ -1,41 +1,63 @@
 import 'dart:io';
+import 'package:bus_booking/src/utils/image_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileImagePicker extends StatefulWidget {
   final String? initialImagePath;
-  const ProfileImagePicker({super.key, this.initialImagePath});
+  final Function(String imagePath) onImageSaved;
+  const ProfileImagePicker(
+      {super.key, this.initialImagePath, required this.onImageSaved});
 
   @override
   State<ProfileImagePicker> createState() => _ProfileImagePickerState();
 }
 
 class _ProfileImagePickerState extends State<ProfileImagePicker> {
-  XFile? _image;
+  File? _image;
+  String? _imagePath;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialImagePath != null &&
+        widget.initialImagePath!.isNotEmpty) {
+      _imagePath = widget.initialImagePath;
+      if (!_imagePath!.startsWith('http')) {
+        final file = File(_imagePath!);
+        if (file.existsSync()) {
+          _image = file;
+        }
+      }
+    }
+  }
 
   Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
+    final picked = await ImageHelper.pickImage();
+    if (picked != null) {
+      final savedPath = await ImageHelper.saveImageLocally(picked);
       setState(() {
-        _image = pickedImage;
+        _image = File(savedPath); // Always set _image to the new file
+        _imagePath = savedPath;
       });
+      widget.onImageSaved(savedPath);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     const double size = 100;
-
     ImageProvider? imageProvider;
 
     if (_image != null) {
-      imageProvider = FileImage(File(_image!.path));
-    } else if (widget.initialImagePath != null) {
-      if (widget.initialImagePath!.startsWith('http')) {
-        imageProvider = NetworkImage(widget.initialImagePath!);
+      imageProvider = FileImage(_image!);
+    } else if (_imagePath != null && _imagePath!.isNotEmpty) {
+      if (_imagePath!.startsWith('http')) {
+        imageProvider = NetworkImage(_imagePath!);
       } else {
-        imageProvider = FileImage(File(widget.initialImagePath!));
+        final file = File(_imagePath!);
+        if (file.existsSync()) {
+          imageProvider = FileImage(file);
+        }
       }
     }
 
