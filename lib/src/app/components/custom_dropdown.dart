@@ -25,7 +25,7 @@ class CustomDropdown extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: KColors.primaryColor),
-        focusColor: KColors.appPrimary,
+        focusColor: KColors.appPrimary.shade100,
         border: AppInputStyle.outlineInputBorder,
         focusedBorder: AppInputStyle.outlineInputBorder,
         contentPadding: AppInputStyle.contentPadding,
@@ -33,7 +33,7 @@ class CustomDropdown extends StatelessWidget {
         floatingLabelStyle: AppInputStyle.floatingLabelStyle,
         hintStyle: AppInputStyle.hintTextStyle,
         filled: true,
-        fillColor: KColors.appPrimary.shade100
+        fillColor: Colors.white,
         
       ),
       value: value,
