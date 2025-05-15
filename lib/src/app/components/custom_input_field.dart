@@ -39,7 +39,7 @@ class CustomInputField extends StatelessWidget {
       decoration: InputDecoration(
         border: AppInputStyle.outlineInputBorder,
         enabledBorder: isValid ? AppInputStyle.outlineValidBorder : AppInputStyle.outlineInputBorder,
-        focusedBorder: AppInputStyle.outlineInputBorder,
+        focusedBorder: AppInputStyle.outlineValidBorder,
         contentPadding: AppInputStyle.contentPadding,
         filled: isValid,
         fillColor: isValid ? KColors.appPrimary.shade100 : KColors.white,
