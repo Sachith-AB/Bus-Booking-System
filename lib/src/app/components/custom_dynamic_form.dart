@@ -25,6 +25,7 @@ class DynamicForm extends StatelessWidget {
             keyboardType: field.keyboardType,
             prefixIcon: field.prefixIcon,
             obscureText: field.obscureText,
+            isRead: field.isRead,
           ),
         )),
         const SizedBox(height: 10),

@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/views/user/Cart/components/item_card.dart';
 import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,16 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+
+  
+
   // to calculate the total price of items in the cart
   double _calculateTotal() {
     double total = 0;
     for (int i = 0; i < cartItems.length; i++) {
-      total += cartItems[i].price * (quantities[i] ?? 1);
+      if (selectedItems[i] == true) {
+        total += cartItems[i].price * (quantities[i] ?? 1);
+      }
     }
     return total;
   }
@@ -33,7 +39,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '2',
@@ -42,7 +49,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '3',
@@ -51,7 +59,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '4',
@@ -60,7 +69,8 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
     Product(
       id: '5',
@@ -69,17 +79,24 @@ class _CartPageState extends State<CartPage> {
       price: 500,
       imageUrl: bread,
       description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false
+      isFavorite: false,
+      availableStatus: 'Available',
     ),
   ];
 
   final Map<int, int> quantities = {};
+  final Map<int, bool> selectedItems = {};
+  final double deliveryFee = 350.0;
+
+  
+
 
   @override
   void initState() {
     super.initState();
     for (int i = 0; i < cartItems.length; i++) {
       quantities[i] = 1;
+      selectedItems[i] = false;
     }
   }
 
@@ -96,6 +113,10 @@ class _CartPageState extends State<CartPage> {
       }
     });
   }
+  double _calculateGrandTotal() {
+    return _calculateTotal() + deliveryFee;
+  }
+
 @override
 Widget build(BuildContext context) {
   return MainScaffold(
@@ -117,40 +138,101 @@ Widget build(BuildContext context) {
                 final product = cartItems[index];
                 final qty = quantities[index] ?? 1;
 
-                return CartItemCard(
-                  product: product,
-                  quantity: qty,
-                  onAdd: () => _increaseQty(index),
-                  onRemove: () => _decreaseQty(index),
+                return Row(
+                  children: [
+                    Checkbox(
+                      value: selectedItems[index] ?? false,
+                      activeColor: KColors.appPrimary,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedItems[index] = value!;
+                        });
+                      },
+                    ),
+                    Expanded(
+                      child: CartItemCard(
+                        product: product,
+                        quantity: qty,
+                        onAdd: () => _increaseQty(index),
+                        onRemove: () => _decreaseQty(index),
+                      ),
+                    ),
+                  ],
                 );
+
               },
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.all(16),
             color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'Total Price of the cart:',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Subtotal:',
+                      style: TextStyle(fontSize: 13, color: Colors.grey),
+                    ),
+                    Text(
+                      'LKR ${_calculateTotal().toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  '${_calculateTotal().toStringAsFixed(2)} LKR',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange,
-                  ),
+                const SizedBox(height: 6),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Delivery:',
+                      style: TextStyle(fontSize: 13, color: Colors.grey),
+                    ),
+                    Text(
+                      'LKR ${deliveryFee.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Total:',
+                      style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold, color: Color.fromARGB(255, 139, 138, 138)),
+                    ),
+                    Text(
+                      'LKR ${_calculateGrandTotal().toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                PrimaryButton(
+                  label: 'Checkout',
+                  
+                  onPressed: () {
+                    // Handle checkout for selected items
+                  },
+                  
                 ),
               ],
             ),
           ),
+
         ],
       ),
     ),

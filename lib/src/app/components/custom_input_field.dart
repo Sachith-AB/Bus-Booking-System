@@ -13,6 +13,7 @@ class CustomInputField extends StatelessWidget {
   final TextInputType keyboardType;
   final Widget ? prefixIcon;
   final bool obscureText;
+  final bool isRead;
 
   const CustomInputField ({
     super.key,
@@ -23,7 +24,8 @@ class CustomInputField extends StatelessWidget {
     required this.onChanged,
     this.keyboardType = TextInputType.text,
     required this.prefixIcon,
-    this.obscureText = false
+    this.obscureText = false,
+    this.isRead = false,
   });
 
   @override
@@ -32,6 +34,7 @@ class CustomInputField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       onChanged: onChanged,
+      readOnly: isRead,
       obscureText: obscureText,
       decoration: InputDecoration(
         border: AppInputStyle.outlineInputBorder,

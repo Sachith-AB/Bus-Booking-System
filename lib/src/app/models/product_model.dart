@@ -6,6 +6,7 @@ class Product {
   final String imageUrl;
   final bool isFavorite;
   final String category;
+  final String availableStatus;
 
   Product({
     required this.id,
@@ -15,5 +16,20 @@ class Product {
     required this.imageUrl,
     required this.isFavorite,
     required this.category,
+    required this.availableStatus,
   });
+  // Convert Product instance to JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+      'isFavorite': isFavorite,
+      'category': category,
+      'availableStatus': availableStatus,
+      'createdAt': DateTime.now().toIso8601String(),
+    };
+  }
 }

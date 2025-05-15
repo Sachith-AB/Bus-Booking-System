@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color backgroundColor;
   final bool showBackButton;
   final VoidCallback? onBack;
+  final bool showAddfoodButton;
   final bool showCartButton;
 
   const CustomAppBar({
@@ -16,6 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackButton = true,
     this.onBack,
     this.showCartButton = false,
+    this.showAddfoodButton = false,
   });
 
   @override
@@ -37,6 +39,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       )
           : null,
       actions: [
+        if (showAddfoodButton == true)
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Get.toNamed('/create-food');
+            },
+          ),
         if(showCartButton)
           Stack(
             children: [

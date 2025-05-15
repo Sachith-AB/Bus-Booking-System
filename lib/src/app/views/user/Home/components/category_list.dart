@@ -43,11 +43,10 @@ class CategoryList extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: ClipOval(
-              child: Image.asset(
-                category.iconPath,
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
+              child: Icon(
+                category.icon,
+                size: 30,
+                color: Colors.black87,
               ),
             ),
           ),

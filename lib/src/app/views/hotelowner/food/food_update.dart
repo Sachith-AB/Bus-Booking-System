@@ -2,33 +2,48 @@ import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
 import 'package:bus_booking/src/app/components/input_field_config.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
-import 'package:bus_booking/src/app/controllers/hotelOwner/create_food_controller.dart';
+import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/hotelOwner/food/components/image_picker_card.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/popup_warning.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../../../../common/style/app_input_style.dart';
 import '../../../components/custom_dropdown.dart';
 
 
-class FoodCreatePage extends StatefulWidget {
-  const FoodCreatePage({super.key});
+class FoodUpdatePage extends StatefulWidget {
+
+  final Product product;
+
+  const FoodUpdatePage({super.key, required this.product});
 
   @override
-  State<FoodCreatePage> createState() => _FoodCreatePageState();
+  State<FoodUpdatePage> createState() => _FoodUpdatePageState();
 }
 
-class _FoodCreatePageState extends State<FoodCreatePage> {
-  final controller = Get.put(AddFoodController());
+class _FoodUpdatePageState extends State<FoodUpdatePage> {
+  // final controller = Get.put(AddFoodController());
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
-  final TextEditingController CategoryController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController availabilityStatusController = TextEditingController();
 
-  String availabilityStatus = 'Available';
+  @override
+  void initState() {
+    super.initState();
+  
+    nameController.text = widget.product.name;
+    descriptionController.text = widget.product.description;
+    priceController.text = widget.product.price.toString();
+    categoryController.text = widget.product.category;
+    imageUrl = widget.product.imageUrl;
+    availabilityStatusController.text = widget.product.availableStatus;
+  }
+
+  
+
 
   // Placeholder: Replace with actual image picker logic
   String? imageUrl; // This will store the image path (or URL later if uploaded)
@@ -40,7 +55,7 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
-        title: "Add Food",
+        title: "Update Food",
         backgroundColor: KColors.appPrimary.shade100,
         showBackButton: true,
         showAddfoodButton: false,
@@ -60,6 +75,7 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
               child: Column(
                 children: [
                   ImagePickerCard(
+                    initialImage: imageUrl,
                     onImageSelected: (path) {
                         setState(() {
                           imageUrl = path;
@@ -73,17 +89,28 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
                         controller: nameController,
                         labelText: "Name",
                         hintText: "Enter Food Name",
-                        isValid: false,
+                        isValid: true,
                         onChanged: (_) {},
                         prefixIcon: AppInputStyle.foodIcon,
+                        isRead: true,
                       ),
                       InputFieldConfig(
                         controller: descriptionController,
                         labelText: "Description",
                         hintText: "Enter food description",
-                        isValid: false,
+                        isValid: true,
                         onChanged: (_) {},
                         prefixIcon: AppInputStyle.foodDescriptionIcon,
+                        isRead: true,
+                      ),
+                      InputFieldConfig(
+                        controller: categoryController,
+                        labelText: "Category",
+                        hintText: "Enter food category",
+                        isValid: true,
+                        onChanged: (_) {},
+                        prefixIcon: AppInputStyle.foodPriceIcon,
+                        isRead: true,
                       ),
                       InputFieldConfig(
                         controller: priceController,
@@ -93,31 +120,24 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
                         onChanged: (_) {},
                         prefixIcon: AppInputStyle.foodPriceIcon,
                       ),
-                      InputFieldConfig(
-                        controller: CategoryController,
-                        labelText: "Category",
-                        hintText: "Enter food category",
-                        isValid: false,
-                        onChanged: (_) {},
-                        prefixIcon: AppInputStyle.foodPriceIcon,
-                      ),
+                      
                     ],
                   ),
                   CustomDropdown(
-                    value: availabilityStatus,
+                    value: availabilityStatusController.text,
                     label: "Availability",
                     icon: Icons.check_circle_outline,
                     items: const ['Available', 'Not Available'],
                     onChanged: (value) {
                       setState(() {
-                        availabilityStatus = value ?? 'Available';
+                        availabilityStatusController.text = value ?? 'Available';
                       });
                     },
                   ),
                   const SizedBox(height: 25),
                   PrimaryButton(
-                    label: "Add Food",
-                    onPressed: addFood,
+                    label: "Update Food",
+                    onPressed: updateFood,
                   ),
                 ],
               ),
@@ -128,11 +148,11 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
     );
   }
 
-  void addFood() {
+  void updateFood() {
     final name = nameController.text.trim();
     final description = descriptionController.text.trim();
     final priceText = priceController.text.trim();
-    final category = CategoryController.text.trim();
+    final category = categoryController.text.trim();
 
     if (name.isEmpty || description.isEmpty || priceText.isEmpty || category.isEmpty || imageUrl == null) {
       PopupWarning.Warning(
@@ -153,13 +173,13 @@ class _FoodCreatePageState extends State<FoodCreatePage> {
       return;
     }
 
-    controller.createFood(
-      name: name,
-      description: description,
-      price: price,
-      imageUrl: imageUrl!, // Add image picker logic later
-      category: category,
-      availableStatus: availabilityStatus,
-    );
+    // controller.createFood(
+    //   name: name,
+    //   description: description,
+    //   price: price,
+    //   imageUrl: imageUrl!, // Add image picker logic later
+    //   category: category,
+    //   availableStatus: availabilityStatusController.text,
+    // );
   }
 }
