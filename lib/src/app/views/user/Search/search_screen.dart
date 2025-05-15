@@ -43,13 +43,13 @@ class _SearchPageState extends State<SearchPage> {
 
     // Sample data
     final List<Category> categories = [
-      Category(id: '1', name: 'Coffee', iconPath:coffee , icon: Icons.coffee_outlined),
-      Category(id: '2', name: 'Croissant', iconPath: croissant , icon: Icons.bakery_dining),
-      Category(id: '3', name: 'Crepe', iconPath: crepe , icon: Icons.set_meal),
-      Category(id: '4', name: 'Donut', iconPath: donut ,  icon : Icons.donut_large),
-      Category(id: '5', name: 'Bread', iconPath: bread , icon: Icons.bakery_dining),
-      Category(id: '6', name: 'Donut', iconPath: donut , icon: Icons.donut_large),
-      Category(id: '7', name: 'Bread', iconPath: bread , icon: Icons.bakery_dining),
+      Category(id: '1', name: 'Coffee', icon: Icons.coffee_outlined),
+      Category(id: '2', name: 'Croissant',  icon: Icons.bakery_dining),
+      Category(id: '3', name: 'Crepe', icon: Icons.set_meal),
+      Category(id: '4', name: 'Donut',  icon : Icons.donut_large),
+      Category(id: '5', name: 'Bread', icon: Icons.bakery_dining),
+      Category(id: '6', name: 'Donut', icon: Icons.donut_large),
+      Category(id: '7', name: 'Bread', icon: Icons.bakery_dining),
     ];
   
     final List<Product> products = [
