@@ -20,17 +20,25 @@ class ProductCard extends StatelessWidget {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius:const  BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(15),
-              topLeft: Radius.circular(15)
+              topLeft: Radius.circular(15),
             ),
-            child: Image.asset(
+            child: Image.network(
               product.imageUrl,
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.broken_image, size: 100); // fallback image
+              },
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(child: CircularProgressIndicator());
+              },
             ),
           ),
+
           Padding(padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

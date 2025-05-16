@@ -89,4 +89,19 @@ class CrudServices {
         throw ex;
       }
   }
+
+  Future<List<T>> findAll<T>({
+    required String collection,
+    required T Function(dynamic doc) fromSnapshot,
+  }) async {
+    try {
+      final snapshot = await service.collection(collection).get();
+
+      return snapshot.docs.map<T>((doc) => fromSnapshot(doc)).toList();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
 }
