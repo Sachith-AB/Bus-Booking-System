@@ -2,11 +2,14 @@ import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/custom_dynamic_form.dart';
 import 'package:bus_booking/src/app/components/input_field_config.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
+import 'package:bus_booking/src/app/controllers/hotelOwner/update_food_controller.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/hotelOwner/food/components/image_picker_card.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/popup_warning.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import '../../../../common/style/app_input_style.dart';
 import '../../../components/custom_dropdown.dart';
 
@@ -22,7 +25,7 @@ class FoodUpdatePage extends StatefulWidget {
 }
 
 class _FoodUpdatePageState extends State<FoodUpdatePage> {
-  // final controller = Get.put(AddFoodController());
+  
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -149,37 +152,43 @@ class _FoodUpdatePageState extends State<FoodUpdatePage> {
   }
 
   void updateFood() {
-    final name = nameController.text.trim();
-    final description = descriptionController.text.trim();
-    final priceText = priceController.text.trim();
-    final category = categoryController.text.trim();
+  final name = nameController.text.trim();
+  final description = descriptionController.text.trim();
+  final priceText = priceController.text.trim();
+  final category = categoryController.text.trim();
+  final availability = availabilityStatusController.text.trim();
 
-    if (name.isEmpty || description.isEmpty || priceText.isEmpty || category.isEmpty || imageUrl == null) {
-      PopupWarning.Warning(
-        title: "Missing Fields",
-        message: "Please fill in all fields.",
-        type: 1,
-      );
-      return;
-    }
-
-    final price = double.tryParse(priceText);
-    if (price == null) {
-      PopupWarning.Warning(
-        title: "Invalid Price",
-        message: "Please enter a valid number for price.",
-        type: 1,
-      );
-      return;
-    }
-
-    // controller.createFood(
-    //   name: name,
-    //   description: description,
-    //   price: price,
-    //   imageUrl: imageUrl!, // Add image picker logic later
-    //   category: category,
-    //   availableStatus: availabilityStatusController.text,
-    // );
+  if (name.isEmpty || description.isEmpty || priceText.isEmpty || category.isEmpty || imageUrl == null) {
+    PopupWarning.Warning(
+      title: "Missing Fields",
+      message: "Please fill in all fields.",
+      type: 1,
+    );
+    return;
   }
+
+  final price = double.tryParse(priceText);
+  if (price == null) {
+    PopupWarning.Warning(
+      title: "Invalid Price",
+      message: "Please enter a valid number for price.",
+      type: 1,
+    );
+    return;
+  }
+
+  final controller = Get.put(UpdateFoodController());
+
+  controller.updateFood(
+    id: widget.product.id,
+    name: name,
+    description: description,
+    price: price,
+    imageUrl: imageUrl!,
+    category: category,
+    availableStatus: availability,
+   
+  );
+}
+
 }
