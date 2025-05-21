@@ -36,7 +36,7 @@ class _OrdersPageState extends State<OrdersPage> {
     ];
 
     return MainScaffold(
-      selectedIndex: 4,
+      selectedIndex: 3,
       body: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: CustomAppBar(

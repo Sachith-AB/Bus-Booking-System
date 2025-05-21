@@ -55,11 +55,7 @@ class _MainScaffoldState extends State<MainScaffold> {
       Get.toNamed('/search');
       break;
     case 3:
-      if(userType == 'hotelowner'){
-        Get.toNamed('/orders'); // Make sure you have this route defined
-      } else {
-        Get.toNamed('/cart'); // Make sure you have this route defined
-      }
+      Get.toNamed(userType == 'hotelowner' ? '/orders' : '/cart');
       break;
     case 4:
       Get.toNamed('/profile'); // Make sure you have this route defined
