@@ -2,7 +2,6 @@ import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/custom_search_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/controllers/foods/food_controller.dart';
-import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/controllers/user_controller.dart';
 import 'package:bus_booking/src/app/models/category_model.dart';
 import 'package:bus_booking/src/app/views/user/Search/components/category_list.dart';

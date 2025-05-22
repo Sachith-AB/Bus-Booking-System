@@ -2,7 +2,7 @@ import 'package:bus_booking/src/app/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:get/get.dart';
-import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
+
 
 class MainScaffold extends StatefulWidget {
   
