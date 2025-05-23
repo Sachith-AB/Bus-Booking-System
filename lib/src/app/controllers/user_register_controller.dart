@@ -69,7 +69,7 @@ class UserRegisterController extends GetxController {
           message: "Login Successful!",
           type: 0,
         );
-
+print(userData);
         Get.offAll(
           () => const HomePage(),
           transition: Transition.rightToLeft,

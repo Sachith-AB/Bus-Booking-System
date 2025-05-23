@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushNamed(context, '/register');
                           },
                           child: const PrimaryHeader(
-                            text: "Register",
+                            text: "Login",
                             color: KColors.primaryColor,
                             size: 16,
                           ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
@@ -24,17 +26,13 @@ class ProductCard extends StatelessWidget {
               topRight: Radius.circular(15),
               topLeft: Radius.circular(15),
             ),
-            child: Image.network(
-              product.imageUrl,
+            child: Image.file(
+              File(product.imageUrl),
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(Icons.broken_image, size: 100); // fallback image
-              },
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return const Center(child: CircularProgressIndicator());
               },
             ),
           ),

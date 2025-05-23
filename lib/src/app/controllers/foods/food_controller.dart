@@ -19,7 +19,6 @@ class FoodController extends GetxController {
       collection: 'Foods',
       fromSnapshot: (doc) => Product.fromSnapshot(doc),
     );
-      print(result);
       if (result.isNotEmpty) {
         foods.value = result.cast<Product>();
         

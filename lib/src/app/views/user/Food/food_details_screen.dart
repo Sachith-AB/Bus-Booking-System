@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
+import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class FoodDetailsPage extends StatelessWidget {
@@ -36,11 +39,19 @@ class FoodDetailsPage extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(30),
-                          child: Image.asset(
-                            product.imageUrl,
+                          child: Image.file(
+                            File(product.imageUrl),
                             height: 450,
                             width: double.infinity,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                coffee,
+                                height: 450,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              );
+                            },
                           ),
                         ),
                         Positioned(
