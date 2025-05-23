@@ -43,6 +43,9 @@ class CartItemCard extends StatelessWidget {
               width: 60,
               height: 60,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.broken_image, size: 60); // fallback image
+              },
             ),
           ),
           const SizedBox(width: 12),

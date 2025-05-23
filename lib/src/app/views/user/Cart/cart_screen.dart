@@ -7,8 +7,6 @@ import 'package:bus_booking/src/app/views/user/Cart/components/item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
-
-import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:get/get.dart';
 

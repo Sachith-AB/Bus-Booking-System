@@ -8,11 +8,6 @@ class CartController extends GetxController {
 
   var foods = <Product>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   Future<RxList<Product>> getCartProduct(List<String> foodIds) async {
     try{
       foods.clear();

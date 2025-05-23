@@ -97,12 +97,7 @@ class FoodDetailsPage extends StatelessWidget {
                                         vertical: 12),
                                   ),
                                   onPressed: () {
-                                    final user = SharedAuthUser.getAuthUser();
-                                    if (user != null && user.isNotEmpty) {
-                                      final userId = user[0];
-                                      Get.find<UserUpdateController>()
-                                          .addToCart(userId, product.id);
-                                    }
+                                    addToCart();
                                   },
                                   child: const Text(
                                     'Add to Cart',
@@ -175,4 +170,15 @@ class FoodDetailsPage extends StatelessWidget {
       ),
     );
   }
+
+  void addToCart(){
+    final user = SharedAuthUser.getAuthUser();
+    final controller = Get.put(UserUpdateController());
+    if (user != null && user.isNotEmpty) {
+      final userId = user[0];
+      controller.addToCart(userId, product.id);
+    }
+  }
 }
+
+
