@@ -1,4 +1,5 @@
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
+import 'package:bus_booking/src/app/controllers/user_controller.dart';
 import 'package:bus_booking/src/app/models/user_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
 import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
@@ -63,7 +64,22 @@ class UserRegisterController extends GetxController {
       final userData =
           await crudController.findOne(collection: "Users", filed: userId);
 
+
       if (userData != null) {
+        final authUser = [
+          userData[0].id.toString(),
+          userData[0].name.toString(),
+          userData[0].email.toString(),
+          userData[0].user_type.toString(),
+          userData[0].image_url.toString(),
+          userData[0].createdAt.toString(),
+          userData[0].address.toString(),
+          userData[0].contact.toString(),
+        ];
+        // ✅ Save user to SharedPreferences
+        await SharedAuthUser.saveAuthUser(authUser);
+        // ✅ Reload user type into UserController
+        Get.find<UserController>().loadUser();
         PopupWarning.Warning(
           title: "Congratulations! 🎉",
           message: "Login Successful!",
@@ -76,17 +92,7 @@ class UserRegisterController extends GetxController {
           duration: const Duration(milliseconds: 500),
         );
 
-        final authUser = [
-          userData[0].id.toString(),
-          userData[0].name.toString(),
-          userData[0].email.toString(),
-          userData[0].user_type.toString(),
-          userData[0].image_url.toString(),
-          userData[0].createdAt.toString(),
-          userData[0].address.toString(),
-          userData[0].contact.toString(),
-        ];
-        await SharedAuthUser.saveAuthUser(authUser);
+        
       }
     } catch (e) {
       e;
