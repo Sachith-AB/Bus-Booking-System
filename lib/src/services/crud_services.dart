@@ -103,5 +103,35 @@ class CrudServices {
     }
   }
 
+  Future<T?> findById<T>({
+    required String collection,
+    required String docId,
+    required T Function(DocumentSnapshot doc) fromSnapshot,
+  }) async {
+    try {
+      final doc = await service.collection(collection).doc(docId).get();
+
+      if (!doc.exists) return null;
+
+      return fromSnapshot(doc);
+    } on FirebaseException catch (e) {
+      final ex = CrudFailure.code(e.code);
+      PopupWarning.Warning(
+        title: "Try again later",
+        message: ex.message,
+        type: 1,
+      );
+      throw ex;
+    } catch (_) {
+      final ex = CrudFailure();
+      PopupWarning.Warning(
+        title: "Try again later",
+        message: "${ex.message}.",
+        type: 1,
+      );
+      throw ex;
+    }
+  }
+
 
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 
@@ -36,8 +38,8 @@ class CartItemCard extends StatelessWidget {
           // Product Image
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              product.imageUrl,
+            child: Image.file(
+              File(product.imageUrl),
               width: 60,
               height: 60,
               fit: BoxFit.cover,
