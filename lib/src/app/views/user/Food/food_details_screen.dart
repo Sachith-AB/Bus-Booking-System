@@ -4,10 +4,13 @@ import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
+import 'package:bus_booking/src/app/controllers/user/user_update_controller.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FoodDetailsPage extends StatelessWidget {
   final Product product;
@@ -31,7 +34,8 @@ class FoodDetailsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 120), // For "Order Now" button space
+                padding: const EdgeInsets.only(
+                    bottom: 120), // For "Order Now" button space
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,7 +72,9 @@ class FoodDetailsPage extends StatelessWidget {
                               product.isFavorite
                                   ? Icons.favorite
                                   : Icons.favorite_border,
-                              color: product.isFavorite ? Colors.red : Colors.white,
+                              color: product.isFavorite
+                                  ? Colors.red
+                                  : Colors.white,
                               size: 20,
                             ),
                           ),
@@ -82,14 +88,21 @@ class FoodDetailsPage extends StatelessWidget {
                               Expanded(
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white.withOpacity(0.50),
+                                    backgroundColor:
+                                        Colors.white.withOpacity(0.50),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
                                   ),
                                   onPressed: () {
-                                    // Add to cart logic
+                                    final user = SharedAuthUser.getAuthUser();
+                                    if (user != null && user.isNotEmpty) {
+                                      final userId = user[0];
+                                      Get.find<UserUpdateController>()
+                                          .addToCart(userId, product.id);
+                                    }
                                   },
                                   child: const Text(
                                     'Add to Cart',
@@ -121,7 +134,9 @@ class FoodDetailsPage extends StatelessWidget {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         PrimaryHeader(text: product.name),
-                        const SizedBox(width: 12,),
+                        const SizedBox(
+                          width: 12,
+                        ),
                         PrimaryHeader(
                           text: "LKR ${product.price.toString()}",
                           size: 20,

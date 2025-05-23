@@ -1,6 +1,5 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/views/user/Cart/components/item_card.dart';
-import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
@@ -17,8 +16,6 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
 
-  
-
   // to calculate the total price of items in the cart
   double _calculateTotal() {
     double total = 0;
@@ -31,59 +28,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   // Example cart items
-  final List<Product> cartItems = [
-    Product(
-      id: '1 ',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '2',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '3',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '4',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '5',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-  ];
-
+  final List<Product> cartItems = [];
   final Map<int, int> quantities = {};
   final Map<int, bool> selectedItems = {};
   final double deliveryFee = 350.0;

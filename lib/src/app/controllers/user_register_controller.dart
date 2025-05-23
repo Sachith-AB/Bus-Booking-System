@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/models/user_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
@@ -30,6 +31,8 @@ class UserRegisterController extends GetxController {
         user_type: userType,
         address: address,
         contact: contact,
+        cart: [],
+        favourite: [],
       );
 
       await authController
@@ -69,7 +72,7 @@ class UserRegisterController extends GetxController {
           message: "Login Successful!",
           type: 0,
         );
-print(userData);
+
         Get.offAll(
           () => const HomePage(),
           transition: Transition.rightToLeft,
@@ -85,11 +88,23 @@ print(userData);
           userData[0].createdAt.toString(),
           userData[0].address.toString(),
           userData[0].contact.toString(),
+          jsonEncode(userData[0].cart ?? []), // Save cart as JSON string
+          jsonEncode(
+              userData[0].favourite ?? []), // Save favourite as JSON string
         ];
         await SharedAuthUser.saveAuthUser(authUser);
       }
     } catch (e) {
       e;
     }
+  }
+
+  void logOut() async {
+    await SharedAuthUser.clearAuthUser();
+    Get.offAll(
+      () => const LoginPage(),
+      transition: Transition.rightToLeft,
+      duration: const Duration(milliseconds: 500),
+    );
   }
 }
