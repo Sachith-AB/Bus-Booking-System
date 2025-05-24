@@ -46,8 +46,6 @@ class _CartPageState extends State<CartPage> {
       selectedItems[i] = false;
     }
     _loadCartItems();
-
-    print(user![8]);
   }
 
 

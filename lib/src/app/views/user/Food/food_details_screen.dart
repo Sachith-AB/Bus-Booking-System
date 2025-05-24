@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
@@ -12,13 +13,56 @@ import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FoodDetailsPage extends StatelessWidget {
+class FoodDetailsPage extends StatefulWidget {
   final Product product;
 
   const FoodDetailsPage({
     super.key,
     required this.product,
   });
+
+  @override
+  State<FoodDetailsPage> createState() => _FoodDetailsPageState();
+}
+
+class _FoodDetailsPageState extends State<FoodDetailsPage> {
+  List<dynamic> favoriteList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorite();
+  }
+
+  void _loadFavorite() {
+    final user = SharedAuthUser.getAuthUser();
+    if (user != null && user.length > 9) {
+      setState(() {
+        favoriteList = jsonDecode(user[9]);
+      });
+    }
+  }
+
+  void addToCart() {
+    final user = SharedAuthUser.getAuthUser();
+    final controller = Get.put(UserUpdateController());
+    if (user != null && user.isNotEmpty) {
+      final userId = user[0];
+      controller.addToCart(userId, widget.product.id);
+    }
+  }
+
+  void addToFavorite() async {
+    final user = SharedAuthUser.getAuthUser();
+    final controller = Get.put(UserUpdateController());
+    if (user != null && user.isNotEmpty) {
+      final userId = user[0];
+      await controller.addToFavorite(userId, widget.product.id);
+      // Reload favorite list from SharedPreferences after update
+      await Future.delayed(const Duration(milliseconds: 300));
+      _loadFavorite();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +78,7 @@ class FoodDetailsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(
-                    bottom: 120), // For "Order Now" button space
+                padding: const EdgeInsets.only(bottom: 120),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -44,7 +87,7 @@ class FoodDetailsPage extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(30),
                           child: Image.file(
-                            File(product.imageUrl),
+                            File(widget.product.imageUrl),
                             height: 450,
                             width: double.infinity,
                             fit: BoxFit.cover,
@@ -68,14 +111,20 @@ class FoodDetailsPage extends StatelessWidget {
                               color: Colors.white.withOpacity(0.5),
                               shape: BoxShape.circle,
                             ),
-                            child: Icon(
-                              product.isFavorite
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
-                              color: product.isFavorite
-                                  ? Colors.red
-                                  : Colors.white,
-                              size: 20,
+                            child: IconButton(
+                              icon: Icon(
+                                favoriteList.contains(widget.product.id)
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: favoriteList.contains(widget.product.id)
+                                    ? Colors.red
+                                    : Colors.white,
+                                size: 20,
+                              ),
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                addToFavorite();
+                              },
                             ),
                           ),
                         ),
@@ -128,12 +177,10 @@ class FoodDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        PrimaryHeader(text: product.name),
-                        const SizedBox(
-                          width: 12,
-                        ),
+                        PrimaryHeader(text: widget.product.name),
+                        const SizedBox(width: 12),
                         PrimaryHeader(
-                          text: "LKR ${product.price.toString()}",
+                          text: "LKR ${widget.product.price.toString()}",
                           size: 20,
                           weight: FontWeight.w500,
                           color: KColors.appPrimary,
@@ -142,7 +189,7 @@ class FoodDetailsPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     PrimaryHeader(
-                      text: product.description,
+                      text: widget.product.description,
                       size: 15,
                       weight: FontWeight.normal,
                       color: KColors.gray,
@@ -170,15 +217,4 @@ class FoodDetailsPage extends StatelessWidget {
       ),
     );
   }
-
-  void addToCart(){
-    final user = SharedAuthUser.getAuthUser();
-    final controller = Get.put(UserUpdateController());
-    if (user != null && user.isNotEmpty) {
-      final userId = user[0];
-      controller.addToCart(userId, product.id);
-    }
-  }
 }
-
-

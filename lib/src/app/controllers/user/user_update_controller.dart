@@ -122,7 +122,59 @@ class UserUpdateController extends GetxController {
     } catch (e) {
       PopupWarning.Warning(
         title: "Cart Update Failed",
-        message: "Could not add item to cart.",
+        message: "Could not add item to cart.$e",
+        type: 1,
+      );
+    }
+  }
+
+  Future<void>addToFavorite(String userId,String foodId) async {
+    try{
+      final userData = await crudController.findOne(collection: "Users", filed: userId);
+      if (userData == null || userData.isEmpty) return;
+
+      UserModel user = userData[0];
+      List<dynamic> updatedFavorite = List.from(user.favourite);
+      if (!updatedFavorite.contains(foodId)) {
+        updatedFavorite.add(foodId);
+      }else{
+        updatedFavorite.remove(foodId);
+      }
+      
+      final updatedUser = UserModel.aboutMe(
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image_url: user.image_url,
+        user_type: user.user_type,
+        createdAt: user.createdAt,
+        address: user.address,
+        contact: user.contact,
+        cart: user.cart,
+        favourite: updatedFavorite,
+      );
+
+      await authController.updateUser(collection: "Users", user: updatedUser);
+
+      // Update SharedPreferences
+      final authUser = [
+        updatedUser.id.toString(),
+        updatedUser.name.toString(),
+        updatedUser.email.toString(),
+        updatedUser.user_type.toString(),
+        updatedUser.image_url.toString(),
+        updatedUser.createdAt.toString(),
+        updatedUser.address.toString(),
+        updatedUser.contact.toString(),
+        jsonEncode(updatedUser.cart),
+        jsonEncode(updatedUser.favourite),
+      ];
+      await SharedAuthUser.saveAuthUser(authUser);
+
+    }catch(e){
+      PopupWarning.Warning(
+        title: "Cart Update Failed",
+        message: "Could not add item to cart.$e",
         type: 1,
       );
     }
