@@ -1,6 +1,5 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
-import 'package:bus_booking/src/app/views/user/Order/components/cash_on_delivery.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/custom_card.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/message.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
@@ -79,7 +78,6 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           onPressed: (){
           }
         ),
-        const CashOnDelivery(),
       ],
     );
   }
