@@ -208,7 +208,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
               child: PrimaryButton(
                 label: 'Order Now',
                 onPressed: () {
-                  // Order action
+                  Get.offNamed('/checkout-order');
                 },
               ),
             ),
