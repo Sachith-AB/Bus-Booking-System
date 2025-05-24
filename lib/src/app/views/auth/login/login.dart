@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     PrimaryButton(
-                      label: 'Register',
+                      label: 'Login',
                       isEnabled: validEmail && validPassword,
                       isLoading: false,
                       onPressed: (){
@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushNamed(context, '/register');
                           },
                           child: const PrimaryHeader(
-                            text: "Login",
+                            text: "register",
                             color: KColors.primaryColor,
                             size: 16,
                           ),
