@@ -69,7 +69,7 @@ class _MainScaffoldState extends State<MainScaffold> {
       body: widget.body,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: KColors.appPrimary.shade100
+          color: KColors.appPrimary.shade50
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

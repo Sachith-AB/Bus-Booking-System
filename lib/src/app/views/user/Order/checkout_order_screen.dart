@@ -1,6 +1,7 @@
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/delivery_address.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/step_indicator.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class CheckoutOrderPage extends StatefulWidget {
 }
 
 class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
-  int currentStep = 1;
+  int currentStep = 0;
   String selectedAddress = 'work';
   String selectedPaymentMethod = 'credit card';
   bool cashOnDelivery = false;
@@ -31,7 +32,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
     return MainScaffold(
       body: Scaffold(
         appBar: CustomAppBar(
-          backgroundColor: KColors.appPrimary.shade100
+          backgroundColor: KColors.appPrimary.shade50
         ),
         body: Padding(padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
           child: SingleChildScrollView(
@@ -51,22 +52,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                const PrimaryHeader(
-                  text: 'Select delivery address',
-                  size: 18,
-                  weight: FontWeight.w500,
-                ),
-                 Expanded(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: _buildStepContent(),
-                  ),
-                ),
+                _buildStepContent(),
               ],
             )
           ),
@@ -78,7 +64,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
   Widget _buildStepContent() {
     switch (currentStep) {
       case 0:
-        //return _buildDeliveryAddressContent();
+        return DeliveryAddress();
       case 1:
         //return _buildPaymentContent();
       case 2:
