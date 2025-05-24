@@ -13,7 +13,7 @@ class CheckoutOrderPage extends StatefulWidget {
 }
 
 class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
-  int currentStep = 2;
+  int currentStep = 1;
   String selectedAddress = 'work';
   String selectedPaymentMethod = 'credit card';
   bool cashOnDelivery = false;
@@ -50,11 +50,23 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 30),
                 const PrimaryHeader(
                   text: 'Select delivery address',
                   size: 18,
                   weight: FontWeight.w500,
-                )
+                ),
+                 Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: _buildStepContent(),
+                  ),
+                ),
               ],
             )
           ),
@@ -62,4 +74,18 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
       )
     );
   }
+
+  Widget _buildStepContent() {
+    switch (currentStep) {
+      case 0:
+        //return _buildDeliveryAddressContent();
+      case 1:
+        //return _buildPaymentContent();
+      case 2:
+        //return _buildOrderPlacedContent();
+      default:
+        return Container();
+    }
+  }
 }
+
