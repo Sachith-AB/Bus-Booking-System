@@ -1,12 +1,17 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
-import 'package:bus_booking/src/app/views/user/Order/components/address_card.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/cash_on_delivery.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/custom_card.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/message.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryAddress extends StatefulWidget {
-  const DeliveryAddress({super.key});
+  final currentStep;
+  const DeliveryAddress({
+    super.key,
+    required this.currentStep
+  });
 
   @override
   State<DeliveryAddress> createState() => _DeliveryAddressState();
@@ -63,15 +68,18 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
             print('Add new address tapped');
             
           },
-          child: const AddressCard(),
+          child:CustomCard(
+            currentStep: widget.currentStep,
+          ),
         ),
         const SizedBox(height: 10),
         const Message(),
         PrimaryButton(
           label: 'Proceed to Payment', 
           onPressed: (){
-        }
-        )
+          }
+        ),
+        const CashOnDelivery(),
       ],
     );
   }

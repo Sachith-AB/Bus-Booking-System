@@ -14,7 +14,7 @@ class CheckoutOrderPage extends StatefulWidget {
 }
 
 class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
-  int currentStep = 0;
+  int currentStep = 1;
   String selectedAddress = 'work';
   String selectedPaymentMethod = 'credit card';
   bool cashOnDelivery = false;
@@ -64,9 +64,9 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
   Widget _buildStepContent() {
     switch (currentStep) {
       case 0:
-        return DeliveryAddress();
+        return DeliveryAddress(currentStep: currentStep,);
       case 1:
-        //return _buildPaymentContent();
+        return DeliveryAddress(currentStep: currentStep,);
       case 2:
         //return _buildOrderPlacedContent();
       default:

@@ -2,8 +2,13 @@ import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 
-class AddressCard extends StatelessWidget {
-  const AddressCard({super.key});
+class CustomCard extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
+  final currentStep;
+  const CustomCard({
+    super.key,
+    required this.currentStep
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class AddressCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: KColors.appPrimary.shade50
       ),
-      child: Padding(padding: const EdgeInsets.all(8),
+      child: Padding(padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment:CrossAxisAlignment.start,
           children: [
@@ -25,8 +30,8 @@ class AddressCard extends StatelessWidget {
                   children: [
                     const Icon(Icons.work,color: KColors.appPrimary,),
                     const SizedBox(width: 8,),
-                    const PrimaryHeader(
-                      text: 'Work',
+                    PrimaryHeader(
+                      text: currentStep == 1 ? 'Credit Card':'Work',
                       size: 16,
                       weight: FontWeight.w600,
                       color: KColors.appPrimary,
@@ -51,18 +56,18 @@ class AddressCard extends StatelessWidget {
               ],
             ),
             const PrimaryHeader(
-              text: 'User name',
+              text: 'Irumii',
               size: 16,
               weight: FontWeight.w500,
             ),
-            const PrimaryHeader(
-              text: '0772843737',
+            PrimaryHeader(
+              text: currentStep == 1 ? '5562 8589 9235 ****' : '0772843737',
               size: 16,
               weight: FontWeight.w500,
             ),
             const SizedBox(height: 20,),
-            const PrimaryHeader(
-              text: 'Address',
+            PrimaryHeader(
+              text: currentStep == 1 ?'Secure checkout powered by':'address',
               size: 16,
               weight: FontWeight.w500,
               color: KColors.gray,
