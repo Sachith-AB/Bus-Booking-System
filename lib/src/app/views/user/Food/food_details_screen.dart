@@ -71,7 +71,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
         appBar: CustomAppBar(
           showBackButton: true,
           showCartButton: true,
-          backgroundColor: KColors.appPrimary.shade100,
+          backgroundColor: KColors.appPrimary.shade50,
         ),
         body: Stack(
           children: [

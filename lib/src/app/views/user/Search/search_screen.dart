@@ -61,7 +61,7 @@ class _SearchPageState extends State<SearchPage> {
           showBackButton: false,
           showCartButton: _showCartButton,
           showAddfoodButton: !_showCartButton,
-          backgroundColor: KColors.appPrimary.shade100,
+          backgroundColor: KColors.appPrimary.shade50,
           title: _showCartButton ?'Search': 'Foods',
         ),
         body: SingleChildScrollView(
@@ -92,7 +92,7 @@ class _SearchPageState extends State<SearchPage> {
                             child: Container(
                               height: 50,
                               decoration: BoxDecoration(
-                                color: KColors.appPrimary.shade100, // adjust as needed
+                                color: KColors.appPrimary.shade50, // adjust as needed
                                 shape: BoxShape.circle,
                               ),
                               padding: const EdgeInsets.all(8),

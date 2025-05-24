@@ -93,7 +93,7 @@ class _profilePageState extends State<profilePage> {
           title: 'Profile',
           showBackButton: false,
           showCartButton: true,
-          backgroundColor: KColors.appPrimary.shade100,
+          backgroundColor: KColors.appPrimary.shade50,
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(

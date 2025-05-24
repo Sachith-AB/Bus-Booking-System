@@ -106,7 +106,7 @@ Widget build(BuildContext context) {
         title: 'Cart',
         showBackButton: false,
         showCartButton: true,
-        backgroundColor: KColors.appPrimary.shade100,
+        backgroundColor: KColors.appPrimary.shade50,
       ),
       backgroundColor: Colors.white,
       body: Column(
