@@ -2,6 +2,7 @@ import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/steps/delivery_address.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/steps/order_place_success.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/steps/payment_proceed.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/step_indicator.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
@@ -15,7 +16,7 @@ class CheckoutOrderPage extends StatefulWidget {
 }
 
 class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
-  int currentStep = 1;
+  int currentStep = 2;
   String selectedAddress = 'work';
   String selectedPaymentMethod = 'credit card';
   bool cashOnDelivery = false;
@@ -69,7 +70,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
       case 1:
         return PaymentProceed(currentStep:currentStep);
       case 2:
-        //return _buildOrderPlacedContent();
+        return OrderPlaceSuccess(currentStep: currentStep);
       default:
         return Container();
     }

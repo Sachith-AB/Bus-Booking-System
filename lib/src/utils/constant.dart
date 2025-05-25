@@ -25,3 +25,5 @@ const bread = 'assets/foods/bread.webp';
 
 const burgerKing = "assets/adds/gift.jpg";
 const delicious = "assets/adds/delicious-food.jpeg";
+
+const delivery = "assets/images/delivery.jpg";
