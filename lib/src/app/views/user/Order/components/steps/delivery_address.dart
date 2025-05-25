@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 
 class DeliveryAddress extends StatefulWidget {
   final int currentStep;
+  final bool isSelect;
+
   const DeliveryAddress({
     super.key,
-    required this.currentStep
+    required this.currentStep,
+    this.isSelect = true,
   });
 
   @override
@@ -17,6 +20,24 @@ class DeliveryAddress extends StatefulWidget {
 }
 
 class _DeliveryAddressState extends State<DeliveryAddress> {
+
+  late bool isSelect = true;
+  late int currentStep = 0;
+
+  @override
+  void initState(){
+    super.initState();
+    isSelect = widget.isSelect;
+    currentStep = widget.currentStep;
+  }
+
+  //need to change after add another address
+  void selectAddress(){
+    setState(() {
+      isSelect = !isSelect;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,20 +84,21 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
         ),
         const SizedBox(height: 10),
         GestureDetector(
-          onTap: () {
-            print('Add new address tapped');
-            
-          },
+          onTap: selectAddress,
           child:CustomCard(
             currentStep: widget.currentStep,
-            isSelected: false,
+            isSelected: isSelect,
           ),
         ),
         const SizedBox(height: 10),
         const Message(),
+        const SizedBox(height: 40),
         PrimaryButton(
           label: 'Proceed to Payment', 
           onPressed: (){
+            setState(() {
+              currentStep = 1;
+            });
           }
         ),
       ],

@@ -55,7 +55,7 @@ class _OrderPlaceSuccessState extends State<OrderPlaceSuccess> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 40),
         Row(
           children: [
             Expanded(

@@ -16,7 +16,7 @@ class CheckoutOrderPage extends StatefulWidget {
 }
 
 class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
-  int currentStep = 2;
+  int currentStep = 1;
   String selectedAddress = 'work';
   String selectedPaymentMethod = 'credit card';
   bool cashOnDelivery = false;
