@@ -8,6 +8,7 @@ import 'package:bus_booking/src/app/components/primary_header.dart';
 
 class PaymentProceed extends StatefulWidget {
   final int currentStep;
+  final VoidCallback onNext;
   final bool cod;
   final bool creditCard;
   final bool pickUp;
@@ -15,6 +16,7 @@ class PaymentProceed extends StatefulWidget {
   const PaymentProceed({
     super.key,
     required this.currentStep,
+    required this.onNext,
     this.cod = false,
     this.creditCard = true,
     this.pickUp = false,
@@ -26,9 +28,9 @@ class PaymentProceed extends StatefulWidget {
 
 class _PaymentProceedState extends State<PaymentProceed> {
 
-  late bool cod;
-  late bool creditCard;
-  late bool pickUp;
+  late bool cod = false;
+  late bool creditCard = false;
+  late bool pickUp = false;
 
   @override
   void intitState(){
@@ -126,9 +128,7 @@ class _PaymentProceedState extends State<PaymentProceed> {
         // )
         PrimaryButton(
             label: 'Place Order',
-            onPressed: (){
-
-            }
+            onPressed: widget.onNext,
         ),
       ]
     );

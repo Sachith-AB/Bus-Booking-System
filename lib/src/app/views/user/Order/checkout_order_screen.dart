@@ -16,7 +16,7 @@ class CheckoutOrderPage extends StatefulWidget {
 }
 
 class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
-  int currentStep = 1;
+  int currentStep = 0;
   String selectedAddress = 'work';
   String selectedPaymentMethod = 'credit card';
   bool cashOnDelivery = false;
@@ -28,6 +28,11 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
     'Order Placed'
   ];
 
+  void _goToStep(int step){
+    setState(() {
+      currentStep = step;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +71,15 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
   Widget _buildStepContent() {
     switch (currentStep) {
       case 0:
-        return DeliveryAddress(currentStep: currentStep,);
+        return DeliveryAddress(
+          currentStep: currentStep,
+          onNext:() => _goToStep(1),
+        );
       case 1:
-        return PaymentProceed(currentStep:currentStep);
+        return PaymentProceed(
+          currentStep:currentStep,
+          onNext:() => _goToStep(2),
+        );
       case 2:
         return OrderPlaceSuccess(currentStep: currentStep);
       default:

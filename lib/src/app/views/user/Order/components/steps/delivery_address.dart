@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 
 class DeliveryAddress extends StatefulWidget {
   final int currentStep;
+  final VoidCallback onNext;
   final bool isSelect;
 
   const DeliveryAddress({
     super.key,
     required this.currentStep,
+    required this.onNext,
     this.isSelect = true,
   });
 
@@ -95,11 +97,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
         const SizedBox(height: 40),
         PrimaryButton(
           label: 'Proceed to Payment', 
-          onPressed: (){
-            setState(() {
-              currentStep = 1;
-            });
-          }
+          onPressed: widget.onNext,
         ),
       ],
     );

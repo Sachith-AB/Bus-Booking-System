@@ -2,6 +2,7 @@ import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../utils/color/colors.dart';
 
@@ -62,7 +63,9 @@ class _OrderPlaceSuccessState extends State<OrderPlaceSuccess> {
                 child: PrimaryButton(
                     label: 'Shopping',
                     backgroundColor: KColors.gray,
-                    onPressed: (){})
+                    onPressed: (){
+                      Get.offNamed('/search');
+                    })
             ),
             const SizedBox(width: 10,),
             Expanded(
