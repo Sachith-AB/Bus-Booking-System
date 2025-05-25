@@ -1,8 +1,8 @@
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
-import 'package:bus_booking/src/app/views/user/Order/components/delivery_address.dart';
-import 'package:bus_booking/src/app/views/user/Order/components/payment_proceed.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/steps/delivery_address.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/steps/payment_proceed.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/step_indicator.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
