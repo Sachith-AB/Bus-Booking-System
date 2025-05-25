@@ -51,7 +51,8 @@ class _CashOnDeliveryState extends State<CashOnDelivery> {
                     )
                   ],
                 ),
-                Icon(Icons.check_circle_outline_outlined,color: widget.isSelected ? KColors.appPrimary:KColors.black,),
+                if(widget.isSelected)
+                  const Icon(Icons.check_circle_outline_outlined,color: KColors.appPrimary)
               ],
             ),
             const SizedBox(height: 10,),

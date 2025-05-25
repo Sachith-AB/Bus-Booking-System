@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
-  final currentStep;
+  final int currentStep;
+  final bool isSelected;
   const CustomCard({
     super.key,
-    required this.currentStep
+    required this.currentStep,
+    required this.isSelected
   });
 
   @override
@@ -15,9 +17,11 @@ class CustomCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(color: KColors.appPrimary),
+        border: Border.all(
+            color: isSelected ? KColors.appPrimary:KColors.black,
+        ),
         borderRadius: BorderRadius.circular(10),
-        color: KColors.appPrimary.shade50
+        color: isSelected ? KColors.appPrimary.shade50:null,
       ),
       child: Padding(padding: const EdgeInsets.all(16),
         child: Column(
@@ -28,18 +32,21 @@ class CustomCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.work,color: KColors.appPrimary,),
+                    Icon(
+                      Icons.work,
+                      color: isSelected ? KColors.appPrimary:KColors.black,
+                    ),
                     const SizedBox(width: 8,),
                     PrimaryHeader(
                       text: currentStep == 1 ? 'Credit Card':'Work',
                       size: 16,
                       weight: FontWeight.w600,
-                      color: KColors.appPrimary,
+                      color: isSelected ? KColors.appPrimary:KColors.black,
                     ),
                     const SizedBox(width: 8,),
                     Container(
                       decoration: BoxDecoration(
-                        color: KColors.appPrimary,
+                        color: isSelected ? KColors.appPrimary:KColors.black,
                         borderRadius: BorderRadius.circular(4)
                       ),
                       child: const Padding(padding: EdgeInsets.all(4),
@@ -52,7 +59,8 @@ class CustomCard extends StatelessWidget {
                     )
                   ],
                 ),
-                const Icon(Icons.check_circle_outline_outlined,color: KColors.appPrimary,),
+                if(isSelected)
+                  const Icon(Icons.check_circle_outline_outlined,color: KColors.appPrimary,),
               ],
             ),
             const PrimaryHeader(

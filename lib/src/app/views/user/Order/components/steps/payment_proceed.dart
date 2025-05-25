@@ -1,17 +1,23 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/cash_on_delivery.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/custom_card.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/pickup_store.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
 
 class PaymentProceed extends StatefulWidget {
-  final currentStep;
+  final int currentStep;
   final bool cod;
+  final bool creditCard;
+  final bool pickUp;
+
   const PaymentProceed({
     super.key,
     required this.currentStep,
-    this.cod = true,
+    this.cod = false,
+    this.creditCard = true,
+    this.pickUp = false,
   });
 
   @override
@@ -19,6 +25,43 @@ class PaymentProceed extends StatefulWidget {
 }
 
 class _PaymentProceedState extends State<PaymentProceed> {
+
+  late bool cod;
+  late bool creditCard;
+  late bool pickUp;
+
+  @override
+  void intitState(){
+    super.initState();
+    cod = widget.cod;
+    creditCard = widget.creditCard;
+    pickUp = widget.pickUp;
+  }
+
+  void selectCreditCard() {
+    setState(() {
+      creditCard = true;
+      cod = false;
+      pickUp = false;
+    });
+  }
+
+  void selectCod() {
+    setState(() {
+      creditCard = false;
+      cod = true;
+      pickUp = false;
+    });
+  }
+
+  void selectPickup() {
+    setState(() {
+      creditCard = false;
+      cod = false;
+      pickUp = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,9 +73,18 @@ class _PaymentProceedState extends State<PaymentProceed> {
           weight: FontWeight.w500,
         ),
         const SizedBox(height: 10,),
-        CustomCard(currentStep: widget.currentStep,),
+        GestureDetector(
+          onTap: selectCreditCard,
+          child: CustomCard(
+            currentStep: widget.currentStep,
+            isSelected: creditCard,
+          ),
+        ),
         const SizedBox(height: 10,),
-        CashOnDelivery(isSelected: widget.cod,),
+        GestureDetector(
+          onTap: selectCod,
+          child: CashOnDelivery(isSelected: cod,),
+        ),
         const SizedBox(height: 20,),
         const Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,71 +114,9 @@ class _PaymentProceedState extends State<PaymentProceed> {
           ],
         ),
         const SizedBox(height: 10,),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: KColors.black),
-          ),
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Left side: Address Info
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  PrimaryHeader(
-                    text: 'Food Store',
-                    size: 20,
-                  ),
-                  SizedBox(height: 4),
-                  PrimaryHeader(
-                    text: 'Pick-up and save AED 5S',
-                    size: 16,
-                    weight: FontWeight.w600,
-                    color: KColors.gray,
-                  ),
-                ],
-              ),
-
-              // Right side: Pickup Toggle Button
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      color: KColors.appPrimary,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Container(
-                        width: 16,
-                        height: 16,
-                        margin: const EdgeInsets.only(right: 4),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'pickup\nselected',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+        GestureDetector(
+          onTap: selectPickup,
+          child: PickupStore(isSelected: pickUp,),
         ),
         const SizedBox(height: 10,),
         // const PrimaryHeader(

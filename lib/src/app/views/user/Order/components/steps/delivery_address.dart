@@ -69,6 +69,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           },
           child:CustomCard(
             currentStep: widget.currentStep,
+            isSelected: false,
           ),
         ),
         const SizedBox(height: 10),
