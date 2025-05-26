@@ -1,12 +1,14 @@
+import 'dart:convert';
+
 import 'package:bus_booking/src/app/components/primary_button.dart';
+import 'package:bus_booking/src/app/controllers/user/cart_controller.dart';
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/views/user/Cart/components/item_card.dart';
-import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
-
-import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
+import 'package:get/get.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -16,9 +18,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-
+  final user = SharedAuthUser.getAuthUser();
   
-
   // to calculate the total price of items in the cart
   double _calculateTotal() {
     double total = 0;
@@ -30,66 +31,12 @@ class _CartPageState extends State<CartPage> {
     return total;
   }
 
-  // Example cart items
-  final List<Product> cartItems = [
-    Product(
-      id: '1 ',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '2',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '3',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '4',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-    Product(
-      id: '5',
-      name: 'lain Croissant',
-      category: 'Sandwich',
-      price: 500,
-      imageUrl: bread,
-      description: 'Kanapka z pieczywem żytnim...',
-      isFavorite: false,
-      availableStatus: 'Available',
-    ),
-  ];
-
   final Map<int, int> quantities = {};
   final Map<int, bool> selectedItems = {};
   final double deliveryFee = 350.0;
 
-  
-
+  final controller = Get.put(CartController());
+  var cartItems = [];
 
   @override
   void initState() {
@@ -98,7 +45,40 @@ class _CartPageState extends State<CartPage> {
       quantities[i] = 1;
       selectedItems[i] = false;
     }
+    _loadCartItems();
   }
+
+
+Future<void> _loadCartItems() async {
+  try {
+    // Step 1: Get user[8] as a String
+    final rawFoodIds = user?[8];
+
+    // Step 2: Decode JSON string to List
+    List<dynamic> decoded = jsonDecode(rawFoodIds!);
+
+    // Step 3: Filter out empty or invalid entries and cast to List<String>
+    List<String> foodIds = decoded
+        .where((id) => id != null && id.toString().isNotEmpty)
+        .map((id) => id.toString())
+        .toList();
+
+    // Step 4: Call the controller function
+    final result = await controller.getCartProduct(foodIds);
+
+    // Step 5: Update state
+    setState(() {
+      cartItems = result;
+      for (int i = 0; i < cartItems.length; i++) {
+        quantities[i] = 1;
+        selectedItems[i] = false;
+      }
+    });
+  } catch (e) {
+    print('Failed to load cart items: $e');
+  }
+}
+
 
   void _increaseQty(int index) {
     setState(() {
@@ -126,7 +106,7 @@ Widget build(BuildContext context) {
         title: 'Cart',
         showBackButton: false,
         showCartButton: true,
-        backgroundColor: KColors.appPrimary.shade100,
+        backgroundColor: KColors.appPrimary.shade50,
       ),
       backgroundColor: Colors.white,
       body: Column(

@@ -9,7 +9,7 @@ class SearchBarWidget extends StatelessWidget {
     return Container(
       height: 50,
       decoration: BoxDecoration(
-        color: KColors.appPrimary.shade100,
+        color: KColors.appPrimary.shade50,
         borderRadius: BorderRadius.circular(25),
       ),
       child: const TextField(

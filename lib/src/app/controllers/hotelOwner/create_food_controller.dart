@@ -43,7 +43,6 @@ class AddFoodController extends GetxController {
         );
       });
     } catch (e) {
-      print("Error: $e");
       PopupWarning.Warning(
         title: "Error ❌",
         message: "Failed to add food item.",

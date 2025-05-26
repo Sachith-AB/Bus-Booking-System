@@ -64,7 +64,6 @@ class _MainScaffoldState extends State<MainScaffold> {
       }
 
       final userType = userController.userType.value;
-      print(" ✅ User Type: $userType");
 
       return Scaffold(
         body: widget.body,

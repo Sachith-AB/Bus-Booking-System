@@ -9,6 +9,8 @@ class UserModel {
   final DateTime? createdAt;
   late String address;
   late String contact;
+  List<dynamic> cart;
+  List<dynamic> favourite;
 
   UserModel({
     required this.id,
@@ -19,6 +21,8 @@ class UserModel {
     required this.createdAt,
     required this.address,
     required this.contact,
+    this.cart = const [],
+    this.favourite = const [],
   });
 
   UserModel.register({
@@ -30,6 +34,8 @@ class UserModel {
     required this.createdAt,
     required this.address,
     required this.contact,
+    this.cart = const [],
+    this.favourite = const [],
   });
 
   UserModel.aboutMe({
@@ -41,6 +47,8 @@ class UserModel {
     this.createdAt,
     required this.address,
     required this.contact,
+    this.cart = const [],
+    this.favourite = const [],
   });
 
   // Convert UserModel instance to JSON map
@@ -54,6 +62,8 @@ class UserModel {
       'createdAt': createdAt,
       'address': address,
       'contact': contact,
+      'cart': cart,
+      'favourite': favourite,
     };
   }
 
@@ -80,15 +90,17 @@ class UserModel {
       name: data['name'] ?? '',
       email: data['email'] ?? '',
       image_url: data['image_url'] ?? '',
-      user_type: data['user_type'], // Include user_type
-      createdAt: createdAtDate, // Include createdAt with proper conversion
+      user_type: data['user_type'],
+      createdAt: createdAtDate,
       address: data['address'] ?? '',
       contact: data['contact'] ?? '',
+      cart: data['cart'] ?? [],
+      favourite: data['favourite'] ?? [],
     );
   }
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, user_type: $user_type, createdAt: $createdAt,$image_url)';
+    return 'UserModel(id: $id, name: $name, email: $email, user_type: $user_type,address: $address createdAt: $createdAt,$image_url)';
   }
 }

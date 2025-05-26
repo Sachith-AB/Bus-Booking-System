@@ -1,5 +1,6 @@
-import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/color/colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String label;
@@ -12,7 +13,6 @@ class PrimaryButton extends StatelessWidget {
   final Color? textColor;
   final bool outline;
   final Color? outlineColor;
-
 
   const PrimaryButton({
     super.key,
@@ -31,7 +31,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color bg = backgroundColor ?? KColors.primaryColor;
-    final Color fg = textColor ?? Colors.white;
+    final Color fg = textColor ?? KColors.white;
 
     return SizedBox(
       width: double.infinity,
@@ -45,8 +45,8 @@ class PrimaryButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
             side: outline
-              ? BorderSide(color: outlineColor ?? KColors.primaryColor, width: 2)
-              : BorderSide.none,
+                ? BorderSide(color: outlineColor ?? KColors.primaryColor, width: 2)
+                : BorderSide.none,
           ),
         ),
         child: isLoading
@@ -60,6 +60,7 @@ class PrimaryButton extends StatelessWidget {
         )
             : Text(
           label,
+          textAlign: TextAlign.center,  // This ensures text stays centered
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,

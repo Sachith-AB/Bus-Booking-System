@@ -33,7 +33,6 @@ class AddCategoryController extends GetxController {
       );
     });
   } catch (e) {
-    print("Error: $e");
     PopupWarning.Warning(
       title: "Error ❌",
       message: e.toString(),

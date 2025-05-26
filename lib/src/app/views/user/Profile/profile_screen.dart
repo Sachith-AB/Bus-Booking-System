@@ -7,6 +7,7 @@ import 'package:bus_booking/src/app/components/profile_image.dart';
 import 'package:bus_booking/src/app/components/secondary_button.dart';
 import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/app/controllers/user/user_update_controller.dart';
+import 'package:bus_booking/src/app/controllers/user_register_controller.dart';
 import 'package:bus_booking/src/common/style/app_input_style.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,7 @@ class _profilePageState extends State<profilePage> {
           title: 'Profile',
           showBackButton: false,
           showCartButton: true,
-          backgroundColor: KColors.appPrimary.shade100,
+          backgroundColor: KColors.appPrimary.shade50,
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -161,10 +162,10 @@ class _profilePageState extends State<profilePage> {
                     ),
                     const SizedBox(height: 25),
                     SecondaryButton(
-                      label: "Cancel",
+                      label: "Log Out",
                       onPressed: () {
-                        // Handle cancel action here
-                      },
+                        logOut();
+                      }
                     ),
                   ],
                 ),
@@ -177,6 +178,7 @@ class _profilePageState extends State<profilePage> {
   }
 
   final controller = Get.put(UserUpdateController());
+  final logOutController = Get.put(UserRegisterController());
 
   void updateUser() {
     final createdAt = DateTime.parse(user![5]);
@@ -189,5 +191,9 @@ class _profilePageState extends State<profilePage> {
 
     controller.updateUser(
         id, name, email, imageUrl, user![3], createdAt, address, contact);
+  }
+
+  void logOut(){
+    logOutController.logOut();
   }
 }

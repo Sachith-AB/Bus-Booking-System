@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
           title: 'Food Store',
           showBackButton: false,
           showCartButton: true,
-          backgroundColor: KColors.appPrimary.shade100
+          backgroundColor: KColors.appPrimary.shade50
         ),
         body: SingleChildScrollView(
           child: Padding(

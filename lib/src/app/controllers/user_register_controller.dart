@@ -31,6 +31,8 @@ class UserRegisterController extends GetxController {
         user_type: userType,
         address: address,
         contact: contact,
+        cart: [],
+        favourite: [],
       );
 
       await authController
@@ -91,11 +93,18 @@ class UserRegisterController extends GetxController {
           transition: Transition.rightToLeft,
           duration: const Duration(milliseconds: 500),
         );
-
-        
       }
     } catch (e) {
       e;
     }
+  }
+
+  void logOut() async {
+    await SharedAuthUser.clearAuthUser();
+    Get.offAll(
+      () => const LoginPage(),
+      transition: Transition.rightToLeft,
+      duration: const Duration(milliseconds: 500),
+    );
   }
 }

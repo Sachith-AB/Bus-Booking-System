@@ -8,6 +8,7 @@ class SharedAuthUser {
   }
 
   static Future<void> saveAuthUser(List<String> userData) async {
+    // userData: [id, name, email, user_type, image_url, createdAt, address, contact, cart(json), favourite(json)]
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('authUser', userData);
   }

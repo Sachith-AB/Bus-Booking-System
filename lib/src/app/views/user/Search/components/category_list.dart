@@ -81,7 +81,7 @@ class _CategoryListState extends State<CategoryList> {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: KColors.appPrimary.shade100,
+              color: KColors.appPrimary.shade50,
             ),
             child: Row(
               children: [
