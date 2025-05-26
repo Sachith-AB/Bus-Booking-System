@@ -6,10 +6,12 @@ class CustomCard extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   final int currentStep;
   final bool isSelected;
+  final dynamic details;
   const CustomCard({
     super.key,
     required this.currentStep,
-    required this.isSelected
+    required this.isSelected,
+    required this.details,
   });
 
   @override
@@ -63,19 +65,19 @@ class CustomCard extends StatelessWidget {
                   const Icon(Icons.check_circle_outline_outlined,color: KColors.appPrimary,),
               ],
             ),
-            const PrimaryHeader(
-              text: 'Irumii',
+            PrimaryHeader(
+              text: details![1],
               size: 16,
               weight: FontWeight.w500,
             ),
             PrimaryHeader(
-              text: currentStep == 1 ? '5562 8589 9235 ****' : '0772843737',
+              text: currentStep == 1 ? '5562 8589 9235 ****' : details![7],
               size: 16,
               weight: FontWeight.w500,
             ),
             const SizedBox(height: 20,),
             PrimaryHeader(
-              text: currentStep == 1 ?'Secure checkout powered by':'address',
+              text: currentStep == 1 ?'Secure checkout powered by':details![6],
               size: 16,
               weight: FontWeight.w500,
               color: KColors.gray,

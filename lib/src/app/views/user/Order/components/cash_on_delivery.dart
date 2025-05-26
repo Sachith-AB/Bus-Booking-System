@@ -19,7 +19,7 @@ class _CashOnDeliveryState extends State<CashOnDelivery> {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: widget.isSelected ? KColors.appPrimary:KColors.black,),
-        borderRadius:BorderRadius.circular(16),
+        borderRadius:BorderRadius.circular(8),
         color: widget.isSelected ? KColors.appPrimary.shade50 : null
       ),
       child: Padding(padding: const EdgeInsets.all(16),

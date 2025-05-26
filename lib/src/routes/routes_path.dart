@@ -32,7 +32,7 @@ class AppRoutes {
     }),
     GetPage(name: '/checkout-order', page: () => const CheckoutOrderPage()),
 
-    //hotelowner
+    //hotelOwner
     GetPage(name: '/create-food', page: () => const FoodCreatePage()),
     GetPage(name: '/update-food', page: () {
       final product = Get.arguments as Product;

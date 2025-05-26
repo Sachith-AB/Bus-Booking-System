@@ -12,6 +12,8 @@ class PaymentProceed extends StatefulWidget {
   final bool cod;
   final bool creditCard;
   final bool pickUp;
+  final dynamic user;
+  final  Function(dynamic method) onMethodSelect;
 
   const PaymentProceed({
     super.key,
@@ -20,6 +22,8 @@ class PaymentProceed extends StatefulWidget {
     this.cod = false,
     this.creditCard = true,
     this.pickUp = false,
+    required this.user,
+    required this.onMethodSelect
   });
 
   @override
@@ -28,9 +32,13 @@ class PaymentProceed extends StatefulWidget {
 
 class _PaymentProceedState extends State<PaymentProceed> {
 
+
   late bool cod = false;
   late bool creditCard = false;
   late bool pickUp = false;
+
+  bool _showError = false;
+  String method = '';
 
   @override
   void intitState(){
@@ -45,6 +53,8 @@ class _PaymentProceedState extends State<PaymentProceed> {
       creditCard = true;
       cod = false;
       pickUp = false;
+      _showError = false;
+      method = 'credit card';
     });
   }
 
@@ -53,6 +63,8 @@ class _PaymentProceedState extends State<PaymentProceed> {
       creditCard = false;
       cod = true;
       pickUp = false;
+      _showError = false;
+      method = 'cash on delivery';
     });
   }
 
@@ -61,6 +73,8 @@ class _PaymentProceedState extends State<PaymentProceed> {
       creditCard = false;
       cod = false;
       pickUp = true;
+      _showError = false;
+      method = 'pickup from shop';
     });
   }
 
@@ -79,6 +93,7 @@ class _PaymentProceedState extends State<PaymentProceed> {
           onTap: selectCreditCard,
           child: CustomCard(
             currentStep: widget.currentStep,
+            details: widget.user,
             isSelected: creditCard,
           ),
         ),
@@ -120,6 +135,17 @@ class _PaymentProceedState extends State<PaymentProceed> {
           onTap: selectPickup,
           child: PickupStore(isSelected: pickUp,),
         ),
+        if (_showError )
+          const Padding(
+            padding: EdgeInsets.only(top: 8.0),
+            child: Text(
+              'Please select a payment method to place order',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 12,
+              ),
+            ),
+          ),
         const SizedBox(height: 10,),
         // const PrimaryHeader(
         //   text: 'Do you have promo code?',
@@ -128,7 +154,16 @@ class _PaymentProceedState extends State<PaymentProceed> {
         // )
         PrimaryButton(
             label: 'Place Order',
-            onPressed: widget.onNext,
+            onPressed:(){
+              if(cod || creditCard || pickUp ){
+                widget.onNext();
+                widget.onMethodSelect(method);
+              }else{
+                setState(() {
+                  _showError = true;
+                });
+              }
+          }
         ),
       ]
     );
