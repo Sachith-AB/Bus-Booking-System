@@ -41,7 +41,7 @@ class _PaymentProceedState extends State<PaymentProceed> {
   String method = '';
 
   @override
-  void intitState(){
+  void initState(){
     super.initState();
     cod = widget.cod;
     creditCard = widget.creditCard;
