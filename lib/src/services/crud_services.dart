@@ -70,7 +70,7 @@ class CrudServices {
     required dynamic data
   }) async {
       try{
-        await service.collection(collection).doc(documentId).update(data.toJson);
+        await service.collection(collection).doc(documentId).update(data.toJson());
       } on FirebaseException catch(e) {
         final ex = CrudFailure.code(e.code);
         PopupWarning.Warning(

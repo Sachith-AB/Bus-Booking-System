@@ -5,6 +5,7 @@ import 'package:bus_booking/src/app/views/auth/register/register.dart';
 import 'package:bus_booking/src/app/views/hotelowner/category/category_create.dart';
 import 'package:bus_booking/src/app/views/hotelowner/food/food_create.dart';
 import 'package:bus_booking/src/app/views/hotelowner/food/food_update.dart';
+import 'package:bus_booking/src/app/views/hotelowner/orders/orders_screen.dart';
 import 'package:bus_booking/src/app/views/user/Cart/cart_screen.dart';
 import 'package:bus_booking/src/app/views/user/Food/food_details_screen.dart';
 import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
@@ -39,6 +40,7 @@ class AppRoutes {
       return FoodUpdatePage(product: product);
     }),
     GetPage(name: '/create-category', page: () => const CreateCategoryPage()),
+    GetPage(name: '/orders', page: () => const OrdersPage()),
 
   ];
 }
