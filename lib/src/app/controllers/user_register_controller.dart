@@ -7,6 +7,7 @@ import 'package:bus_booking/src/services/authentication_services.dart';
 import 'package:bus_booking/src/services/crud_services.dart';
 import 'package:bus_booking/src/utils/constant.dart';
 import 'package:get/get.dart';
+import 'dart:convert'; 
 
 import '../../utils/popup_warning.dart';
 
@@ -77,6 +78,8 @@ class UserRegisterController extends GetxController {
           userData[0].createdAt.toString(),
           userData[0].address.toString(),
           userData[0].contact.toString(),
+          jsonEncode(userData[0].cart),       // ✅ CORRECT
+          jsonEncode(userData[0].favourite),  // ✅ CORRECT
         ];
         // ✅ Save user to SharedPreferences
         await SharedAuthUser.saveAuthUser(authUser);
