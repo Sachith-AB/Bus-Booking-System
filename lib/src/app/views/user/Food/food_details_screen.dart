@@ -28,6 +28,8 @@ class FoodDetailsPage extends StatefulWidget {
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
   List<dynamic> favoriteList = [];
 
+  int quantity = 1;  // Default quantity starts at 1
+
   @override
   void initState() {
     super.initState();
@@ -63,6 +65,64 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
       _loadFavorite();
     }
   }
+
+    Widget quantitySelector() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          "Quantity:",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(width: 12),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: KColors.appPrimary),
+          ),
+          child: Row(
+            children: [
+              // Minus Button
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    if (quantity > 1) quantity--;
+                  });
+                },
+                icon: const Icon(Icons.remove),
+                color: KColors.appPrimary,
+                splashRadius: 20,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 25),
+              ),
+              // Quantity display
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Text(
+                  quantity.toString(),
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
+              // Plus Button
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    quantity++;
+                  });
+                },
+                icon: const Icon(Icons.add),
+                color: KColors.appPrimary,
+                splashRadius: 20,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 30),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +254,8 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                       weight: FontWeight.normal,
                       color: KColors.gray,
                     ),
+                    const SizedBox(height: 8),
+                    quantitySelector(),  // <---- Add here
                     const SizedBox(height: 16),
                   ],
                 ),
