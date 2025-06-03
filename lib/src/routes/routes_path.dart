@@ -31,7 +31,12 @@ class AppRoutes {
       final product = Get.arguments as Product;
         return FoodDetailsPage(product: product);
     }),
-    GetPage(name: '/checkout-order', page: () => const CheckoutOrderPage()),
+    GetPage(name: '/checkout-order', page: () {
+      final args = Get.arguments as Map<String, dynamic>;
+      final product = args['product'] as Product;
+      final quantity = args['quantity'] as int;
+      return CheckoutOrderPage(product: product, quantity: quantity);
+    }),
 
     //hotelOwner
     GetPage(name: '/create-food', page: () => const FoodCreatePage()),

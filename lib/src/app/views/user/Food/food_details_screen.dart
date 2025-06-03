@@ -66,55 +66,55 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
     }
   }
 
-    Widget quantitySelector() {
+  Widget quantitySelector() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Quantity:",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 8),
         Container(
+          height: 32, // Smaller height
+          padding: const EdgeInsets.symmetric(horizontal: 4),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: KColors.appPrimary),
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: KColors.appPrimary, width: 1),
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              // Minus Button
               IconButton(
                 onPressed: () {
                   setState(() {
                     if (quantity > 1) quantity--;
                   });
                 },
-                icon: const Icon(Icons.remove),
+                icon: const Icon(Icons.remove, size: 16),
                 color: KColors.appPrimary,
-                splashRadius: 20,
+                splashRadius: 18,
                 padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(minWidth: 25),
+                constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
               ),
-              // Quantity display
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 6),
                 child: Text(
                   quantity.toString(),
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 14),
                 ),
               ),
-              // Plus Button
               IconButton(
                 onPressed: () {
                   setState(() {
                     quantity++;
                   });
                 },
-                icon: const Icon(Icons.add),
+                icon: const Icon(Icons.add, size: 16),
                 color: KColors.appPrimary,
-                splashRadius: 20,
+                splashRadius: 18,
                 padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(minWidth: 30),
+                constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
               ),
             ],
           ),
@@ -270,7 +270,12 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
               child: PrimaryButton(
                 label: 'Order Now',
                 onPressed: () {
-                  Get.offNamed('/checkout-order');
+                  Get.offNamed('/checkout-order',
+                  arguments: {
+                    'product': widget.product,
+                    'quantity': quantity,
+                  },
+                  );
                 },
               ),
             ),

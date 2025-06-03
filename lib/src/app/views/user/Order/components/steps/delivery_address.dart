@@ -1,5 +1,6 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/views/user/Order/components/change_delivery_address_dialog.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/custom_card.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/message.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class DeliveryAddress extends StatefulWidget {
   final bool isSelect;
   final dynamic user;
   final Function(dynamic address)  onAddressSelected;
+  
 
   const DeliveryAddress({
     super.key,
@@ -25,6 +27,7 @@ class DeliveryAddress extends StatefulWidget {
 }
 
 class _DeliveryAddressState extends State<DeliveryAddress> {
+  String? selectedDeliveryAddress;
   bool _showError = false;
   late bool isSelect;
 
@@ -39,6 +42,14 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
       isSelect = !isSelect;
       _showError = false; // Clear error once a valid selection is made
     });
+  }
+  void _handleChangeAddress() async {
+    final result = await showChangeDeliveryAddressDialog(context);
+    if (result != null && result.isNotEmpty) {
+      setState(() {
+        selectedDeliveryAddress = result;
+      });
+    }
   }
 
   @override
@@ -58,6 +69,8 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
             currentStep: widget.currentStep,
             details: widget.user,
             isSelected: isSelect,
+            deliveryAddress: selectedDeliveryAddress,
+            onChangeAddress: _handleChangeAddress,
           ),
         ),
         const SizedBox(height: 10),
@@ -80,7 +93,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           onPressed: () {
             if (isSelect) {
               widget.onNext();
-              widget.onAddressSelected(widget.user![6]);
+              widget.onAddressSelected(selectedDeliveryAddress);
             } else {
               setState(() {
                 _showError = true;

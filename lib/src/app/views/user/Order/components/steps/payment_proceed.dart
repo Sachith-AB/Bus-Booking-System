@@ -1,10 +1,12 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
+import 'package:bus_booking/src/app/controllers/user/add_order_controller.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/cash_on_delivery.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/custom_card.dart';
 import 'package:bus_booking/src/app/views/user/Order/components/pickup_store.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:get/get.dart';
 
 class PaymentProceed extends StatefulWidget {
   final int currentStep;
@@ -15,6 +17,11 @@ class PaymentProceed extends StatefulWidget {
   final dynamic user;
   final  Function(dynamic method) onMethodSelect;
 
+  final String productId;
+  final String deliveryAddress;
+  final int quantity;
+  final int extraFee;
+
   const PaymentProceed({
     super.key,
     required this.currentStep,
@@ -22,6 +29,12 @@ class PaymentProceed extends StatefulWidget {
     this.cod = false,
     this.creditCard = true,
     this.pickUp = false,
+    required this.productId,
+    required this.deliveryAddress,
+    required this.quantity,
+    required this.extraFee,
+
+
     required this.user,
     required this.onMethodSelect
   });
@@ -32,10 +45,12 @@ class PaymentProceed extends StatefulWidget {
 
 class _PaymentProceedState extends State<PaymentProceed> {
 
+  final AddOrderController orderController = Get.put(AddOrderController());
 
   late bool cod = false;
   late bool creditCard = false;
   late bool pickUp = false;
+  int extraFee = 0; // Initial extra fee for cash on delivery
 
   bool _showError = false;
   String method = '';
@@ -46,6 +61,7 @@ class _PaymentProceedState extends State<PaymentProceed> {
     cod = widget.cod;
     creditCard = widget.creditCard;
     pickUp = widget.pickUp;
+    extraFee = cod ? 350 : 0; // Set initial extra fee based on payment method
   }
 
   void selectCreditCard() {
@@ -55,8 +71,11 @@ class _PaymentProceedState extends State<PaymentProceed> {
       pickUp = false;
       _showError = false;
       method = 'credit card';
+      extraFee = 0;
     });
   }
+
+  
 
   void selectCod() {
     setState(() {
@@ -65,6 +84,7 @@ class _PaymentProceedState extends State<PaymentProceed> {
       pickUp = false;
       _showError = false;
       method = 'cash on delivery';
+      extraFee = 350;
     });
   }
 
@@ -75,6 +95,7 @@ class _PaymentProceedState extends State<PaymentProceed> {
       pickUp = true;
       _showError = false;
       method = 'pickup from shop';
+      extraFee = 0;
     });
   }
 
@@ -155,17 +176,44 @@ class _PaymentProceedState extends State<PaymentProceed> {
         PrimaryButton(
             label: 'Place Order',
             onPressed:(){
-              if(cod || creditCard || pickUp ){
-                widget.onNext();
-                widget.onMethodSelect(method);
-              }else{
+              if (cod || creditCard || pickUp) {
+                addOrder();
+              } else {
                 setState(() {
                   _showError = true;
                 });
               }
-          }
+            },
+            ),
+        const SizedBox(height: 20,),
+        PrimaryHeader(
+          text: 'Total Extra Fee: LKR $extraFee',
+          size: 16,
+          weight: FontWeight.w500,
+          color: KColors.appPrimary,
         ),
       ]
     );
   }
+
+
+  void addOrder() {
+  final String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+
+  orderController.createOrder(
+    userId: widget.user[0], // Update this if needed
+    productId: widget.productId,
+    quantity: widget.quantity.toDouble(),
+    deliveryAddress: widget.deliveryAddress,
+    uniqueId: uniqueId,
+  );
+
+  widget.onMethodSelect({
+    'method': method,
+    'extra_fee': extraFee,
+  });
+
+  widget.onNext();
+}
+
 }

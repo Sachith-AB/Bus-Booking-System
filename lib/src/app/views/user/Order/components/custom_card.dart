@@ -7,11 +7,16 @@ class CustomCard extends StatelessWidget {
   final int currentStep;
   final bool isSelected;
   final dynamic details;
+  final String? deliveryAddress;
+  final VoidCallback? onChangeAddress; // This means: void Function()
+
   const CustomCard({
     super.key,
     required this.currentStep,
     required this.isSelected,
     required this.details,
+    this.deliveryAddress,
+    this.onChangeAddress,
   });
 
   @override
@@ -76,12 +81,42 @@ class CustomCard extends StatelessWidget {
               weight: FontWeight.w500,
             ),
             const SizedBox(height: 20,),
-            PrimaryHeader(
-              text: currentStep == 1 ?'Secure checkout powered by':details![6],
-              size: 16,
-              weight: FontWeight.w500,
-              color: KColors.gray,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: PrimaryHeader(
+                    text: currentStep == 1
+                        ? 'Secure checkout powered by'
+                        : (deliveryAddress ?? details![6]), // Show override if exists
+                    size: 16,
+                    weight: FontWeight.w500,
+                    color: KColors.gray,
+                  ),
+                ),
+                if (currentStep != 1)
+                  GestureDetector(
+                    onTap: onChangeAddress,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: KColors.appPrimary.withOpacity(0.1), // soft background
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Text(
+                        'Change',
+                        style: TextStyle(
+                          color: KColors.appPrimary,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.none, // no underline
+                        ),
+                      ),
+                    ),
+
+                  ),
+              ],
             ),
+
           ],
         ),
       ),
