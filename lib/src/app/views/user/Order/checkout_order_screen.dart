@@ -29,6 +29,8 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
   int extraFee = 0;
   bool cashOnDelivery = false;
   bool selfPickup = false;
+  String orderUniqueId = '';
+
 
   List<dynamic>? user;
 
@@ -118,9 +120,17 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderPage> {
               // print(selectedPaymentMethod);
             });
           },
+          onUniqueIdGenerated: (id) {
+            setState(() {
+              orderUniqueId = id;
+            });
+          },
         );
       case 2:
-        return OrderPlaceSuccess(currentStep: currentStep);
+      return OrderPlaceSuccess(
+        currentStep: currentStep,
+        uniqueId: orderUniqueId,
+      );
       default:
         return Container();
     }

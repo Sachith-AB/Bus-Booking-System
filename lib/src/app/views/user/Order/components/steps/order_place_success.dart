@@ -8,10 +8,12 @@ import '../../../../../../utils/color/colors.dart';
 
 class OrderPlaceSuccess extends StatefulWidget {
   final int currentStep;
+  final String uniqueId;
 
   const OrderPlaceSuccess({
     super.key,
     required this.currentStep,
+    required this.uniqueId,
   });
 
   @override
@@ -36,19 +38,19 @@ class _OrderPlaceSuccessState extends State<OrderPlaceSuccess> {
         Center(
           child: RichText(
             textAlign: TextAlign.center,
-            text: const TextSpan(
-              style: TextStyle(
+            text:  TextSpan(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: CupertinoColors.black,
               ),
               children: [
-                TextSpan(
+                const TextSpan(
                   text: 'Congratulations! Your order has been placed.You can track your order number ',
                 ),
                 TextSpan(
-                  text: '#6473458',
-                  style: TextStyle(
+                  text: widget.uniqueId,
+                  style: const TextStyle(
                     color: KColors.appPrimary,
                   ),
                 ),

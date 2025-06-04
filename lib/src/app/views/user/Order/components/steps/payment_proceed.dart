@@ -16,6 +16,8 @@ class PaymentProceed extends StatefulWidget {
   final bool pickUp;
   final dynamic user;
   final  Function(dynamic method) onMethodSelect;
+  final Function(String uniqueId) onUniqueIdGenerated;
+
 
   final String productId;
   final String deliveryAddress;
@@ -36,7 +38,8 @@ class PaymentProceed extends StatefulWidget {
 
 
     required this.user,
-    required this.onMethodSelect
+    required this.onMethodSelect,
+    required this.onUniqueIdGenerated,
   });
 
   @override
@@ -60,6 +63,7 @@ class _PaymentProceedState extends State<PaymentProceed> {
     super.initState();
     cod = widget.cod;
     creditCard = widget.creditCard;
+    // print("User Details: ${widget.user}");
     pickUp = widget.pickUp;
     extraFee = cod ? 350 : 0; // Set initial extra fee based on payment method
   }
@@ -175,9 +179,10 @@ class _PaymentProceedState extends State<PaymentProceed> {
         // )
         PrimaryButton(
             label: 'Place Order',
-            onPressed:(){
+            onPressed:() {
               if (cod || creditCard || pickUp) {
                 addOrder();
+                widget.onNext();
               } else {
                 setState(() {
                   _showError = true;
@@ -197,23 +202,28 @@ class _PaymentProceedState extends State<PaymentProceed> {
   }
 
 
-  void addOrder() {
+  Future<void> addOrder() async {
   final String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
   orderController.createOrder(
-    userId: widget.user[0], // Update this if needed
+    userId: widget.user[0],
     productId: widget.productId,
     quantity: widget.quantity.toDouble(),
     deliveryAddress: widget.deliveryAddress,
+    deliveryFee: extraFee,
     uniqueId: uniqueId,
   );
+
+  // Send uniqueId back to parent
+  widget.onUniqueIdGenerated(uniqueId);
 
   widget.onMethodSelect({
     'method': method,
     'extra_fee': extraFee,
   });
 
-  widget.onNext();
+  
 }
+
 
 }

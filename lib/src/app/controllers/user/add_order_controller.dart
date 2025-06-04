@@ -14,6 +14,7 @@ class AddOrderController extends GetxController {
     required double quantity,
     required String deliveryAddress,
     required String uniqueId,
+    int deliveryFee = 0,
   }) async {
     try {
       // Step 1: Generate a new document reference with an auto ID
@@ -28,7 +29,7 @@ class AddOrderController extends GetxController {
         quantity: quantity,
         deliveryAddress: deliveryAddress,
         uniqueId: uniqueId,
-        deliveryFee: 0, // Default delivery fee, can be modified later
+        deliveryFee: deliveryFee, // Default delivery fee, can be modified later
       );
 
       // Step 3: Insert with the generated ID
