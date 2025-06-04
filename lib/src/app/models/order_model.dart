@@ -6,6 +6,7 @@ class Order {
   final String deliveryAddress;
   final String uniqueId;
   final int deliveryFee;
+  final String? status;
 
   Order({
     required this.id,
@@ -15,6 +16,7 @@ class Order {
     required this.deliveryAddress,
     required this.uniqueId,
     this.deliveryFee = 0,
+    this.status,
   });
   // Convert Order instance to JSON map
   Map<String, dynamic> toJson() {
@@ -26,6 +28,7 @@ class Order {
       'deliveryAddress': deliveryAddress,
       'uniqueId': uniqueId,
       'deliveryFee': deliveryFee,
+      'status': status ?? 'pending',
       'createdAt': DateTime.now().toIso8601String(),
     };
   }
@@ -41,6 +44,7 @@ class Order {
       deliveryAddress: data['deliveryAddress'] ?? '',
       uniqueId: data['uniqueId'] ?? '',
       deliveryFee: (data['deliveryFee'] ?? 0).toInt(),
+      status: data['status'] ?? 'pending',
     );
   }
 }
