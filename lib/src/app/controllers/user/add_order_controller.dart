@@ -30,6 +30,8 @@ class AddOrderController extends GetxController {
         deliveryAddress: deliveryAddress,
         uniqueId: uniqueId,
         deliveryFee: deliveryFee, // Default delivery fee, can be modified later
+        status: 'processing', // Default status
+        createdAt: DateTime.now(), // Current timestamp
       );
 
       // Step 3: Insert with the generated ID

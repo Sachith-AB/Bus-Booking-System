@@ -1,8 +1,11 @@
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
+import 'package:bus_booking/src/app/controllers/hotelOwner/order_screen_controller.dart';
+import 'package:bus_booking/src/app/models/order_with_user_model.dart';
 import 'package:bus_booking/src/app/views/hotelowner/orders/component/order_component.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
@@ -12,29 +15,25 @@ class OrdersPage extends StatefulWidget {
 }
 
 class _OrdersPageState extends State<OrdersPage> {
+  List<OrderWithUser> _ordersWithUser = [];
+  final controller = Get.put(OrderController());
+
+  @override
+  void initState() {
+    super.initState();
+    _loadOrderItems();
+  }
+
+  Future<void> _loadOrderItems() async {
+    final result = await controller.getOrdersWithUserDetails();
+    // print("+++++++++++++++++++++++++++++++++++Orders with User: $result");
+    setState(() {
+      _ordersWithUser = result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> orders = [
-      {
-        "customerName": "Alice Johnson",
-        "profileUrl": "https://randomuser.me/api/portraits/women/10.jpg",
-        "orderTime": DateTime.now().subtract(const Duration(minutes: 15)),
-        "status": "Pending",
-      },
-      {
-        "customerName": "Bob Smith",
-        "profileUrl": "https://randomuser.me/api/portraits/men/20.jpg",
-        "orderTime": DateTime.now().subtract(const Duration(hours: 1, minutes: 5)),
-        "status": "Processing",
-      },
-      {
-        "customerName": "Clara Davis",
-        "profileUrl": "https://randomuser.me/api/portraits/women/30.jpg",
-        "orderTime": DateTime.now().subtract(const Duration(hours: 3)),
-        "status": "Delivered",
-      },
-    ];
-
     return MainScaffold(
       selectedIndex: 3,
       body: Scaffold(
@@ -46,21 +45,28 @@ class _OrdersPageState extends State<OrdersPage> {
           showAddfoodButton: false,
           showCartButton: false,
         ),
-        body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: orders.length,
-        itemBuilder: (context, index) {
-          final order = orders[index];
-
-          return OrderComponent(
-            customerName: order["customerName"],
-            profileUrl: order["profileUrl"],
-            status: order["status"],
-            orderTime: order["orderTime"],
-          );
-        },
+        body: _ordersWithUser.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                padding: const EdgeInsets.all(12),
+                itemCount: _ordersWithUser.length,
+                itemBuilder: (context, index) {
+                  final item = _ordersWithUser[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/order-item', arguments: item);
+                      // print("Navigating to order details for order ID: ${item.order.id}");
+                    },
+                    child: OrderComponent(
+                      customerName: item.user["name"] ?? "Customer",
+                      profileUrl: item.user["image_url"] ?? "",
+                      status: item.order.status ?? "pending",
+                      orderTime: item.order.createdAt,
+                    ),
+                  );
+                },
+              ),
       ),
-      )
     );
   }
 }

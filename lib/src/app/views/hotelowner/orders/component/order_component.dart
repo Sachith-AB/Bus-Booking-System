@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bus_booking/src/app/components/custom_delivery_status.dart';
+import 'dart:io';
 
 
 class OrderComponent extends StatelessWidget {
@@ -26,7 +27,9 @@ class OrderComponent extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundImage: NetworkImage(profileUrl),
+          backgroundImage: File(profileUrl).existsSync()
+          ? FileImage(File(profileUrl))
+          : const AssetImage('assets/images/default_avatar.png') as ImageProvider,
           radius: 25,
         ),
         title: Text(

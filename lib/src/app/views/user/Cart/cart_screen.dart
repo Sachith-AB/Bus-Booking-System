@@ -40,7 +40,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   void initState() {
-    print('User: $user');
+    // print('User: $user');
 
     super.initState();
     for (int i = 0; i < cartItems.length; i++) {
@@ -55,7 +55,7 @@ Future<void> _loadCartItems() async {
   try {
     // Step 1: Get user[8] as a String
     final rawFoodIds = user?[8];
-    print('Raw Food IDs: $rawFoodIds');
+    // print('Raw Food IDs: $rawFoodIds');
     
 
     // Step 2: Decode JSON string to List

@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/app/models/order_with_user_model.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
 import 'package:bus_booking/src/app/views/auth/register/owner_register.dart';
@@ -5,6 +6,7 @@ import 'package:bus_booking/src/app/views/auth/register/register.dart';
 import 'package:bus_booking/src/app/views/hotelowner/category/category_create.dart';
 import 'package:bus_booking/src/app/views/hotelowner/food/food_create.dart';
 import 'package:bus_booking/src/app/views/hotelowner/food/food_update.dart';
+import 'package:bus_booking/src/app/views/hotelowner/orders/order_item.dart';
 import 'package:bus_booking/src/app/views/hotelowner/orders/orders_screen.dart';
 import 'package:bus_booking/src/app/views/user/Cart/cart_screen.dart';
 import 'package:bus_booking/src/app/views/user/Food/food_details_screen.dart';
@@ -46,6 +48,10 @@ class AppRoutes {
     }),
     GetPage(name: '/create-category', page: () => const CreateCategoryPage()),
     GetPage(name: '/orders', page: () => const OrdersPage()),
+    GetPage(name: '/order-item', page: () {
+      final order = Get.arguments as OrderWithUser;
+      return OrdersItemPage(order: order);
+    }),
 
   ];
 }

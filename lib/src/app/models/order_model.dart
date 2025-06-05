@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Order {
   final String id;
   final String userId;
@@ -6,7 +8,8 @@ class Order {
   final String deliveryAddress;
   final String uniqueId;
   final int deliveryFee;
-  final String? status;
+  String? status;
+  final DateTime createdAt;
 
   Order({
     required this.id,
@@ -17,6 +20,7 @@ class Order {
     required this.uniqueId,
     this.deliveryFee = 0,
     this.status,
+    required this.createdAt,
   });
   // Convert Order instance to JSON map
   Map<String, dynamic> toJson() {
@@ -29,10 +33,10 @@ class Order {
       'uniqueId': uniqueId,
       'deliveryFee': deliveryFee,
       'status': status ?? 'pending',
-      'createdAt': DateTime.now().toIso8601String(),
+      'createdAt': Timestamp.fromDate(createdAt), // ✅ fix this line
     };
   }
-
+  
   factory Order.fromSnapshot(dynamic doc) {
     final data = doc.data() as Map<String, dynamic>;
 
@@ -45,6 +49,9 @@ class Order {
       uniqueId: data['uniqueId'] ?? '',
       deliveryFee: (data['deliveryFee'] ?? 0).toInt(),
       status: data['status'] ?? 'pending',
+      createdAt: data['createdAt'] != null
+        ? (data['createdAt'] as Timestamp).toDate()
+        : DateTime.now(), // Fallback to now or handle accordingly
     );
   }
 }
