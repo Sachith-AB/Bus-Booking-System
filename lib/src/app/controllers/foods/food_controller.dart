@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/services/crud_services.dart';
 import 'package:get/get.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
@@ -32,13 +33,16 @@ class FoodController extends GetxController {
   }
 
   Future<void> getAllOrders() async {
+    final user = SharedAuthUser.getAuthUser();
+    final userId = user![0];
     try {
       final result = await crudController.findAll<Order>(
         collection: 'Orders',
         fromSnapshot: (doc) => Order.fromSnapshot(doc),
       );
       if (result.isNotEmpty) {
-        orders.value = result.cast<Order>();
+        // Filter orders by userId
+        orders.value = result.where((order) => order.userId == userId).toList();
       } else {
         orders.clear();
       }
