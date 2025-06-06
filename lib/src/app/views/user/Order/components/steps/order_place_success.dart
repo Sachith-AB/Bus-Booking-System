@@ -1,5 +1,6 @@
 import 'package:bus_booking/src/app/components/primary_button.dart';
 import 'package:bus_booking/src/app/components/primary_header.dart';
+import 'package:bus_booking/src/app/controllers/user/order_controller.dart';
 import 'package:bus_booking/src/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class _OrderPlaceSuccessState extends State<OrderPlaceSuccess> {
         Center(
           child: RichText(
             textAlign: TextAlign.center,
-            text:  TextSpan(
+            text: TextSpan(
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -46,7 +47,8 @@ class _OrderPlaceSuccessState extends State<OrderPlaceSuccess> {
               ),
               children: [
                 const TextSpan(
-                  text: 'Congratulations! Your order has been placed.You can track your order number ',
+                  text:
+                      'Congratulations! Your order has been placed.You can track your order number ',
                 ),
                 TextSpan(
                   text: widget.uniqueId,
@@ -65,13 +67,25 @@ class _OrderPlaceSuccessState extends State<OrderPlaceSuccess> {
                 child: PrimaryButton(
                     label: 'Shopping',
                     backgroundColor: KColors.gray,
-                    onPressed: (){
+                    onPressed: () {
                       Get.offNamed('/search');
-                    })
+                    })),
+            const SizedBox(
+              width: 10,
             ),
-            const SizedBox(width: 10,),
             Expanded(
-                child: PrimaryButton(label: 'Track Order', onPressed: (){})),
+                child: PrimaryButton(
+                    label: 'Track Order',
+                    onPressed: () async {
+                      final controller = Get.put(OrderController());
+                      await controller.fetchOrder(widget.uniqueId);
+                      if (controller.order.value != null) {
+                        Get.toNamed('/track-order',
+                            arguments: controller.order.value);
+                      } else {
+                        Get.snackbar('error', 'Failed to load order details');
+                      }
+                    })),
           ],
         )
       ],

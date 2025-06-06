@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/app/models/order_model.dart';
 import 'package:bus_booking/src/app/models/order_with_user_model.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
 import 'package:bus_booking/src/app/views/auth/login/login.dart';
@@ -12,6 +13,7 @@ import 'package:bus_booking/src/app/views/user/Cart/cart_screen.dart';
 import 'package:bus_booking/src/app/views/user/Food/food_details_screen.dart';
 import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
 import 'package:bus_booking/src/app/views/user/Order/checkout_order_screen.dart';
+import 'package:bus_booking/src/app/views/user/Order/track_orader.dart';
 import 'package:bus_booking/src/app/views/user/Profile/profile_screen.dart';
 import 'package:bus_booking/src/app/views/user/Search/search_screen.dart';
 import 'package:bus_booking/src/app/views/welcome_screen.dart';
@@ -38,6 +40,10 @@ class AppRoutes {
       final product = args['product'] as Product;
       final quantity = args['quantity'] as int;
       return CheckoutOrderPage(product: product, quantity: quantity);
+    }),
+    GetPage(name: '/track-order', page: (){
+      final order = Get.arguments as Order;
+      return TrackOrder(order:order);
     }),
 
     //hotelOwner
