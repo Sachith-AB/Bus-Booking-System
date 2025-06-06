@@ -36,7 +36,7 @@ class Order {
       'createdAt': Timestamp.fromDate(createdAt), // ✅ fix this line
     };
   }
-  
+
   factory Order.fromSnapshot(dynamic doc) {
     final data = doc.data() as Map<String, dynamic>;
 
@@ -50,8 +50,29 @@ class Order {
       deliveryFee: (data['deliveryFee'] ?? 0).toInt(),
       status: data['status'] ?? 'pending',
       createdAt: data['createdAt'] != null
-        ? (data['createdAt'] as Timestamp).toDate()
-        : DateTime.now(), // Fallback to now or handle accordingly
+          ? (data['createdAt'] as Timestamp).toDate()
+          : DateTime.now(), // Fallback to now or handle accordingly
     );
+  }
+
+  factory Order.fromMap(Map<String, dynamic> data) {
+    return Order(
+      id: data['id'] ?? '',
+      userId: data['userId'] ?? '',
+      productId: data['productId'] ?? '',
+      quantity: (data['quantity'] ?? 0).toDouble(),
+      deliveryAddress: data['deliveryAddress'] ?? '',
+      uniqueId: data['uniqueId'] ?? '',
+      deliveryFee: (data['deliveryFee'] ?? 0).toInt(),
+      status: data['status'] ?? 'pending',
+      createdAt: data['createdAt'] is Timestamp
+          ? (data['createdAt'] as Timestamp).toDate()
+          : DateTime.tryParse(data['createdAt'] ?? '') ?? DateTime.now(),
+    );
+  }
+
+  @override
+  String toString() {
+    return 'OrderModel(id: $id, name: $userId, email: $productId, user_type: $quantity,address: $uniqueId createdAt: $createdAt)';
   }
 }
