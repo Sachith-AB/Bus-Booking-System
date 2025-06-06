@@ -13,6 +13,7 @@ import 'package:bus_booking/src/app/views/user/Cart/cart_screen.dart';
 import 'package:bus_booking/src/app/views/user/Food/food_details_screen.dart';
 import 'package:bus_booking/src/app/views/user/Home/home_screen.dart';
 import 'package:bus_booking/src/app/views/user/Order/checkout_order_screen.dart';
+import 'package:bus_booking/src/app/views/user/Order/order_hostory_Screen.dart';
 import 'package:bus_booking/src/app/views/user/Order/track_orader.dart';
 import 'package:bus_booking/src/app/views/user/Profile/profile_screen.dart';
 import 'package:bus_booking/src/app/views/user/Search/search_screen.dart';
@@ -45,6 +46,7 @@ class AppRoutes {
       final order = Get.arguments as Order;
       return TrackOrder(order:order);
     }),
+    GetPage(name: '/order-history', page: () => const OrderHistoryScreen()),
 
     //hotelOwner
     GetPage(name: '/create-food', page: () => const FoodCreatePage()),

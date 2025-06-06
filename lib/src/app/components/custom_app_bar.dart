@@ -25,18 +25,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: backgroundColor,
-      automaticallyImplyLeading: showBackButton, 
-      title: title != null ? 
-        PrimaryHeader(
-          text: title!,
-          weight: FontWeight.w500,
-        )
-        : null,
+      automaticallyImplyLeading: showBackButton,
+      title: title != null
+          ? PrimaryHeader(
+              text: title!,
+              weight: FontWeight.w500,
+            )
+          : null,
       leading: showBackButton
           ? IconButton(
-        onPressed: onBack ?? () => Get.back(),
-        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
-      )
+              onPressed: onBack ?? () => Get.back(),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                  color: Colors.black),
+            )
           : null,
       actions: [
         if (showAddfoodButton == true)
@@ -46,34 +47,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Get.toNamed('/create-food');
             },
           ),
-        if(showCartButton)
-          Stack(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.shopping_bag_outlined),
-                onPressed: () {},
-              ),
-              Positioned(
-                right: 8,
-                top: 8,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Text(
-                    '2',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )
+        if (showCartButton)
+          IconButton(
+            icon: const Icon(Icons.local_shipping_outlined),
+            onPressed: () {
+              Get.toNamed('/order-history');
+            },
+          ),
       ],
     );
   }

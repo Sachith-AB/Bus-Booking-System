@@ -1,11 +1,13 @@
 import 'package:bus_booking/src/services/crud_services.dart';
 import 'package:get/get.dart';
 import 'package:bus_booking/src/app/models/product_model.dart';
+import 'package:bus_booking/src/app/models/order_model.dart';
 
 class FoodController extends GetxController {
   final crudController = Get.put(CrudServices());
 
   var foods = <Product>[].obs;
+  var orders = <Order>[].obs;
 
   @override
   void onInit() {
@@ -16,12 +18,11 @@ class FoodController extends GetxController {
   Future<void> getAllFoods() async {
     try {
       final result = await crudController.findAll<Product>(
-      collection: 'Foods',
-      fromSnapshot: (doc) => Product.fromSnapshot(doc),
-    );
+        collection: 'Foods',
+        fromSnapshot: (doc) => Product.fromSnapshot(doc),
+      );
       if (result.isNotEmpty) {
         foods.value = result.cast<Product>();
-        
       } else {
         foods.clear();
       }
@@ -29,5 +30,20 @@ class FoodController extends GetxController {
       foods.clear();
     }
   }
-  
+
+  Future<void> getAllOrders() async {
+    try {
+      final result = await crudController.findAll<Order>(
+        collection: 'Orders',
+        fromSnapshot: (doc) => Order.fromSnapshot(doc),
+      );
+      if (result.isNotEmpty) {
+        orders.value = result.cast<Order>();
+      } else {
+        orders.clear();
+      }
+    } catch (e) {
+      orders.clear();
+    }
+  }
 }
