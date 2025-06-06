@@ -15,7 +15,6 @@ class OrderHistoryScreen extends StatelessWidget {
     foodController.getAllOrders();
 
     return MainScaffold(
-      selectedIndex: 2,
       body: Scaffold(
         appBar: CustomAppBar(
           title: 'Order History',

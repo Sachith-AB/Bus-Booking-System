@@ -28,7 +28,6 @@ class TrackOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      selectedIndex: 2,
       body: Scaffold(
         appBar: CustomAppBar(
           title: 'Track Order',
