@@ -9,13 +9,13 @@ class OrderStatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     Color badgeColor;
     switch (status) {
-      case "Pending":
+      case "pending":
         badgeColor = Colors.orange;
         break;
-      case "Processing":
+      case "processing":
         badgeColor = Colors.blue;
         break;
-      case "Delivered":
+      case "delivered":
         badgeColor = Colors.green;
         break;
       default:

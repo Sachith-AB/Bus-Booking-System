@@ -72,7 +72,7 @@ class UserUpdateController extends GetxController {
       if (userData == null || userData.isEmpty) return;
 
       UserModel user = userData[0];
-      List<dynamic> updatedCart = List.from(user.cart);
+      List<String> updatedCart = List.from(user.cart);
       if (!updatedCart.contains(foodId)) {
         updatedCart.add(foodId);
       }else{

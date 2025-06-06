@@ -57,7 +57,7 @@ class _CashOnDeliveryState extends State<CashOnDelivery> {
             ),
             const SizedBox(height: 10,),
             const PrimaryHeader(
-              text: 'Additional Add 20 chargers for COD services',
+              text: 'Additional Add 350 LKR chargers for COD services',
               size:16,
               weight: FontWeight.w600,
               color: KColors.gray,

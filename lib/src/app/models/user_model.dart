@@ -9,7 +9,7 @@ class UserModel {
   final DateTime? createdAt;
   late String address;
   late String contact;
-  List<dynamic> cart;
+  List<String> cart;
   List<dynamic> favourite;
 
   UserModel({
@@ -94,13 +94,13 @@ class UserModel {
       createdAt: createdAtDate,
       address: data['address'] ?? '',
       contact: data['contact'] ?? '',
-      cart: data['cart'] ?? [],
+      cart: List<String>.from(data['cart'] ?? []),
       favourite: data['favourite'] ?? [],
     );
   }
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, user_type: $user_type,address: $address createdAt: $createdAt,$image_url)';
+    return 'UserModel(id: $id, name: $name, email: $email, user_type: $user_type,address: $address createdAt: $createdAt,$image_url,cart: $cart,favourite: $favourite)';
   }
 }
