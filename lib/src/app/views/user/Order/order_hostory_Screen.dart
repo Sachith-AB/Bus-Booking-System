@@ -1,3 +1,4 @@
+import 'package:bus_booking/src/app/controllers/user/shared_auth_user.dart';
 import 'package:bus_booking/src/utils/color/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,15 +6,29 @@ import 'package:bus_booking/src/app/controllers/foods/food_controller.dart';
 import 'package:bus_booking/src/app/components/main_scaffold.dart';
 import 'package:bus_booking/src/app/components/custom_app_bar.dart';
 
-class OrderHistoryScreen extends StatelessWidget {
+class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final foodController = Get.put(FoodController());
+  _OrderHistoryScreenState createState() => _OrderHistoryScreenState();
+}
+
+class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
+  final foodController = Get.put(FoodController());
+
+  List<dynamic>? user;
+
+  @override
+  void initState() {
+    super.initState();
     // Fetch orders if not already loaded
     foodController.getAllOrders();
+    user = SharedAuthUser.getAuthUser();
+    print('User: ${user?[6]}'); // Assuming user[6] is the address
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return MainScaffold(
       body: Scaffold(
         appBar: CustomAppBar(
@@ -306,7 +321,11 @@ class OrderHistoryScreen extends StatelessWidget {
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
-                        _truncateAddress(order.deliveryAddress),
+                        _truncateAddress(
+                          order.deliveryAddress != ""
+                              ? order.deliveryAddress!
+                              : (user?[6] ?? 'No address'),
+                        ),
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey[600],
@@ -315,7 +334,7 @@ class OrderHistoryScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '\$${order.deliveryFee.toStringAsFixed(2)}',
+                      'LKR ${order.deliveryFee.toStringAsFixed(2)}',
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
